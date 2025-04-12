@@ -2,8 +2,6 @@
 
 ## Projects
 
-- [@icebreakers/bar](packages/bar) - tsup build package template
-
 ## Contributing
 
 Contributions Welcome! You can contribute in the following ways.

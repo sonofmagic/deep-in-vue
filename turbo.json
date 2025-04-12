@@ -13,7 +13,9 @@
       "outputs": []
     },
     "dev": {
-      "cache": false
+      "dependsOn": [
+        "^dev"
+      ]
     },
     "test": {
       "dependsOn": [
