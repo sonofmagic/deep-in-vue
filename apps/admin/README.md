@@ -17,4 +17,4 @@ const Static = Symbol.for('v-stc')
 
 toDisplayString 是你在 vue 中使用 `{{ obj }}` 还能正常展示的原因，假如一个对象直接 `toString`，会得到 `[object Object]`
 
-createElementVNode 是 createBaseVNode 的别名, 这个只能默认的 h5 元素，不像 h 还可以渲染组件
+createElementVNode 是 createBaseVNode 的别名, 这个只能默认的 h5 元素和一些 vue 自己扩展的元素(比如 `Fragment`)，不像 h 还可以渲染组件
