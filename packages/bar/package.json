@@ -7,11 +7,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sonofmagic/monorepo-template.git",
+    "url": "git+https://github.com/sonofmagic/only-vue-runtime.git",
     "directory": "packages/bar"
   },
   "bugs": {
-    "url": "https://github.com/sonofmagic/monorepo-template/issues"
+    "url": "https://github.com/sonofmagic/only-vue-runtime/issues"
   },
   "keywords": [],
   "sideEffects": false,
