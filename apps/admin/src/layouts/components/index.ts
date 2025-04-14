@@ -1,8 +1,9 @@
+import { adminRoutes } from '@/router'
 import { ElCheckbox, ElMenu, ElMenuItem, ElRadioButton, ElRadioGroup } from 'element-plus'
 import { defineComponent, h, reactive, vShow, withDirectives } from 'vue'
 
 const sharedState = reactive({
-  isCollapse: true,
+  isCollapse: false,
   isShown: false,
 })
 
@@ -50,16 +51,12 @@ export const BaseSidebar = defineComponent({
   name: 'BaseSidebar',
   setup() {
     return () => {
-      const menus = [
-        {
-          label: 'home',
-          index: '/',
-        },
-        {
-          label: 'dashborad',
-          index: 'dashborad',
-        },
-      ]
+      const menus = adminRoutes.map((x) => {
+        return {
+          index: x.path === '' ? '/' : x.path,
+          label: x.meta?.label,
+        }
+      })
 
       return h('div', {
 
@@ -78,7 +75,7 @@ export const BaseSidebar = defineComponent({
               }),
               withDirectives(
                 h(ElMenuItem, [
-                  'isShown',
+                  '隐藏菜单',
                 ]),
                 [
                   [vShow, sharedState.isShown],

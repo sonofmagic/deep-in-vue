@@ -1,20 +1,35 @@
 import type { RouteRecordRaw } from 'vue-router'
 import { createRouter, createWebHistory } from 'vue-router'
 
-const routes: RouteRecordRaw[] = [
+export const adminRoutes: RouteRecordRaw[] = [
+  {
+    path: '',
+    component: () => import('@/pages/home'),
+    meta: {
+      label: '首页',
+    },
+  },
+  {
+    path: 'dashborad',
+    component: () => import('@/pages/dashborad'),
+    meta: {
+      label: '仪表盘',
+    },
+  },
+  {
+    path: 'player',
+    component: () => import('@/pages/player'),
+    meta: {
+      label: '播放器',
+    },
+  },
+]
+
+export const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: () => import('@/layouts/admin'),
-    children: [
-      {
-        path: '',
-        component: () => import('@/pages/home'),
-      },
-      {
-        path: 'dashborad',
-        component: () => import('@/pages/dashborad'),
-      },
-    ],
+    children: adminRoutes,
   },
   {
     path: '/login',

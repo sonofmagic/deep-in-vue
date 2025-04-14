@@ -1,7 +1,7 @@
 import { defineComponent, h, onMounted, shallowRef } from 'vue'
 
 export default defineComponent({
-  name: 'Home',
+  name: 'Player',
   setup() {
     const divRef = shallowRef()
 
@@ -16,7 +16,7 @@ export default defineComponent({
           ref: divRef,
         },
         [
-          h('p', 'Home page'),
+          h('p', 'Player page'),
         ],
       )
     }
