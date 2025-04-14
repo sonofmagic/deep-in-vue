@@ -1,11 +1,12 @@
 import { defineComponent, h } from 'vue'
-import { RouterView } from 'vue-router'
 
 export default defineComponent({
-  name: 'App',
+  name: 'Home',
   setup() {
     return () => {
-      return h(RouterView)
+      return h('div', [
+        h('p', 'Home page'),
+      ])
     }
   },
 })
