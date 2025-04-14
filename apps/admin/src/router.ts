@@ -23,6 +23,13 @@ export const adminRoutes: RouteRecordRaw[] = [
       label: '播放器',
     },
   },
+  {
+    path: 'table',
+    component: () => import('@/pages/table'),
+    meta: {
+      label: 'Table 列表',
+    },
+  },
 ]
 
 export const routes: RouteRecordRaw[] = [
