@@ -27,5 +27,10 @@
     "typescript": "~5.8.3",
     "vite": "^6.2.6",
     "vite-tsconfig-paths": "^5.1.4"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

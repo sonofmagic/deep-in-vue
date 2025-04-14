@@ -2,6 +2,9 @@ import { icebreaker } from '@icebreakers/eslint-config'
 
 export default icebreaker(
   {
-    ignores: ['**/fixtures/**'],
+    ignores: [
+      '**/fixtures/**',
+      'apps/admin/public',
+    ],
   },
 )
