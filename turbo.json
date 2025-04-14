@@ -13,9 +13,7 @@
       "outputs": []
     },
     "dev": {
-      "dependsOn": [
-        "^dev"
-      ]
+      "persistent": true
     },
     "test": {
       "dependsOn": [
