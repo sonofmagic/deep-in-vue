@@ -4,7 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    component: () => import('@/layouts/default'),
+    component: () => import('@/layouts/admin'),
     children: [
       {
         path: '',

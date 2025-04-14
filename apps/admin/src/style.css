@@ -1,1 +1,8 @@
 @import 'tailwindcss';
+
+@layer base {
+  html,
+  :host {
+    --main-container-height: calc(100vh - 4rem);
+  }
+}

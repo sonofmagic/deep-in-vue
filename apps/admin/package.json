@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@vimeo/player": "^2.26.0",
+    "@vueuse/core": "^13.1.0",
     "element-plus": "^2.9.7",
     "ice-ui": "workspace:*",
     "pinia": "^3.0.2",
