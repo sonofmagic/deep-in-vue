@@ -17,20 +17,6 @@ export default defineComponent({
     const videoId = ref<number | undefined>(vimeoOpenIds.value[0])
     const loading = ref(false)
 
-    onMounted(() => {
-      if (divRef.value) {
-        player = new Player(divRef.value, {
-          id: videoId.value,
-          height: 720,
-        })
-
-        player.on('loaded', () => {
-          // 双保险
-          loading.value = false
-        })
-      }
-    })
-
     async function loadVideo(id: number) {
       try {
         loading.value = true
@@ -41,13 +27,27 @@ export default defineComponent({
       }
     }
 
+    onMounted(() => {
+      if (divRef.value) {
+        loading.value = true
+        player = new Player(divRef.value, {
+          id: videoId.value,
+          height: 720,
+        })
+        player.on('loaded', () => {
+          // 双保险
+          loading.value = false
+        })
+      }
+    })
+
     return () => {
       return h('div', { class: 'space-y-4 flex flex-col items-center' }, [
         withDirectives(h(
           'div',
           {
             ref: 'player',
-            class: 'self-center',
+            class: ['self-center', 'h-[720px]'],
           },
         ), [
           [vLoading, loading.value],
