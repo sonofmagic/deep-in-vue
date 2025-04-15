@@ -2,12 +2,11 @@ import { http, HttpResponse } from 'msw'
 
 export const handlers = [
   // Intercept "GET https://example.com/user" requests...
-  http.get('https://example.com/user', () => {
-    // ...and respond to them using this JSON response.
-    return HttpResponse.json({
-      id: 'c7b3d8e0-5e0b-4b0f-8b3a-3b9f4b3d3b3d',
-      firstName: 'John',
-      lastName: 'Maverick',
-    })
+  http.get('/api/table', async ({ request, requestId, cookies }) => {
+    const url = new URL(request.url)
+    url.searchParams.get('page')
+    const x = await request.json()
+    console.log(x, requestId, cookies)
+    return HttpResponse.json()
   }),
 ]

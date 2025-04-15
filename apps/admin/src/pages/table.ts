@@ -1,5 +1,27 @@
-import { ElTable, ElTableColumn } from 'element-plus'
+import type { FunctionalComponent } from 'vue'
+import { ElButton, ElInput, ElTable, ElTableColumn } from 'element-plus'
 import { defineComponent, h, onMounted } from 'vue'
+
+const TableControl: FunctionalComponent = () => {
+  return h('div', {
+    class: 'flex justify-between',
+  }, [
+    h('div', [
+      h(ElInput),
+    ]),
+    h('div', [
+      h(
+        ElButton,
+        {
+          type: 'primary',
+        },
+        [
+          '添加',
+        ],
+      ),
+    ]),
+  ])
+}
 
 export default defineComponent({
   name: 'Table',
@@ -37,11 +59,7 @@ export default defineComponent({
 
         },
         [
-          h('div', {
-
-          }, [
-
-          ]),
+          h(TableControl),
           h('div', [
             h(ElTable, {
               data: tableData,

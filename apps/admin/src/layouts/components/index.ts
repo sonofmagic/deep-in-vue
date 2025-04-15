@@ -1,8 +1,9 @@
 import { adminRoutes } from '@/router'
 import { ElCheckbox, ElMenu, ElMenuItem, ElRadioButton, ElRadioGroup } from 'element-plus'
-import { defineComponent, h, reactive, vShow, withDirectives } from 'vue'
+import { computed, defineComponent, h, reactive, vShow, withDirectives } from 'vue'
 
-const sharedState = reactive({
+// 最简易的外置状态
+export const sharedState = reactive({
   isCollapse: false,
   isShown: false,
 })
@@ -50,13 +51,27 @@ export const BaseHeader = defineComponent({
 export const BaseSidebar = defineComponent({
   name: 'BaseSidebar',
   setup() {
-    return () => {
-      const menus = adminRoutes.map((x) => {
+    const menus = computed(() => {
+      return adminRoutes.filter((x) => {
+        return x.meta?.hidden !== true
+      }).map((x) => {
         return {
           index: x.path === '' ? '/' : x.path,
           label: x.meta?.label,
         }
       })
+    })
+
+    return () => {
+      // 写在这里和写在上面的 computed 有什么区别?
+      // const menus = adminRoutes.filter((x) => {
+      //   return x.meta?.hidden !== true
+      // }).map((x) => {
+      //   return {
+      //     index: x.path === '' ? '/' : x.path,
+      //     label: x.meta?.label,
+      //   }
+      // })
 
       return h('div', {
 
@@ -70,7 +85,7 @@ export const BaseSidebar = defineComponent({
           },
           () => {
             return [
-              menus.map((x) => {
+              menus.value.map((x) => {
                 return h(ElMenuItem, { index: x.index }, () => x.label)
               }),
               withDirectives(

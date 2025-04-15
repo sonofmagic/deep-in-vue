@@ -4,6 +4,20 @@ import { createRouter, createWebHistory } from 'vue-router'
 export const adminRoutes: RouteRecordRaw[] = [
   {
     path: '',
+    redirect: '/table',
+    meta: {
+      hidden: true,
+    },
+  },
+  {
+    path: 'table',
+    component: () => import('@/pages/table'),
+    meta: {
+      label: 'Table 列表',
+    },
+  },
+  {
+    path: 'home',
     component: () => import('@/pages/home'),
     meta: {
       label: '首页',
@@ -23,13 +37,7 @@ export const adminRoutes: RouteRecordRaw[] = [
       label: '播放器',
     },
   },
-  {
-    path: 'table',
-    component: () => import('@/pages/table'),
-    meta: {
-      label: 'Table 列表',
-    },
-  },
+
 ]
 
 export const routes: RouteRecordRaw[] = [
