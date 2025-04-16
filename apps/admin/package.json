@@ -14,7 +14,9 @@
     "@vueuse/core": "^13.1.0",
     "axios": "^1.8.4",
     "element-plus": "^2.9.7",
+    "es-toolkit": "^1.34.1",
     "ice-ui": "workspace:*",
+    "idb": "^8.0.2",
     "pinia": "^3.0.2",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"

@@ -21,6 +21,7 @@ export const adminRoutes: RouteRecordRaw[] = [
     component: () => import('@/pages/home'),
     meta: {
       label: '首页',
+      hidden: true,
     },
   },
   {
@@ -28,6 +29,7 @@ export const adminRoutes: RouteRecordRaw[] = [
     component: () => import('@/pages/dashborad'),
     meta: {
       label: '仪表盘',
+      hidden: true,
     },
   },
   {
