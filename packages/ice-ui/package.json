@@ -4,7 +4,6 @@
   "version": "0.1.3",
   "private": true,
   "description": "tsup build package template",
-  "author": "ice breaker <1324318532@qq.com>",
   "license": "MIT",
   "repository": {
     "type": "git",

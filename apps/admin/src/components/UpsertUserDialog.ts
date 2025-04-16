@@ -1,7 +1,9 @@
 import type { User } from '@/types'
+import type { ValidateFieldsError } from 'async-validator'
+import type { FormInstance } from 'element-plus'
 import { ElButton, ElDialog, ElForm, ElFormItem, ElInput } from 'element-plus'
 import { cloneDeep } from 'es-toolkit'
-import { defineComponent, h, reactive } from 'vue'
+import { defineComponent, h, ref, useTemplateRef } from 'vue'
 
 export const UpsertUserDialog = defineComponent({
   name: 'UpsertUserDialog',
@@ -36,12 +38,14 @@ export const UpsertUserDialog = defineComponent({
   setup(
     props,
     {
-      // eslint-disable-next-line ts/no-unused-vars
+
       emit,
     },
   ) {
-    const formValue = reactive(cloneDeep(props.user))
-    // console.log(props)
+    const formValue = ref(cloneDeep(props.user))
+
+    const formRef = useTemplateRef<FormInstance>('formRef')
+
     return () => {
       return h(ElDialog, {
         'modelValue': props.modelValue,
@@ -53,34 +57,112 @@ export const UpsertUserDialog = defineComponent({
         'closeOnClickModal': false,
         'closeOnPressEscape': false,
         'destroyOnClose': true,
+        onOpen() {
+          formValue.value = cloneDeep(props.user)
+        },
       }, {
         header: () => {
-          const vnode = h('div', {}, [`${formValue?.name}的个人信息`])
+          const vnode = h('div', {}, [`${formValue.value.name}的个人信息`])
           return vnode
         },
         default: () => {
           return [
-            h(ElForm, {}, [
-              h(ElFormItem, { label: '用户名' }, () => h(ElInput, {
-                modelValue: formValue?.username,
-                onInput: (val: string) => {
-                  formValue.username = val
+            h(ElForm, {
+              ref: 'formRef',
+              labelWidth: '120px',
+              model: formValue.value,
+            }, [
+              h(
+                ElFormItem,
+                {
+                  label: '姓名',
+                  prop: 'name',
+                  rules: [
+                    {
+                      required: true,
+                      message: '请输入姓名',
+                      trigger: 'blur',
+                    },
+                  ],
                 },
-              })),
-              h(ElFormItem, { label: '邮箱' }, () => h(ElInput, {
-                modelValue: formValue?.email,
-                onInput: (val: string) => {
-                  formValue.email = val
+                () => h(ElInput, {
+                  modelValue: formValue.value.name,
+                  onInput: (val: string) => {
+                    formValue.value.name = val
+                  },
+                }),
+              ),
+              h(
+                ElFormItem,
+                {
+                  label: '用户名',
+                  prop: 'username',
+                  rules: [
+                    {
+                      required: true,
+                      message: '请输入用户名',
+                      trigger: 'blur',
+                    },
+                  ],
                 },
-              })),
+                () => h(ElInput, {
+                  modelValue: formValue.value.username,
+                  onInput: (val: string) => {
+                    formValue.value.username = val
+                  },
+                }),
+              ),
+              h(
+                ElFormItem,
+                {
+                  label: '邮箱',
+                  prop: 'email',
+                  rules: [
+                    {
+                      required: true,
+                      message: '请输入邮箱',
+                      trigger: 'blur',
+                    },
+                    {
+                      type: 'email',
+                      message: '请输入正确的邮箱地址',
+                      trigger: ['blur', 'change'],
+                    },
+                  ],
+                },
+                () => h(ElInput, {
+                  modelValue: formValue.value.email,
+                  onInput: (val: string) => {
+                    formValue.value.email = val
+                  },
+                }),
+              ),
             ]),
           ]
         },
         footer: () => {
           return [
-            h(ElButton, ['取消']),
+            h(ElButton, {
+              onClick() {
+                emit('update:modelValue', false)
+              },
+            }, ['取消']),
             h(ElButton, {
               type: 'primary',
+              async onClick() {
+                try {
+                  const valid = await formRef.value?.validate()
+                  if (valid) {
+                    // 这里可以调用接口保存数据
+                    // await saveUser(formValue.value)
+                    // doUpsertUser(formValue.value)
+                    emit('update:modelValue', false)
+                  }
+                }
+                catch (error) {
+                  console.error(error as ValidateFieldsError)
+                }
+              },
             }, () => '确定'),
           ]
         },
