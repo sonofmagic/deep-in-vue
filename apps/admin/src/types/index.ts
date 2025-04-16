@@ -26,3 +26,23 @@ export interface User {
   isActive: boolean // 用户是否激活
   role?: 'admin' | 'user' | 'guest' | null // 用户角色，可能为空
 }
+
+export enum Role {
+  Admin = 'admin',
+  User = 'user',
+  Guest = 'guest',
+  None = 'none',
+}
+
+export function roleTextFilter(role: string): string {
+  switch (role) {
+    case Role.Admin:
+      return '管理员'
+    case Role.User:
+      return '普通用户'
+    case Role.Guest:
+      return '游客'
+    default:
+      return '未知'
+  }
+}

@@ -1,96 +1,10 @@
 import type { PaginationRequest, PaginationResponse, User } from '@/types'
 import type { FunctionalComponent, VNode } from 'vue'
+import { BaseUserDialog } from '@/components/BaseUserDialog'
+import { Role, roleTextFilter } from '@/types'
 import axios from 'axios'
-import { ElButton, ElDialog, ElDivider, ElInput, ElLink, ElMessage, ElPagination, ElTable, ElTableColumn, vLoading } from 'element-plus'
-import { cloneDeep } from 'es-toolkit'
-import { cloneVNode, defineComponent, h, nextTick, onMounted, reactive, ref, render, withDirectives } from 'vue'
-
-enum Role {
-  Admin = 'admin',
-  User = 'user',
-  Guest = 'guest',
-  None = 'none',
-}
-
-const BaseUserDialog: FunctionalComponent<{
-  'modelValue': boolean
-  'user'?: User
-  'onUpdate:modelValue'?: (val: boolean) => void
-  'zIndex'?: number
-}> = (
-  props,
-  {
-    slots,
-    // eslint-disable-next-line ts/no-unused-vars
-    emit,
-  },
-) => {
-  // 切断引用
-  const clonedUser = cloneDeep(props.user)
-
-  return h(ElDialog, {
-    'modelValue': props.modelValue,
-    'onUpdate:modelValue': (val: boolean) => {
-      props?.['onUpdate:modelValue']?.(val)
-      // 思考上面这行和下面这一行的区别，为什么他们的行为是一致的, 为什么 react 都放 props 里？ vue 到底创造了多少额外的概念?
-      // emit('update:modelValue', val)
-    },
-    'draggable': true,
-    'zIndex': props.zIndex,
-    'closeOnClickModal': false,
-    'closeOnPressEscape': false,
-    'destroyOnClose': true,
-  }, {
-    header: () => {
-      const vnode = h('div', {}, [`${clonedUser?.name}的个人信息`, '(这是正常的插槽透传)'])
-      return slots.header ? slots.header?.({ vnode, Component: BaseUserDialog }) : vnode
-    },
-    default: () => {
-      return [
-        h('div', ['dialog body']),
-        h('div', {
-          class: 'border border-gray-300 rounded-lg p-4',
-        }, [
-          // 在 default 中渲染全部插槽
-          slots.header?.({ Component: BaseUserDialog, vnode: '从 dialog body 中渲染 header 插槽' }),
-          slots.default?.({ Component: BaseUserDialog }),
-          slots.footer?.({ Component: BaseUserDialog }),
-        ]),
-
-      ]
-    },
-    footer: () => {
-      return [
-        // 在 footer 中渲染 header 插槽的同时，对插槽的渲染结果，进行修改
-        slots.header?.(
-          { Component: BaseUserDialog, vnode: '从 dialog footer 中渲染 header 插槽' },
-        )?.map((x) => {
-          return cloneVNode(x, {
-            type: 'info',
-            // 对于事件则走 merge props 流程
-            onClick: () => {
-              ElMessage('hello world')
-            },
-          })
-        }),
-        h('div', ['footer']),
-      ]
-    },
-  })
-}
-
-function roleText(role: string): string {
-  switch (role) {
-    case Role.Admin:
-      return '管理员'
-    case Role.User:
-      return '普通用户'
-    case Role.Guest:
-      return '游客'
-    default:
-      return '未知'
-  }
-}
+import { ElButton, ElDivider, ElInput, ElLink, ElMessageBox, ElPagination, ElProgress, ElTable, ElTableColumn, vLoading } from 'element-plus'
+import { defineComponent, h, nextTick, onMounted, reactive, ref, render, withDirectives } from 'vue'
 
 export default defineComponent({
   name: 'Table',
@@ -163,7 +77,7 @@ export default defineComponent({
         ]),
       ])
     }
-
+    const percentage = ref(0)
     function renderActionColumn() {
       return h(ElTableColumn, {
         prop: 'id',
@@ -182,6 +96,37 @@ export default defineComponent({
           h(ElButton, {
             type: 'danger',
             size: 'small',
+            onClick: () => {
+              percentage.value = 0
+
+              const ptr = window.setInterval(() => {
+                if (percentage.value >= 100) {
+                  clearInterval(ptr)
+                  return
+                }
+                percentage.value += 1
+              }, 30)
+
+              ElMessageBox({
+                message: () => {
+                  return h('div', {
+                    class: 'flex justify-center items-center w-full',
+                  }, [
+                    h(ElProgress, {
+                      type: 'circle',
+                      status: 'success',
+                      percentage: percentage.value,
+
+                    }, {
+                      default: ({ percentage }: { percentage: number }) => {
+                        return percentage < 100 ? '正在删除 ' : '删除完成'
+                      },
+                    }),
+                  ])
+                },
+                center: true,
+              })
+            },
           }, () => '删除'),
         ],
       })
@@ -284,7 +229,7 @@ export default defineComponent({
                                 'text-red-500': row.role === undefined || row.role === null,
                               },
                             ],
-                          }, roleText(row.role ?? Role.None))
+                          }, roleTextFilter(row.role ?? Role.None))
                         },
                       }),
                       h(ElTableColumn, {
@@ -329,7 +274,9 @@ export default defineComponent({
             },
             'user': currentUser.value,
           }, {
+            // BaseUserDialog 的 header 的作用域插槽
             header: (
+              // 传入 vnode 和 Component 组件
               { vnode, Component }: { vnode: VNode, Component: FunctionalComponent }) => {
               return h(ElButton, {
                 type: 'primary',
