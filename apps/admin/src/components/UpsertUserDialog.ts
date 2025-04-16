@@ -62,7 +62,9 @@ export const UpsertUserDialog = defineComponent({
         },
       }, {
         header: () => {
-          const vnode = h('div', {}, [`${formValue.value.name}的个人信息`])
+          const vnode = h('div', {}, [
+            formValue.value ? `${formValue.value.name}的个人信息` : '新增',
+          ])
           return vnode
         },
         default: () => {
