@@ -2,10 +2,9 @@ import type { PaginationResponse, User } from '@/types'
 import { sleepRandom } from '@/utils'
 import { http, HttpResponse } from 'msw'
 import mockedUsers from './dataSource/users'
-// import { dbRef } from './datebase'
 
 export const handlers = [
-  http.get('/api/table', async ({ request }) => {
+  http.get('/api/user', async ({ request }) => {
     // dbRef.value.
     const url = new URL(request.url)
     // 从 1 开始分页有几个原因
@@ -15,7 +14,7 @@ export const handlers = [
     const data = mockedUsers.slice((page - 1) * pageSize, (page) * pageSize)
 
     await sleepRandom()
-
+    // dbRef.value!.getAll('user',{})
     const result: PaginationResponse<User> = {
       data,
       total: mockedUsers.length,

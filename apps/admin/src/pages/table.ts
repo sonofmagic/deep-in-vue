@@ -1,6 +1,7 @@
 import type { PaginationRequest, PaginationResponse, User } from '@/types'
 import type { FunctionalComponent, VNode } from 'vue'
 import { BaseUserDialog } from '@/components/BaseUserDialog'
+import { UpsertUserDialog } from '@/components/UpsertUserDialog'
 import { Role, roleTextFilter } from '@/types'
 import axios from 'axios'
 import { ElButton, ElDivider, ElInput, ElLink, ElMessageBox, ElPagination, ElProgress, ElTable, ElTableColumn, vLoading } from 'element-plus'
@@ -19,12 +20,13 @@ export default defineComponent({
     const loading = ref(false)
     const baseDialogVisible = ref(false)
     const currentUser = ref<User>()
+    const upsertUserDialogVisible = ref(false)
 
     async function fetchData(req: Partial<PaginationRequest> = {}) {
       const { page = pagination.page, pageSize = pagination.pageSize, searchParams = {} } = req
       try {
         loading.value = true
-        const { data } = await axios.get<PaginationResponse<User>>('/api/table', {
+        const { data } = await axios.get<PaginationResponse<User>>('/api/user', {
           params: {
             page,
             pageSize,
@@ -69,6 +71,10 @@ export default defineComponent({
             ElButton,
             {
               type: 'primary',
+              onClick: () => {
+                currentUser.value = undefined
+                upsertUserDialogVisible.value = true
+              },
             },
             [
               '添加',
@@ -85,12 +91,13 @@ export default defineComponent({
         label: '操作',
         fixed: 'right',
       }, {
-        default: (_scope: { row: User }) => [
+        default: ({ row }: { row: User }) => [
           h(ElButton, {
             type: 'primary',
             size: 'small',
             onClick: () => {
-
+              currentUser.value = row
+              upsertUserDialogVisible.value = true
             },
           }, () => '编辑'),
           h(ElButton, {
@@ -296,6 +303,13 @@ export default defineComponent({
                 },
               }, vnode)
             },
+          }),
+          h(UpsertUserDialog, {
+            'modelValue': upsertUserDialogVisible.value,
+            'onUpdate:modelValue': (val: boolean) => {
+              upsertUserDialogVisible.value = val
+            },
+            'user': currentUser.value,
           }),
         ],
       )
