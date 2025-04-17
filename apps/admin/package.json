@@ -15,7 +15,7 @@
     "axios": "^1.8.4",
     "date-fns": "^4.1.0",
     "element-plus": "^2.9.7",
-    "es-toolkit": "^1.34.1",
+    "es-toolkit": "^1.35.0",
     "ice-ui": "workspace:*",
     "idb": "^8.0.2",
     "pinia": "^3.0.2",
@@ -23,14 +23,14 @@
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.3",
+    "@tailwindcss/postcss": "^4.1.4",
     "@types/vimeo__player": "^2.18.3",
     "async-validator": "^4.2.5",
     "msw": "^2.7.4",
     "postcss": "^8.5.3",
-    "tailwindcss": "^4.1.3",
+    "tailwindcss": "^4.1.4",
     "typescript": "~5.8.3",
-    "vite": "^6.2.6",
+    "vite": "^6.3.1",
     "vite-tsconfig-paths": "^5.1.4"
   },
   "msw": {
