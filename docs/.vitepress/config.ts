@@ -13,4 +13,9 @@ export default defineConfig({
       { text: 'vModel 的本质', link: '/vModel' },
     ],
   },
+  vite: {
+    server: {
+      port: 8080,
+    },
+  },
 })
