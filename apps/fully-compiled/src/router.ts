@@ -12,6 +12,11 @@ export const routes: Array<RouteRecordRaw> = [
     name: 'ice',
     component: () => import('@/pages/ice.vue'),
   },
+  {
+    path: '/counter',
+    name: 'counter',
+    component: () => import('@/pages/counter.vue'),
+  },
 ]
 
 const router = createRouter({
