@@ -1,8 +1,8 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  title: 'Vue 本质轮',
-  description: 'A VitePress Site',
+  title: 'Vue 编译本质论',
+  description: '理解 vue 编译器',
   themeConfig: {
     sidebar: [
       { text: '.vue 文件的本质', link: '/' },
