@@ -6,7 +6,7 @@
   "configurations": [
     {
       "command": "npm run compile",
-      "name": "Compile Vue GOGOGO",
+      "name": "Compile Vue",
       "request": "launch",
       "type": "node-terminal",
       "cwd": "${workspaceFolder}/apps/fully-compiled"

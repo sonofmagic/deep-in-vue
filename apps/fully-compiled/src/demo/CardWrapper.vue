@@ -1,4 +1,3 @@
-<!-- CardWrapper.vue -->
 <script lang="ts">
 import { computed, defineEmits, defineProps, ref } from 'vue'
 
