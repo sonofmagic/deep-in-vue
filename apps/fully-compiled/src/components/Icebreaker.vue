@@ -18,20 +18,28 @@ export default defineComponent({
       },
     })
 
-    return () => (
-      <div
-        class={
-          [
-            'border border-red-500',
-            'ice-wrap',
-          ]
-        }
-        onClick={(e: MouseEvent) => emit('click', e)}
-      >
-        <input v-model={wrap.value}></input>
-        {slots.default?.()}
-      </div>
-    )
+    const aaa = <div>{wrap.value}</div>
+
+    return () => {
+      const bbb = <div>{wrap.value}</div>
+
+      return (
+        <div
+          class={
+            [
+              'border border-red-500',
+              'ice-wrap',
+            ]
+          }
+          onClick={(e: MouseEvent) => emit('click', e)}
+        >
+          <input v-model={wrap.value}></input>
+          {slots.default?.()}
+          {aaa}
+          {bbb}
+        </div>
+      )
+    }
   },
 })
 </script>
