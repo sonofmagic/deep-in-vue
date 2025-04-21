@@ -28,7 +28,10 @@
     "script:init": "monorepo init",
     "script:sync": "monorepo sync",
     "script:clean": "monorepo clean",
-    "script:mirror": "monorepo mirror"
+    "script:mirror": "monorepo mirror",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.1",
@@ -62,6 +65,7 @@
     "turbo": "^2.4.4",
     "typescript": "^5.8.3",
     "unbuild": "^3.5.0",
+    "vitepress": "^1.6.3",
     "vitest": "~3.1.1",
     "yaml": "^2.7.0"
   },
