@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "compile": "tsx scripts/index.ts"
   },
   "dependencies": {
     "vue": "^3.5.13",

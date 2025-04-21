@@ -17,6 +17,11 @@ export const routes: Array<RouteRecordRaw> = [
     name: 'counter',
     component: () => import('@/pages/counter.vue'),
   },
+  {
+    path: '/card',
+    name: 'card',
+    component: () => import('@/pages/card.vue'),
+  },
 ]
 
 const router = createRouter({
