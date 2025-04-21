@@ -32,11 +32,24 @@ function renderCounter2() {
 
 const nodes = h(Counter)
 
+console.log('nodes', nodes)
+
 const RenderNode5 = defineComponent({
   name: 'RenderNode5',
   setup() {
     return () => {
       return nodes
+    }
+  },
+})
+
+const flag = ref(true)
+
+const RenderNode6 = defineComponent({
+  name: 'RenderNode6',
+  setup() {
+    return () => {
+      return flag.value ? nodes : <div class={['bg-gray-200']}>RenderNode6 placeholader</div>
     }
   },
 })
@@ -68,6 +81,13 @@ const RenderNode5 = defineComponent({
     <div class="border border-red-500">
       renderNode5
       <RenderNode5 />
+    </div>
+    <div class="border border-red-500">
+      RenderNode6
+      <RenderNode6 />
+      <button @click="flag = !flag">
+        Toggle
+      </button>
     </div>
   </div>
 </template>
