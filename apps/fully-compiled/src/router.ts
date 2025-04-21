@@ -7,6 +7,11 @@ export const routes: Array<RouteRecordRaw> = [
     name: 'home',
     component: () => import('@/pages/index.vue'),
   },
+  {
+    path: '/ice',
+    name: 'ice',
+    component: () => import('@/pages/ice.vue'),
+  },
 ]
 
 const router = createRouter({
