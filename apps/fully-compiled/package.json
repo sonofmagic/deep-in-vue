@@ -19,7 +19,7 @@
     "@vue/tsconfig": "^0.7.0",
     "tailwindcss": "^4.1.4",
     "typescript": "~5.8.3",
-    "vite": "^6.0.5",
+    "vite": "^6.3.2",
     "vite-tsconfig-paths": "^5.1.4",
     "vue-tsc": "^2.2.0"
   }
