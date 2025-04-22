@@ -38,7 +38,8 @@
 
 ## 代码目录
 
-- `apps/admin` 为项目本体
+- `apps/only-vue-runtime` 为项目本体
+- `apps/fully-compiled` 为全编译器版本
 
 ## 运行方式
 
@@ -143,9 +144,11 @@ createElementVNode 是 createBaseVNode 的别名, 这个只能默认的 h5 元�
 
 ### v-for
 
-```ts
+```html
 <div v-for="(item, index) in list" key="item.id">{{item.name}}</div>
+```
 
+```ts
 list.map((item, index) => {
   return h('div', { key: item.id }, toDisplayString(item.name))
 })
@@ -153,11 +156,13 @@ list.map((item, index) => {
 
 ### v-if
 
-```ts
+```html
 <div v-if="condition"><span>1</span></div>
 <div v-else>2</div>
+```
 
-condition? h('div', null, h('span', '1')) : h('div', null, '2')
+```ts
+condition ? h('div', null, h('span', '1')) : h('div', null, '2')
 ```
 
 ### v-model

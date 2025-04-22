@@ -50,7 +50,7 @@
     "cross-env": "^7.0.3",
     "defu": "^6.1.4",
     "es-toolkit": "^1.35.0",
-    "eslint": "^9.25.0",
+    "eslint": "^9.25.1",
     "execa": "^9.5.2",
     "fs-extra": "^11.3.0",
     "husky": "^9.1.6",
@@ -75,7 +75,9 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "esbuild"
+      "esbuild",
+      "msw",
+      "vue-demi"
     ]
   }
 }

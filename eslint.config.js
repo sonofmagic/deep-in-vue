@@ -7,7 +7,7 @@ export default icebreaker(
   {
     ignores: [
       '**/fixtures/**',
-      'apps/admin/public',
+      'apps/only-vue-runtime/public',
     ],
   },
 )
