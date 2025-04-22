@@ -17,6 +17,11 @@ export default defineComponent({
       pageSize: 10,
       totalPages: 0,
     })
+
+    const searchParams = reactive({
+      name: '',
+    })
+
     const fetchedData = ref<User[]>([])
     const loading = ref(false)
     const baseDialogVisible = ref(false)
@@ -24,14 +29,14 @@ export default defineComponent({
     const upsertUserDialogVisible = ref(false)
 
     async function fetchData(req: Partial<PaginationRequest> = {}) {
-      const { page = pagination.page, pageSize = pagination.pageSize, searchParams = {} } = req
+      const { page = pagination.page, pageSize = pagination.pageSize } = req
       try {
         loading.value = true
         const { data } = await axios.get<PaginationResponse<User>>('/api/user', {
           params: {
             page,
             pageSize,
-            ...searchParams,
+            searchParams,
           },
         })
         fetchedData.value = data.data
@@ -49,6 +54,21 @@ export default defineComponent({
       try {
         loading.value = true
         await axios.post('/api/user', user)
+        await fetchData()
+      }
+      finally {
+        loading.value = false
+      }
+    }
+
+    async function deleteUser(user: User) {
+      try {
+        loading.value = true
+        await axios.delete(`/api/user`, {
+          params: {
+            id: user.id,
+          },
+        })
         await fetchData()
       }
       finally {
@@ -75,11 +95,24 @@ export default defineComponent({
               placeholder: '请输入',
               class: 'w-80',
               clearable: true,
+              modelValue: searchParams.name,
+              onInput: (val: string) => {
+                searchParams.name = val
+              },
             }),
           ]),
 
         ]),
+
         h('div', [
+          h(ElButton, {
+            type: 'primary',
+            onClick: () => {
+              fetchData()
+            },
+          }, [
+            '搜索',
+          ]),
           h(
             ElButton,
             {
@@ -97,6 +130,7 @@ export default defineComponent({
       ])
     }
     const percentage = ref(0)
+
     function renderActionColumn() {
       return h(ElTableColumn, {
         prop: 'id',
@@ -116,18 +150,19 @@ export default defineComponent({
           h(ElButton, {
             type: 'danger',
             size: 'small',
-            onClick: () => {
+            onClick: async () => {
               percentage.value = 0
 
               const ptr = window.setInterval(() => {
                 if (percentage.value >= 100) {
                   clearInterval(ptr)
+                  deleteUser(row)
                   return
                 }
                 percentage.value += 1
               }, 30)
 
-              ElMessageBox({
+              const res = await ElMessageBox({
                 message: () => {
                   return h('div', {
                     class: 'flex justify-center items-center w-full',
@@ -145,7 +180,9 @@ export default defineComponent({
                   ])
                 },
                 center: true,
+                showConfirmButton: true,
               })
+              console.log(res)
             },
           }, () => '删除'),
         ],

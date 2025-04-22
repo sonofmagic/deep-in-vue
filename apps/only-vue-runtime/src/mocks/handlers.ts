@@ -1,21 +1,46 @@
-import type { PaginationResponse, User } from '@/types'
+import type { PaginationRequest, PaginationResponse, User } from '@/types'
 import { sleepRandom } from '@/utils'
+import { defu } from 'defu'
 import { http, HttpResponse } from 'msw'
 import { db } from './database'
 
-async function getPagedItems(page = 1, pageSize = 10) {
+type UserPaginationRequest = PaginationRequest<{ nameSearch?: string }>
+
+async function getPagedItems(query: UserPaginationRequest) {
+  const { page, pageSize, searchParams } = defu<Required<UserPaginationRequest>, UserPaginationRequest[]>(query, {
+    page: 1,
+    pageSize: 10,
+    searchParams: {},
+  })
+  const { nameSearch } = searchParams
+
   const offset = (page - 1) * pageSize
 
-  const total = await db.users.count() // 获取总记录数
+  let collection = db.users.orderBy('id').reverse()
 
-  const data = await db.users
-    .orderBy('id')
-    .reverse()
+  // 如果传入了 name 搜索，则添加 filter
+  if (nameSearch && nameSearch.trim() !== '') {
+    collection = collection.filter(user =>
+      user.name?.toLowerCase().includes(nameSearch.toLowerCase()),
+    )
+  }
+
+  // 计算筛选后的总数
+  const total = await collection.clone().count()
+
+  // 获取分页数据
+  const data = await collection
     .offset(offset)
     .limit(pageSize)
     .toArray()
 
-  return { data, total, page, pageSize, totalPages: Math.ceil(total / pageSize) }
+  return {
+    data,
+    total,
+    page,
+    pageSize,
+    totalPages: Math.ceil(total / pageSize),
+  }
 }
 
 export const handlers = [
@@ -28,7 +53,13 @@ export const handlers = [
 
     await sleepRandom()
 
-    const result: PaginationResponse<User> = await getPagedItems(page, pageSize)
+    const result: PaginationResponse<User> = await getPagedItems({
+      page,
+      pageSize,
+      searchParams: {
+        nameSearch: url.searchParams.get('searchParams[name]') ?? '',
+      },
+    })
 
     return HttpResponse.json(result)
   }),
@@ -44,6 +75,15 @@ export const handlers = [
       body.createdAt = Date.now()
       body.updatedAt = Date.now()
       await db.users.add(body)
+    }
+
+    return HttpResponse.text('ok')
+  }),
+  http.delete('/api/user', async ({ request }) => {
+    const url = new URL(request.url)
+    const id = Number.parseInt(url.searchParams.get('id') ?? '-1')
+    if (id > -1) {
+      await db.users.delete(id)
     }
 
     return HttpResponse.text('ok')

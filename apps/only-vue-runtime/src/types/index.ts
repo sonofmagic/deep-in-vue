@@ -6,10 +6,10 @@ export interface PaginationResponse<T> {
   totalPages: number // 总页数
 }
 
-export interface PaginationRequest {
+export interface PaginationRequest<T extends Record<string, any> = Record<string, any>> {
   page: number
   pageSize?: number
-  searchParams?: Record<string, any>
+  searchParams?: T
 }
 
 export interface User {

@@ -28,6 +28,7 @@
     "@tailwindcss/postcss": "^4.1.4",
     "@types/vimeo__player": "^2.18.3",
     "async-validator": "^4.2.5",
+    "defu": "^6.1.4",
     "msw": "^2.7.5",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.1.4",
