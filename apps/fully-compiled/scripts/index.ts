@@ -7,11 +7,18 @@ function debug(..._args: any[]) {
 
 }
 
+function output(target: string, data: string) {
+  fs.outputFileSync(path.resolve(import.meta.dirname, `../src/demo/output/${target}`), data)
+}
+
 async function main() {
   const target = 'CardWrapper' // 'error'// 'CardWrapper'
+  const filename = `${target}.vue`
   const codePath = path.resolve(import.meta.dirname, `../src/demo/${target}.vue`) // path.resolve(import.meta.url, '../src/demo/App.vue')
   const code = await fs.readFile(codePath, 'utf-8')
-  const { descriptor, errors } = parse(code)
+  const { descriptor, errors } = parse(code, {
+    filename,
+  })
   debug(descriptor, errors)
   if (errors.length === 0) {
     const { script, template, styles } = descriptor
@@ -20,23 +27,23 @@ async function main() {
         id: target,
 
       })
-      debug(content)
+      output('script.ts', content)
     }
     if (template) {
       const { code } = compileTemplate({
         id: target,
-        filename: target,
+        filename,
         source: template.content,
       })
-      debug(code)
+      output('template.ts', code)
     }
     if (styles.length) {
       const { code } = compileStyle({
         id: target,
-        filename: target,
+        filename,
         source: styles[0].content,
       })
-      debug(code)
+      output('style.css', code)
     }
   }
 }
