@@ -1,7 +1,7 @@
 import type { User } from '@/types'
 import type { ValidateFieldsError } from 'async-validator'
 import type { FormInstance } from 'element-plus'
-import { ElButton, ElDialog, ElForm, ElFormItem, ElInput } from 'element-plus'
+import { ElButton, ElDialog, ElForm, ElFormItem, ElInput, ElSelect } from 'element-plus'
 import { cloneDeep } from 'es-toolkit'
 import { defineComponent, h, ref, useTemplateRef } from 'vue'
 
@@ -15,7 +15,6 @@ export const UpsertUserDialog = defineComponent({
     'user': {
       type: Object as () => User,
       default: () => ({
-        id: 0,
         name: '',
         email: '',
         username: '',
@@ -34,11 +33,10 @@ export const UpsertUserDialog = defineComponent({
       required: false,
     },
   },
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'save'],
   setup(
     props,
     {
-
       emit,
     },
   ) {
@@ -139,6 +137,63 @@ export const UpsertUserDialog = defineComponent({
                   },
                 }),
               ),
+              h(
+                ElFormItem,
+                {
+                  label: '手机号码',
+                  prop: 'phone',
+                  rules: [
+                    {
+                      required: true,
+                      message: '请输入手机号码',
+                      trigger: 'blur',
+                    },
+                  ],
+                },
+                () => h(ElInput, {
+                  modelValue: formValue.value.phone,
+                  onInput: (val: string) => {
+                    formValue.value.phone = val
+                  },
+                }),
+              ),
+              h(
+                ElFormItem,
+                {
+                  label: '角色',
+                  prop: 'role',
+                  rules: [
+                    {
+                      required: true,
+                      message: '请选择角色',
+                      trigger: 'blur',
+                    },
+                  ],
+                },
+                () => h(ElSelect, {
+                  'modelValue': formValue.value.role!,
+                  'onUpdate:modelValue': (val) => {
+                    formValue.value.role = val
+                  },
+                }, [
+                  h(ElSelect.Option, {
+                    value: 'admin',
+                    label: '管理员',
+                  }),
+                  h(ElSelect.Option, {
+                    value: 'user',
+                    label: '普通用户',
+                  }),
+                  h(ElSelect.Option, {
+                    value: 'guest',
+                    label: '游客',
+                  }),
+                  h(ElSelect.Option, {
+                    value: 'none',
+                    label: '未知',
+                  }),
+                ]),
+              ),
             ]),
           ]
         },
@@ -158,6 +213,7 @@ export const UpsertUserDialog = defineComponent({
                     // 这里可以调用接口保存数据
                     // await saveUser(formValue.value)
                     // doUpsertUser(formValue.value)
+                    emit('save', formValue.value)
                     emit('update:modelValue', false)
                   }
                 }

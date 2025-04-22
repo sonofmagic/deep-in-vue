@@ -1,3 +1,5 @@
+import dayjs from 'dayjs'
+
 /**
  * 使程序暂停指定的时间
  * @param ms 暂停的时间，单位是毫秒
@@ -16,4 +18,8 @@ export function sleep(ms: number): Promise<void> {
 export function sleepRandom(min: number = 200, max: number = 1000): Promise<void> {
   const randomMs = Math.floor(Math.random() * (max - min + 1)) + min
   return sleep(randomMs)
+}
+
+export function formatDate(ts: dayjs.ConfigType) {
+  return dayjs(ts).format('YYYY-MM-DD HH:mm:ss')
 }

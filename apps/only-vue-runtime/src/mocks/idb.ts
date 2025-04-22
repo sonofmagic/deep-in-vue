@@ -7,7 +7,7 @@ import users from './dataSource/users'
 export const dbRef = shallowRef<IDBPDatabase<unknown>>()
 
 export async function initDatebase() {
-  const db = await openDB('ice-admin', 1, {
+  const db = await openDB('ice', 1, {
     upgrade(db, oldVersion, _newVersion) {
       // 版本 1 -> 2：初始化一些数据
       if (oldVersion < 2) {

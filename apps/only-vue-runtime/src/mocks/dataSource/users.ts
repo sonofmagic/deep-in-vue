@@ -1,6 +1,6 @@
-import type { User } from '@/types'
+// import type { User } from '@/types'
 
-const users: User[] = [
+const users: any[] = [
   {
     id: 570,
     name: 'Wanda Mcfarland',

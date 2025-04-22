@@ -3,8 +3,9 @@ import type { FunctionalComponent, VNode } from 'vue'
 import { BaseUserDialog } from '@/components/BaseUserDialog'
 import { UpsertUserDialog } from '@/components/UpsertUserDialog'
 import { Role, roleTextFilter } from '@/types'
+import { formatDate } from '@/utils'
 import axios from 'axios'
-import { ElButton, ElDivider, ElInput, ElLink, ElMessageBox, ElPagination, ElProgress, ElTable, ElTableColumn, vLoading } from 'element-plus'
+import { ElButton, ElDivider, ElInput, ElLink, ElMessageBox, ElPagination, ElProgress, ElTable, ElTableColumn, ElTooltip, vLoading } from 'element-plus'
 import { defineComponent, h, nextTick, onMounted, reactive, ref, render, withDirectives } from 'vue'
 
 export default defineComponent({
@@ -43,6 +44,18 @@ export default defineComponent({
         loading.value = false
       }
     }
+
+    async function upsertUser(user: User) {
+      try {
+        loading.value = true
+        await axios.post('/api/user', user)
+        await fetchData()
+      }
+      finally {
+        loading.value = false
+      }
+    }
+
     onMounted(async () => {
       await fetchData()
     })
@@ -175,11 +188,10 @@ export default defineComponent({
                 {
                   default: () => {
                     return [
-                      // h(ElTableColumn, {
-                      //   prop: 'id',
-                      //   type: 'selection',
-                      //   width: '30',
-                      // }),
+                      h(ElTableColumn, {
+                        prop: 'id',
+                        width: '60',
+                      }),
                       h(ElTableColumn, {
                         prop: 'name',
                         label: '名称',
@@ -252,12 +264,36 @@ export default defineComponent({
                       h(ElTableColumn, {
                         prop: 'createdAt',
                         label: '创建时间',
-                        width: 120,
+                        width: 180,
+                      }, {
+                        default: ({ row }: { row: User }) => {
+                          return h(ElTooltip, {
+                            placement: 'top',
+                            effect: 'dark',
+                          }, {
+                            default: () => h('span', {
+                              class: 'text-gray-500',
+                            }, formatDate(row.createdAt)),
+                            content: () => row.createdAt,
+                          })
+                        },
                       }),
                       h(ElTableColumn, {
                         prop: 'updatedAt',
                         label: '修改时间',
-                        width: 120,
+                        width: 180,
+                      }, {
+                        default: ({ row }: { row: User }) => {
+                          return h(ElTooltip, {
+                            placement: 'top',
+                            effect: 'dark',
+                          }, {
+                            default: () => h('span', {
+                              class: 'text-gray-500',
+                            }, formatDate(row.updatedAt)),
+                            content: () => row.updatedAt,
+                          })
+                        },
                       }),
                       renderActionColumn(),
                     ]
@@ -310,6 +346,9 @@ export default defineComponent({
               upsertUserDialogVisible.value = val
             },
             'user': currentUser.value,
+            'onSave': (user: User) => {
+              return upsertUser(user)
+            },
           }),
         ],
       )

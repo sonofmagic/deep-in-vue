@@ -14,6 +14,8 @@
     "@vueuse/core": "^13.1.0",
     "axios": "^1.8.4",
     "date-fns": "^4.1.0",
+    "dayjs": "^1.11.13",
+    "dexie": "^4.0.11",
     "element-plus": "^2.9.8",
     "es-toolkit": "^1.35.0",
     "ice-ui": "workspace:*",
