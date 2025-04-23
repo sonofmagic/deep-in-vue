@@ -10,6 +10,10 @@ export interface PaginationRequest<T extends Record<string, any> = Record<string
   page: number
   pageSize?: number
   searchParams?: T
+  orderBy?: {
+    order: 'ascending' | 'descending'
+    prop: string
+  }[]
 }
 
 export interface User {

@@ -22,6 +22,11 @@ export default defineComponent({
       name: '',
     })
 
+    const orderBy = ref<{
+      order: 'ascending' | 'descending'| (string & {})
+      prop: string
+    }[]>([])
+
     const fetchedData = ref<User[]>([])
     const loading = ref(false)
     const baseDialogVisible = ref(false)
@@ -37,6 +42,7 @@ export default defineComponent({
             page,
             pageSize,
             searchParams,
+            orderBy: orderBy.value,
           },
         })
         fetchedData.value = data.data
@@ -219,8 +225,15 @@ export default defineComponent({
               h(
                 ElTable,
                 {
-                  data: fetchedData.value,
-                  class: 'w-full',
+                  'data': fetchedData.value,
+                  'class': 'w-full',
+                  'onSort-change': function ({ order, prop }) {
+                    orderBy.value = [{
+                      order,
+                      prop,
+                    }]
+                    fetchData()
+                  },
                 },
                 {
                   default: () => {
@@ -228,6 +241,7 @@ export default defineComponent({
                       h(ElTableColumn, {
                         prop: 'id',
                         width: '60',
+                        label: 'ID',
                       }),
                       h(ElTableColumn, {
                         prop: 'name',
@@ -302,6 +316,7 @@ export default defineComponent({
                         prop: 'createdAt',
                         label: '创建时间',
                         width: 180,
+                        sortable: 'custom',
                       }, {
                         default: ({ row }: { row: User }) => {
                           return h(ElTooltip, {
@@ -319,6 +334,7 @@ export default defineComponent({
                         prop: 'updatedAt',
                         label: '修改时间',
                         width: 180,
+                        sortable: 'custom',
                       }, {
                         default: ({ row }: { row: User }) => {
                           return h(ElTooltip, {
