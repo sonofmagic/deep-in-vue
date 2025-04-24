@@ -12,7 +12,7 @@ function output(target: string, data: string) {
 }
 
 async function main() {
-  const target = 'CardWrapper' // 'error'// 'CardWrapper'
+  const target = 'CustomDirective' // 'error'// 'CardWrapper'
   const filename = `${target}.vue`
   const codePath = path.resolve(import.meta.dirname, `../src/demo/${target}.vue`) // path.resolve(import.meta.url, '../src/demo/App.vue')
   const code = await fs.readFile(codePath, 'utf-8')
@@ -27,15 +27,20 @@ async function main() {
         id: target,
 
       })
-      output(`${target}/` + `script.ts`, content)
+      output('script.ts', content)
     }
     if (template) {
       const { code } = compileTemplate({
         id: target,
         filename,
         source: template.content,
+        compilerOptions: {
+          nodeTransforms: [
+
+          ],
+        },
       })
-      output(`${target}/` + `template.ts`, code)
+      output('template.ts', code)
     }
     if (styles.length) {
       const { code } = compileStyle({
@@ -43,7 +48,7 @@ async function main() {
         filename,
         source: styles[0].content,
       })
-      output(`${target}/` + `style.css`, code)
+      output('style.css', code)
     }
   }
 }

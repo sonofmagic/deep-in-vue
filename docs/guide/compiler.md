@@ -29,3 +29,16 @@
 - `@vue/shared`: 包含了 Vue 项目中使用的共享工具函数和常量，供其他 Vue 包复用。
 
 > https://www.npmjs.com/package/vue?activeTab=dependencies
+
+## 主要作用
+
+- 将模板（Template）编译为渲染函数（Render Function）
+- 将样式，预处理语言，再次处理编译成新的样式
+- 将 `script` 和 `script setup` 进行组合
+- 最终把
+
+编译过程的三个阶段：
+
+1. **解析（Parse）**：将模板字符串转换为抽象语法树（AST）
+2. **转换（Transform）**：对 AST 做各种优化与转换
+3. **代码生成（Codegen）**：生成最终的渲染函数代码

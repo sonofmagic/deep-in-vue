@@ -10,6 +10,13 @@
       "request": "launch",
       "type": "node-terminal",
       "cwd": "${workspaceFolder}/apps/fully-compiled"
+    },
+    {
+      "command": "npm run repeat",
+      "name": "Compile run-repeat Vue",
+      "request": "launch",
+      "type": "node-terminal",
+      "cwd": "${workspaceFolder}/apps/fully-compiled"
     }
   ]
 }

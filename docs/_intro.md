@@ -1,3 +1,6 @@
+https://template-explorer.vuejs.org/
+https://play.vuejs.org/
+
 当然可以！下面是一个关于“**Vue 编译器帮助我们做了什么**”的技术分享大纲，内容适合中高级前端开发者，重点是让大家理解 Vue 编译器在开发体验、性能优化和运行时之间的桥梁作用：
 
 ---
