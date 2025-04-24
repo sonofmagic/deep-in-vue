@@ -23,9 +23,9 @@ export default defineComponent({
     })
 
     const orderBy = ref<{
-      order: 'ascending' | 'descending'| (string & {})
-      prop: string
-    }[]>([])
+      order?: 'ascending' | 'descending'| (string & {})
+      prop?: string
+    }>({})
 
     const fetchedData = ref<User[]>([])
     const loading = ref(false)
@@ -228,11 +228,15 @@ export default defineComponent({
                   'data': fetchedData.value,
                   'class': 'w-full',
                   'onSort-change': function ({ order, prop }) {
-                    orderBy.value = [{
+                    Object.assign(orderBy.value, {
                       order,
                       prop,
-                    }]
+                    })
                     fetchData()
+                  },
+                  'defaultSort': {
+                    prop: 'id',
+                    order: 'descending',
                   },
                 },
                 {
@@ -240,8 +244,9 @@ export default defineComponent({
                     return [
                       h(ElTableColumn, {
                         prop: 'id',
-                        width: '60',
+                        width: '70',
                         label: 'ID',
+                        sortable: 'custom',
                       }),
                       h(ElTableColumn, {
                         prop: 'name',

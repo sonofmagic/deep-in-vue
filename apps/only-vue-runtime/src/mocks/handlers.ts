@@ -7,16 +7,20 @@ import { db } from './database'
 type UserPaginationRequest = PaginationRequest<{ nameSearch?: string }>
 
 async function getPagedItems(query: UserPaginationRequest) {
-  const { page, pageSize, searchParams } = defu<Required<UserPaginationRequest>, UserPaginationRequest[]>(query, {
+  const { page, pageSize, searchParams, orderBy } = defu<Required<UserPaginationRequest>, UserPaginationRequest[]>(query, {
     page: 1,
     pageSize: 10,
     searchParams: {},
+    orderBy: {
+      prop: 'id',
+      order: 'descending',
+    },
   })
   const { nameSearch } = searchParams
 
   const offset = (page - 1) * pageSize
-
-  let collection = db.users.orderBy('id').reverse()
+  const x = db.users.orderBy(orderBy.prop)
+  let collection = orderBy.order === 'descending' ? x.reverse() : x
 
   // 如果传入了 name 搜索，则添加 filter
   if (nameSearch && nameSearch.trim() !== '') {
@@ -50,7 +54,10 @@ export const handlers = [
     // 1: el 分页器就是从 1 开始的，2 是符合人类直觉，但是不符合我这种专业程序员从0开始的习惯
     const page = Number.parseInt(url.searchParams.get('page') ?? '1')
     const pageSize = Number.parseInt(url.searchParams.get('pageSize') ?? '10')
-
+    const orderBy = {
+      prop: url.searchParams.get('orderBy[prop]') ?? 'id',
+      order: url.searchParams.get('orderBy[order]') ?? 'descending',
+    }
     await sleepRandom()
 
     const result: PaginationResponse<User> = await getPagedItems({
@@ -59,6 +66,7 @@ export const handlers = [
       searchParams: {
         nameSearch: url.searchParams.get('searchParams[name]') ?? '',
       },
+      orderBy,
     })
 
     return HttpResponse.json(result)
