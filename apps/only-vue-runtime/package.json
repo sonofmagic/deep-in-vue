@@ -1,5 +1,5 @@
 {
-  "name": "ice-admin",
+  "name": "ice-only-vue-runtime",
   "type": "module",
   "version": "0.0.0",
   "private": true,
