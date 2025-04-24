@@ -16,7 +16,7 @@
   },
   "scripts": {
     "build": "turbo run build",
-    "dev": "turbo run dev",
+    "dev": "pnpm run -r --parallel dev",
     "test": "vitest run",
     "test:dev": "vitest",
     "lint": "turbo run lint",

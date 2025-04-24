@@ -6,16 +6,6 @@
   - [代码目录](#代码目录)
   - [运行方式](#运行方式)
   - [对比工具](#对比工具)
-  - [认识 h 函数](#认识-h-函数)
-    - [渲染原生元素](#渲染原生元素)
-    - [渲染组件](#渲染组件)
-  - [h 函数的本质](#h-函数的本质)
-  - [插槽的本质](#插槽的本质)
-  - [写法对比](#写法对比)
-    - [v-for](#v-for)
-    - [v-if](#v-if)
-    - [v-model](#v-model)
-    - [v-on / @xx](#v-on--xx)
 
 ## 介绍
 
@@ -54,7 +44,7 @@ pnpm dev
 
 [`Vue Playground`](https://play.vuejs.org/#eNqdU02P0zAQ/SvGl7bSNlGAU0mrsqgScAAESFxySZNJ411/yR/doij/nbHTlBTtrlZc2njeezNvZuyOvtc6OXqgK5rbyjDtiAXn9aaQTGhlHOmIgYb0pDFKkBlSZxNox2+9c0pecOAgQLql5t4isZCVktYRYQ9kHRLNZx+Bc0V+KcPrV7PFSLCtepBnijMeEMjTwRBawYMDoXnpAE+E5G1GjsugWRc0Sgu66bpYpu/ztM0G2sXetuKsukfyfLHedKGk4pBwdZhnix61WZbl6cgetJYrt6mhKT1He3iIESJLAZinUcqBQSW6DMTzX1TW7Bg/xiQT7Ao940+lPPPTUTD5YlJ7hxMQqgaOUuy7oCRFME8ng8Kjdb85EFspDTVGkj3pQoZKcWVWZM89vCtkH4cdmBt6Qx2yZcMOyZ1VEu9FFBS0UkIzDuardgznV9DVkCpgJa704XOMheXdjPGqher+kfidPYVYQb8ZsGCOUNAL5kpzADfAux9f4ITfFxAb9hzZz4DfAXfrg8eBdutljbYnvOj2U7zCTB5+2t3JgbRjU8FoYPaRX1C88R+eaf2v3TfJ26jDeeIUhyeyFKX+Z44DcJ1ki0VS25YG6sF065y2qzStaolyXDI7mkSCS6UW6YS9DZu2Dm8G/gyhBKxY7oemUTvpe/o2X1BmSr+qw2QNp6TxnCeCyUQ8WST9zyqTdNurfCy83CW2/5IpPa7cvp42EfwH+5fF9X8AQR+3mQ==) 是一个非常好的 `vue` 的教学工具，我们可以在上面尝试编译一些 `vue` 文件，查看编译后的代码
 
-## 认识 h 函数
+<!-- ## 认识 h 函数
 
 ### 渲染原生元素
 
@@ -212,4 +202,4 @@ h(
 )
 ```
 
-[演练场示例](https://play.vuejs.org/#eNp9VMFu2zAM/RXNl6ZAYnfoTlnSdRt66DBsQ7vtEuXg2YyjRpYEUU5TBPn3UZLtuE1RH2KLfCIfycfsk8/GpNsGkmkyw8IK4xiCa8wVV6I22jq2Zw3CbV2DZQe2srpmZ2km/PmMK8a4KrRCxxbCQY1j1pgyd3DrD0s27++OFh689z/0OOEkTBlPvkNuFfvbAE/Gra/UilzOko0Mh2A+ufcHwd9ij8KtWUjwMsAqlxgjcLU854qrVaMKJ7RiTleVDBRHQpWwO4/xB8xHoRg2v+oyh/MioJepT0ClvTsxhnSUi1LOsthN6iMdCGgkBacTY7NGhjd9ScG2k5W2c56M9rG6ceBPdbOWm1AxO0/a+uiZFjJHpFv7Fj10XhdSFBtyntTJkzaxf/ZtQnYguoFNJkUkmAWGs2xAm47onqT/jPWHxjjYuUkJhba57+yUSaFg4tZWN9X6Y9eIcC8ZJ1FQkzo36QNqRZILQXjroAqnXb+9LQzVD3vtnMFpljXKbKq00HWU3/X7i/QivcxKgS5aUglVXjxNAGvK8KnWZSNJWa0KDoGChzmk3L28jSVcQX1o1d1puwfgOpdSP97BqsfQxhCCK9gFTC+tXu7/coR7R71rxRWXBL2FpHOMOAAeYVGJhBvFL3s+kGKIkW5zSfKfd+RHA2u3gzZEpML9y9JS06YtAq5DLFmOMWXsjkM6rET1YjzUcSMk2J/G1/h8TKGOb8HmV7bdQbqzhmLziv0Bd3Govywg2O1x8Umvua3ARffN/Q/S1sDZDfMN5x2glo3nGGFfGlUS7QEusL0NcxWq+o03OwcKu6Ke/+fwhIb89Y3Sj3Qv0w+9xg7/AWfvyMs=)
+[演练场示例](https://play.vuejs.org/#eNp9VMFu2zAM/RXNl6ZAYnfoTlnSdRt66DBsQ7vtEuXg2YyjRpYEUU5TBPn3UZLtuE1RH2KLfCIfycfsk8/GpNsGkmkyw8IK4xiCa8wVV6I22jq2Zw3CbV2DZQe2srpmZ2km/PmMK8a4KrRCxxbCQY1j1pgyd3DrD0s27++OFh689z/0OOEkTBlPvkNuFfvbAE/Gra/UilzOko0Mh2A+ufcHwd9ij8KtWUjwMsAqlxgjcLU854qrVaMKJ7RiTleVDBRHQpWwO4/xB8xHoRg2v+oyh/MioJepT0ClvTsxhnSUi1LOsthN6iMdCGgkBacTY7NGhjd9ScG2k5W2c56M9rG6ceBPdbOWm1AxO0/a+uiZFjJHpFv7Fj10XhdSFBtyntTJkzaxf/ZtQnYguoFNJkUkmAWGs2xAm47onqT/jPWHxjjYuUkJhba57+yUSaFg4tZWN9X6Y9eIcC8ZJ1FQkzo36QNqRZILQXjroAqnXb+9LQzVD3vtnMFpljXKbKq00HWU3/X7i/QivcxKgS5aUglVXjxNAGvK8KnWZSNJWa0KDoGChzmk3L28jSVcQX1o1d1puwfgOpdSP97BqsfQxhCCK9gFTC+tXu7/coR7R71rxRWXBL2FpHOMOAAeYVGJhBvFL3s+kGKIkW5zSfKfd+RHA2u3gzZEpML9y9JS06YtAq5DLFmOMWXsjkM6rET1YjzUcSMk2J/G1/h8TKGOb8HmV7bdQbqzhmLziv0Bd3Govywg2O1x8Umvua3ARffN/Q/S1sDZDfMN5x2glo3nGGFfGlUS7QEusL0NcxWq+o03OwcKu6Ke/+fwhIb89Y3Sj3Qv0w+9xg7/AWfvyMs=) -->
