@@ -1,5 +1,5 @@
 [build]
-publish = "dist"
+publish = "apps/only-vue-runtime/dist"
 command = "pnpm run build"
 
 [build.environment]
