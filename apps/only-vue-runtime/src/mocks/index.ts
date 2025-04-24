@@ -1,9 +1,9 @@
 import { init } from './database'
 
 export async function enableMocking() {
-  if (import.meta.env.PROD) {
-    return
-  }
+  // if (import.meta.env.PROD) {
+  //   return
+  // }
   await init()
   const { worker } = await import('./browser')
 

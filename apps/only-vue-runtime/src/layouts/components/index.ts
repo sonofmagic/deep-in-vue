@@ -17,7 +17,6 @@ export const BaseHeader = defineComponent({
       }, [
         h('div', [
           'ice-admin',
-
         ]),
         h('div', {
           class: 'flex items-center space-x-5',
