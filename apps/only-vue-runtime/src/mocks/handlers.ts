@@ -4,7 +4,7 @@ import { defu } from 'defu'
 import { http, HttpResponse } from 'msw'
 import { db } from './database'
 
-type UserPaginationRequest = PaginationRequest<{ nameSearch?: string }>
+type UserPaginationRequest = PaginationRequest<{ nameSearch?: string, roleSearch?: string }>
 
 async function getPagedItems(query: UserPaginationRequest) {
   const { page, pageSize, searchParams, orderBy } = defu<Required<UserPaginationRequest>, UserPaginationRequest[]>(query, {
@@ -16,7 +16,7 @@ async function getPagedItems(query: UserPaginationRequest) {
       order: 'descending',
     },
   })
-  const { nameSearch } = searchParams
+  const { nameSearch, roleSearch } = searchParams
 
   const offset = (page - 1) * pageSize
   const x = db.users.orderBy(orderBy.prop)
@@ -24,8 +24,22 @@ async function getPagedItems(query: UserPaginationRequest) {
 
   // 如果传入了 name 搜索，则添加 filter
   if (nameSearch && nameSearch.trim() !== '') {
-    collection = collection.filter(user =>
-      user.name?.toLowerCase().includes(nameSearch.toLowerCase()),
+    collection = collection.filter(
+      (user) => {
+        return user.name?.toLowerCase().includes(nameSearch.toLowerCase())
+      },
+    )
+  }
+  if (roleSearch && roleSearch.trim() !== '') {
+    collection = collection.filter(
+      (user) => {
+        if (roleSearch === 'none') {
+          return user.role === null || user.role === undefined // || user.role === ''
+        }
+        else {
+          return Boolean(user.role?.toLowerCase().includes(roleSearch.toLowerCase()))
+        }
+      },
     )
   }
 
@@ -65,6 +79,7 @@ export const handlers = [
       pageSize,
       searchParams: {
         nameSearch: url.searchParams.get('searchParams[name]') ?? '',
+        roleSearch: url.searchParams.get('searchParams[role]') ?? '',
       },
       orderBy,
     })

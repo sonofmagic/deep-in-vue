@@ -5,7 +5,7 @@ import { UpsertUserDialog } from '@/components/UpsertUserDialog'
 import { Role, roleTextFilter } from '@/types'
 import { formatDate } from '@/utils'
 import axios from 'axios'
-import { ElButton, ElDivider, ElInput, ElLink, ElMessageBox, ElPagination, ElProgress, ElTable, ElTableColumn, ElTooltip, vLoading } from 'element-plus'
+import { ElButton, ElDivider, ElInput, ElLink, ElMessageBox, ElPagination, ElProgress, ElSelect, ElTable, ElTableColumn, ElTooltip, vLoading } from 'element-plus'
 import { defineComponent, h, nextTick, onMounted, reactive, ref, render, withDirectives } from 'vue'
 
 export default defineComponent({
@@ -20,10 +20,11 @@ export default defineComponent({
 
     const searchParams = reactive({
       name: '',
+      role: '',
     })
 
     const orderBy = ref<{
-      order?: 'ascending' | 'descending'| (string & {})
+      order?: 'ascending' | 'descending' | (string & {})
       prop?: string
     }>({})
 
@@ -87,17 +88,23 @@ export default defineComponent({
     })
 
     const TableControl: FunctionalComponent = () => {
+      function renderSearchField(label: string, vnode: VNode) {
+        return h('div', { class: 'flex items-center' }, [
+          h('div', { class: 'mr-4 w-16 text-right' }, [
+            label,
+          ]),
+          vnode,
+        ])
+      }
+
       return h('div', {
         class: 'flex justify-between',
       }, [
         h('div', {
           class: 'flex items-center text-sm',
         }, [
-          h('div', { class: 'flex items-center' }, [
-            h('div', { class: 'mr-2 w-20' }, [
-              '名称',
-            ]),
-            h(ElInput, {
+          h('div', { class: 'flex items-center space-x-4' }, [
+            renderSearchField('名称', h(ElInput, {
               placeholder: '请输入',
               class: 'w-80',
               clearable: true,
@@ -105,7 +112,36 @@ export default defineComponent({
               onInput: (val: string) => {
                 searchParams.name = val
               },
-            }),
+            })),
+            renderSearchField('角色', h('div', {
+              class: 'w-45',
+            }, [
+              h(ElSelect, {
+                'modelValue': searchParams.role!,
+                'onUpdate:modelValue': (val) => {
+                  searchParams.role = val
+                },
+                'placeholder': '请选择角色',
+                'clearable': true,
+              }, [
+                h(ElSelect.Option, {
+                  value: 'admin',
+                  label: '管理员',
+                }),
+                h(ElSelect.Option, {
+                  value: 'user',
+                  label: '普通用户',
+                }),
+                h(ElSelect.Option, {
+                  value: 'guest',
+                  label: '游客',
+                }),
+                h(ElSelect.Option, {
+                  value: 'none',
+                  label: '未知',
+                }),
+              ]),
+            ])),
           ]),
 
         ]),

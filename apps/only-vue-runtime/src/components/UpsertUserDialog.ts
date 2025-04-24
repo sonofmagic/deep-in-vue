@@ -175,6 +175,7 @@ export const UpsertUserDialog = defineComponent({
                   'onUpdate:modelValue': (val) => {
                     formValue.value.role = val
                   },
+                  'placeholder': '请选择角色',
                 }, [
                   h(ElSelect.Option, {
                     value: 'admin',
