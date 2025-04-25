@@ -19,9 +19,9 @@
 
 ## 项目
 
-本文附带项目 `https://github.com/sonofmagic/only-vue-runtime`
+本文附带项目 [**deep-in-vue**](https://github.com/sonofmagic/deep-in-vue) 
 
-请务必 `clone` 下来运行体验一下，不然很可能体会不到这个项目后续的知识点
+请务必 `git clone` 下来运行体验一下，不然很可能体会不到这个项目后续的知识点
 
 ## 运行环境
 

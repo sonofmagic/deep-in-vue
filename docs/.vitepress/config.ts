@@ -4,6 +4,13 @@ export default defineConfig({
   title: 'Vue 编译本质论',
   description: '理解 vue 编译器',
   themeConfig: {
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/sonofmagic/deep-in-vue' },
+    ],
+    editLink: {
+      pattern: 'https://github.com/sonofmagic/deep-in-vue/edit/main/website-weapp-vite/:path',
+      text: '为此页提供修改建议',
+    },
     sidebar: [
       { text: '前言', link: '/' },
       {

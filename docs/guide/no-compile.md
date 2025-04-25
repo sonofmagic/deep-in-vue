@@ -62,7 +62,7 @@
 
 > 技术栈: `vue3` + `service worker` + `indexedDB` + `tailwindcss@4`
 
-源代码详见 [apps/only-vue-runtime](https://github.com/sonofmagic/only-vue-runtime/tree/main/apps/only-vue-runtime)
+源代码详见 [apps/only-vue-runtime](https://github.com/sonofmagic/deep-in-vue/tree/main/apps/only-vue-runtime)
 
 线上地址: https://only-vue-runtime.netlify.app/
 

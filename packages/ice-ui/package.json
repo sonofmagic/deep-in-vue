@@ -7,11 +7,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sonofmagic/only-vue-runtime.git",
+    "url": "git+https://github.com/sonofmagic/deep-in-vue.git",
     "directory": "packages/ice-ui"
   },
   "bugs": {
-    "url": "https://github.com/sonofmagic/only-vue-runtime/issues"
+    "url": "https://github.com/sonofmagic/deep-in-vue/issues"
   },
   "keywords": [],
   "sideEffects": false,
