@@ -9,5 +9,8 @@ export default icebreaker(
       '**/fixtures/**',
       'apps/only-vue-runtime/public',
     ],
+    rules: {
+      'vue/one-component-per-file': 'off',
+    },
   },
 )

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import HelloWorld, { Happy, Sad } from '@/components/HelloWorld.vue'
+import MutlipleComponent, { Happy, Sad } from '@/components/MutlipleComponent.vue'
 import { ref } from 'vue'
 
 const msg = ref('Hello World')
@@ -12,14 +12,14 @@ function handleClick(event: MouseEvent) {
 <template>
   <div class="mx-auto container grid gap-4 text-5xl py-12">
     <input v-model="msg" type="text">
-    <HelloWorld :msg="msg" @click="handleClick">
+    <MutlipleComponent :msg="msg" @click="handleClick">
       <template #default>
         <div class="border border-yellow-500">
           默认插槽
           {{ msg }}
         </div>
       </template>
-    </HelloWorld>
+    </MutlipleComponent>
     <Happy :msg="msg" @click="handleClick">
       <template #default>
         <div class="border border-yellow-500">

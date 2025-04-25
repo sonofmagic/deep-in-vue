@@ -15,7 +15,7 @@ export default defineConfig({
           { text: 'vue 编译器介绍', link: '/compiler' },
           { text: '编译时指令 vs 运行时指令', link: '/compile-time-directive' },
           { text: 'render vs setup render 函数', link: '/render-vs-setup' },
-          { text: 'vue+jsx 全编译项目', link: '/fully-compiled' }
+          { text: 'vue+jsx 全编译项目', link: '/fully-compiled' },
         ],
       },
       {
@@ -31,6 +31,7 @@ export default defineConfig({
           { text: 'v-if 的本质', link: '/vIf' },
           { text: 'v-for 的本质', link: '/vFor' },
           { text: 'style scoped 的本质', link: '/style-scoped' },
+          { text: 'vue jsx/tsx 的本质', link: '/tsx' },
           { text: '.vue 文件的本质', link: '/vue' },
         ],
       },

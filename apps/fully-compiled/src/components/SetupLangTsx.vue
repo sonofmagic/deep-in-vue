@@ -33,7 +33,7 @@ function renderCounter2() {
 const nodes = h(Counter)
 
 console.log('nodes', nodes)
-
+// https://eslint.vuejs.org/rules/one-component-per-file.html
 const RenderNode5 = defineComponent({
   name: 'RenderNode5',
   setup() {
@@ -44,7 +44,7 @@ const RenderNode5 = defineComponent({
 })
 
 const flag = ref(true)
-
+// https://eslint.vuejs.org/rules/one-component-per-file.html
 const RenderNode6 = defineComponent({
   name: 'RenderNode6',
   setup() {

@@ -6,7 +6,7 @@ export interface Props {
   msg?: string
 }
 
-export const Happy: FunctionalComponent<Props> = ({ msg = 'Happy' }, { emit, slots }) => {
+export const Happy: FunctionalComponent<Props> = ({ msg }, { emit, slots }) => {
   return h('div', {
     class: 'border border-red-500',
     onClick: (e: MouseEvent) => {
@@ -20,7 +20,7 @@ Happy.emits = ['click']
 Happy.props = {
   msg: {
     type: String,
-    default: 'Happy',
+    default: '我是 MutlipleComponent 内定义的组件 Happy',
   },
 }
 
@@ -29,7 +29,7 @@ export const Sad = defineComponent(
     name: 'Sad',
     props: {
       msg: {
-        default: 'Sad',
+        default: '我是 MutlipleComponent 内定义的组件 Sad',
         type: String,
       },
     },
@@ -62,6 +62,8 @@ defineEmits<{
     {{ msg }}
     <slot />
   </div>
+  <Happy />
+  <Sad />
 </template>
 
 <style scoped></style>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Icebreaker from '@/components/Icebreaker.vue'
+import LangTsx from '@/components/LangTsx.vue'
 import { ref } from 'vue'
 
 const msg = ref('Hello World')
@@ -7,11 +7,11 @@ const msg = ref('Hello World')
 
 <template>
   <div class="grid justify-center items-center text-5xl py-16">
-    <Icebreaker v-model:msg="msg">
+    <LangTsx v-model:msg="msg">
       <div class="border border-yellow-500">
         <input v-model="msg">
       </div>
-    </Icebreaker>
+    </LangTsx>
   </div>
 </template>
 

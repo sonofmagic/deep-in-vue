@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import Counter from '@/components/Counter.vue'
+import SetupLangTsx from '@/components/SetupLangTsx.vue'
 </script>
 
 <template>
   <div>
-    <Counter />
+    <SetupLangTsx />
   </div>
 </template>
 
