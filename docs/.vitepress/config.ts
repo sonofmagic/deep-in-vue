@@ -33,6 +33,7 @@ export default defineConfig({
           { text: 'style scoped 的本质', link: '/style-scoped' },
           { text: 'vue jsx/tsx 的本质', link: '/tsx' },
           { text: '.vue 文件的本质', link: '/vue' },
+          { text: 'vite dev 和 build 下的 vue 产物', link: '/vite-dev-build' },
         ],
       },
       // {

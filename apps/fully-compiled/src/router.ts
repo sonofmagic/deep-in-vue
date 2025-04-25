@@ -22,6 +22,11 @@ export const routes: Array<RouteRecordRaw> = [
     name: 'card',
     component: () => import('@/pages/card.vue'),
   },
+  {
+    path: '/hello',
+    name: 'hello',
+    component: () => import('@/pages/hello.vue'),
+  },
 ]
 
 const router = createRouter({
