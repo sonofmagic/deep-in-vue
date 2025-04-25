@@ -86,7 +86,7 @@ export default /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], 
 
 ### js(css)
 
-url: http://localhost:8088/src/pages/hello.vue?vue&type=style&index=0&scoped=9e67ff97&lang.css
+url: /src/pages/hello.vue?vue&type=style&index=0&scoped=9e67ff97&lang.css
 
 ```js
 import {createHotContext as __vite__createHotContext} from "/@vite/client";
