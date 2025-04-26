@@ -1,0 +1,52 @@
+{
+  "name": "type-infer",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "description": "esbuild build package template",
+  "author": "ice breaker <1324318532@qq.com>",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sonofmagic/monorepo-template.git",
+    "directory": "packages/foo"
+  },
+  "bugs": {
+    "url": "https://github.com/sonofmagic/monorepo-template/issues"
+  },
+  "keywords": [],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "unbuild --stub",
+    "build:watch": "unbuild --watch --sourcemap",
+    "build": "unbuild",
+    "test": "vitest run",
+    "test:dev": "vitest",
+    "release": "pnpm publish",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "publishConfig": {},
+  "devDependencies": {
+    "@babel/parser": "^7.27.0",
+    "@types/babel__traverse": "^7.20.7"
+  },
+  "dependencies": {
+    "@babel/traverse": "^7.27.0",
+    "@babel/types": "^7.27.0",
+    "magic-string": "^0.30.17"
+  }
+}
