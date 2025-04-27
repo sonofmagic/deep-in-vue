@@ -31,26 +31,29 @@ export default defineConfig({
         text: '本质',
         items: [
           { text: 'script setup 的本质', link: '/setup' },
-          { text: 'slot 的本质', link: '/slot' },
           { text: 'v-bind 的本质', link: '/vBind' },
           { text: 'v-on 的本质', link: '/vOn' },
           { text: 'v-model 的本质', link: '/vModel' },
           { text: 'v-if 的本质', link: '/vIf' },
           { text: 'v-for 的本质', link: '/vFor' },
+          { text: 'slot 的本质', link: '/slot' },
+          { text: 'v-slot 的本质', link: '/v-slot' },
           { text: 'style scoped 的本质', link: '/style-scoped' },
+          { text: 'h 函数的本质', link: '/h' },
           { text: 'vue jsx/tsx 的本质', link: '/tsx' },
           { text: '.vue 文件的本质', link: '/vue' },
           { text: 'vite dev 和 build 下的 vue 产物', link: '/vite-dev-build' },
         ],
       },
-      // {
-      //   base: '/deep',
-      //   collapsed: false,
-      //   text: '深入',
-      //   items: [
-      //     { text: '静态提升与 openBlock', link: '/index' },
-      //   ],
-      // },
+      {
+        base: '/deep',
+        collapsed: false,
+        text: '深入',
+        items: [
+          { text: '类型推导与提取', link: '/type-infer' },
+          // { text: '静态提升与 openBlock', link: '/index' },
+        ],
+      },
 
     ],
   },

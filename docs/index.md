@@ -32,6 +32,7 @@
 
 - `apps/only-vue-runtime` 为项目本体
 - `apps/fully-compiled` 为全编译器版本
+- `packages/type-infer` 为提取 `Type` 定义实现代码
 
 ## 运行方式
 
@@ -41,3 +42,9 @@ pnpm i
 # 开发环境
 pnpm dev
 ```
+
+## 推荐工具
+
+- [play.vuejs.org](https://play.vuejs.org/)
+- [babeljs.io/repl](https://babeljs.io/repl#?browsers=defaults%2C%20not%20ie%2011%2C%20not%20ie_mob%2011&build=&builtIns=false&corejs=3.21&spec=false&loose=false&code_lz=JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wChzMBXAOw2AmrgElqATJADwAoBKAb1Jw4RGJSiMAPAD5BcCa2AA3OGgA2KAM4aAcihBIAvACIARgHMAtEVYWArAAZ7RqQEYJAegWKZQofKUq6lq6-sbmVkg2Dk6uHl4-cu5ScKQAvkA&forceAllTransforms=false&modules=false&shippedProposals=false&evaluate=false&fileSize=false&timeTravel=false&sourceType=module&lineWrap=true&presets=env%2Creact%2Cstage-2&prettier=false&targets=&version=7.27.0&externalPlugins=&assumptions=%7B%7D)
+- [ast-explorer](https://ast-explorer.dev/) 
