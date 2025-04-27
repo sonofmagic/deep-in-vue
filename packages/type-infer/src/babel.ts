@@ -1,4 +1,5 @@
 import _babelTraverse from '@babel/traverse'
+import * as t from '@babel/types'
 
 export { parse, parseExpression } from '@babel/parser'
 
@@ -7,3 +8,7 @@ function _interopDefaultCompat(e: any) {
 }
 
 export const traverse = _interopDefaultCompat(_babelTraverse) as typeof _babelTraverse
+
+export {
+  t
+}

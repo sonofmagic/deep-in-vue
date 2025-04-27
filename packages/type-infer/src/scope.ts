@@ -1,12 +1,11 @@
 import type { NodePath, TraverseOptions } from '@babel/traverse'
 import type * as t from '@babel/types'
+import type { RuntimeProps } from './types'
 import path from 'node:path'
 import fs from 'fs-extra'
 import { LRUCache } from 'lru-cache'
 import set from 'set-value'
 import { parse, traverse } from './babel'
-
-export type RuntimeProps = Record<string, { type: string, required: boolean }>
 
 interface Scope {
   props: RuntimeProps

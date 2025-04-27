@@ -1,0 +1,182 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`insert > simple-interface 1`] = `
+"import { defineComponent as _defineComponent } from 'vue'
+import { ref } from 'vue'
+
+
+const __sfc__ = /*@__PURE__*/_defineComponent({
+  __name: 'App',
+  props: {
+    a: { type: Number, required: true },
+    b: { type: String, required: false },
+    c: { type: Boolean, required: true },
+    d: { type: Array, required: true },
+    e: { type: Object, required: true },
+  },
+  setup(__props, { expose: __expose }) {
+  __expose();
+
+const msg = ref('Hello World!')
+
+
+
+
+const __returned__ = { msg }
+Object.defineProperty(__returned__, '__isScriptSetup', { enumerable: false, value: true })
+return __returned__
+}
+
+});
+import { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, vModelText as _vModelText, withDirectives as _withDirectives, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock } from "vue"
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (_openBlock(), _createElementBlock(_Fragment, null, [
+    _createElementVNode("h1", null, _toDisplayString($setup.msg), 1 /* TEXT */),
+    _withDirectives(_createElementVNode("input", {
+      "onUpdate:modelValue": _cache[0] || (_cache[0] = $event => (($setup.msg) = $event))
+    }, null, 512 /* NEED_PATCH */), [
+      [_vModelText, $setup.msg]
+    ])
+  ], 64 /* STABLE_FRAGMENT */))
+}
+__sfc__.render = render
+__sfc__.__file = "src/App.vue"
+export default __sfc__"
+`;
+
+exports[`insert > simple-interface-ref 1`] = `
+"import { defineComponent as _defineComponent } from 'vue'
+import { ref } from 'vue'
+
+
+const __sfc__ = /*@__PURE__*/_defineComponent({
+  __name: 'App',
+  props: {
+    a: { type: Number, required: true },
+    b: { type: String, required: false },
+    c: { type: Boolean, required: true },
+    d: { type: Array, required: true },
+    e: { type: Object, required: true },
+  },
+  setup(__props, { expose: __expose }) {
+  __expose();
+
+const msg = ref('Hello World!')
+
+
+
+
+const __returned__ = { msg }
+Object.defineProperty(__returned__, '__isScriptSetup', { enumerable: false, value: true })
+return __returned__
+}
+
+});
+import { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, vModelText as _vModelText, withDirectives as _withDirectives, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock } from "vue"
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (_openBlock(), _createElementBlock(_Fragment, null, [
+    _createElementVNode("h1", null, _toDisplayString($setup.msg), 1 /* TEXT */),
+    _withDirectives(_createElementVNode("input", {
+      "onUpdate:modelValue": _cache[0] || (_cache[0] = $event => (($setup.msg) = $event))
+    }, null, 512 /* NEED_PATCH */), [
+      [_vModelText, $setup.msg]
+    ])
+  ], 64 /* STABLE_FRAGMENT */))
+}
+__sfc__.render = render
+__sfc__.__file = "src/App.vue"
+export default __sfc__"
+`;
+
+exports[`insert > simple-type-ref 1`] = `
+"import { defineComponent as _defineComponent } from 'vue'
+import { ref } from 'vue'
+
+
+const __sfc__ = /*@__PURE__*/_defineComponent({
+  __name: 'App',
+  props: {
+    a: { type: Number, required: true },
+    b: { type: String, required: false },
+    c: { type: Boolean, required: true },
+    d: { type: Array, required: true },
+    e: { type: Object, required: true },
+  },
+  setup(__props, { expose: __expose }) {
+  __expose();
+
+const msg = ref('Hello World!')
+
+
+
+
+const __returned__ = { msg }
+Object.defineProperty(__returned__, '__isScriptSetup', { enumerable: false, value: true })
+return __returned__
+}
+
+});
+import { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, vModelText as _vModelText, withDirectives as _withDirectives, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock } from "vue"
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (_openBlock(), _createElementBlock(_Fragment, null, [
+    _createElementVNode("h1", null, _toDisplayString($setup.msg), 1 /* TEXT */),
+    _withDirectives(_createElementVNode("input", {
+      "onUpdate:modelValue": _cache[0] || (_cache[0] = $event => (($setup.msg) = $event))
+    }, null, 512 /* NEED_PATCH */), [
+      [_vModelText, $setup.msg]
+    ])
+  ], 64 /* STABLE_FRAGMENT */))
+}
+__sfc__.render = render
+__sfc__.__file = "src/App.vue"
+export default __sfc__"
+`;
+
+exports[`insert > simple-type-ref-interseaction-case-0 1`] = `
+"import { defineComponent as _defineComponent } from 'vue'
+import { ref } from 'vue'
+
+
+const __sfc__ = /*@__PURE__*/_defineComponent({
+  __name: 'App',
+  props: {
+    a: { type: Number, required: true },
+    b: { type: String, required: false },
+    c: { type: Boolean, required: true },
+    d: { type: Array, required: true },
+    e: { type: Object, required: true },
+    h: { type: Number, required: true },
+    i: { type: String, required: false },
+    j: { type: Boolean, required: true },
+    k: { type: Array, required: true },
+    l: { type: Object, required: true },
+  },
+  setup(__props, { expose: __expose }) {
+  __expose();
+
+const msg = ref('Hello World!')
+
+
+
+
+const __returned__ = { msg }
+Object.defineProperty(__returned__, '__isScriptSetup', { enumerable: false, value: true })
+return __returned__
+}
+
+});
+import { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, vModelText as _vModelText, withDirectives as _withDirectives, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock } from "vue"
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (_openBlock(), _createElementBlock(_Fragment, null, [
+    _createElementVNode("h1", null, _toDisplayString($setup.msg), 1 /* TEXT */),
+    _withDirectives(_createElementVNode("input", {
+      "onUpdate:modelValue": _cache[0] || (_cache[0] = $event => (($setup.msg) = $event))
+    }, null, 512 /* NEED_PATCH */), [
+      [_vModelText, $setup.msg]
+    ])
+  ], 64 /* STABLE_FRAGMENT */))
+}
+__sfc__.render = render
+__sfc__.__file = "src/App.vue"
+export default __sfc__"
+`;
