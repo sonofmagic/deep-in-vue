@@ -1,16 +1,14 @@
 import type { NodePath } from '@babel/traverse'
 import type * as t from '@babel/types'
-import path from 'node:path'
 import fs from 'fs-extra'
 import set from 'set-value'
-// import path from 'pathe'
 import { parse, traverse } from './babel'
 
 export type RuntimeProps = Record<string, { type: string, required: boolean }>
 
 export function extractTypes(id: string) {
   const code = fs.readFileSync(id, 'utf8')
-  const dir = path.dirname(id)
+
   const ast = parse(code, {
     plugins: ['typescript'],
     sourceType: 'module',
@@ -18,8 +16,6 @@ export function extractTypes(id: string) {
 
   const result: RuntimeProps = {}
   const typeMap = new Map<string, NodePath<t.TypeScript>>()
-  const ImportDeclarations: NodePath<t.ImportDeclaration>[] = []
-  const ExportDeclarations: NodePath<t.ExportDeclaration>[] = []
 
   function resolveTSTypeReference(np: NodePath<t.TSTypeReference>) {
     const typeNameNode = np.node.typeName
@@ -27,24 +23,6 @@ export function extractTypes(id: string) {
       const name = typeNameNode.name
       if (typeMap.get(name)) {
         return typeMap.get(name)
-      }
-      else {
-        const targetDeclaration = ImportDeclarations.find((x) => {
-          return x.get('specifiers').find((x) => {
-            if (x.isImportSpecifier() && x.get('imported').isIdentifier({ name })) {
-              return x.get('local').isIdentifier({ name })
-            }
-            return false
-          })
-        })
-        if (targetDeclaration) {
-          const value = targetDeclaration.get('source').node.value
-          const imtf = path.resolve(dir, value)
-          if (fs.existsSync(imtf)) {
-            const { props } = extractTypes(imtf)
-            console.log(props)
-          }
-        }
       }
     }
     else if (typeNameNode.type === 'TSQualifiedName') {
@@ -151,17 +129,6 @@ export function extractTypes(id: string) {
             }
           }
         }
-      },
-    },
-
-    ImportDeclaration: {
-      enter(p) {
-        ImportDeclarations.push(p)
-      },
-    },
-    ExportDeclaration: {
-      enter(p) {
-        ExportDeclarations.push(p)
       },
     },
   })

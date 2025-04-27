@@ -16,7 +16,7 @@
     "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
     "dexie": "^4.0.11",
-    "element-plus": "^2.9.8",
+    "element-plus": "^2.9.9",
     "es-toolkit": "^1.36.0",
     "ice-ui": "workspace:*",
     "idb": "^8.0.2",

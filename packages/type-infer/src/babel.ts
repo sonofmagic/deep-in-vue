@@ -10,5 +10,5 @@ function _interopDefaultCompat(e: any) {
 export const traverse = _interopDefaultCompat(_babelTraverse) as typeof _babelTraverse
 
 export {
-  t
+  t,
 }
