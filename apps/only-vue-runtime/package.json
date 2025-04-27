@@ -12,7 +12,7 @@
     "@faker-js/faker": "^9.7.0",
     "@vimeo/player": "^2.26.0",
     "@vueuse/core": "^13.1.0",
-    "axios": "^1.8.4",
+    "axios": "^1.9.0",
     "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
     "dexie": "^4.0.11",
@@ -22,7 +22,7 @@
     "idb": "^8.0.2",
     "pinia": "^3.0.2",
     "vue": "^3.5.13",
-    "vue-router": "^4.5.0"
+    "vue-router": "^4.5.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.4",

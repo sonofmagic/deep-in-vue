@@ -18,5 +18,25 @@
   "e": {
     "type": "TSTypeLiteral",
     "required": true
+  },
+  "h": {
+    "type": "TSNumberKeyword",
+    "required": true
+  },
+  "i": {
+    "type": "TSStringKeyword",
+    "required": false
+  },
+  "j": {
+    "type": "TSBooleanKeyword",
+    "required": true
+  },
+  "k": {
+    "type": "TSArrayType",
+    "required": true
+  },
+  "l": {
+    "type": "TSTypeLiteral",
+    "required": true
   }
 }

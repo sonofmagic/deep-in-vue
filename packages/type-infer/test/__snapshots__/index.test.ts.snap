@@ -1,0 +1,125 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`index > complex 1`] = `{}`;
+
+exports[`index > complex-intersection 1`] = `{}`;
+
+exports[`index > simple-interface 1`] = `
+{
+  "a": {
+    "required": true,
+    "type": "TSNumberKeyword",
+  },
+  "b": {
+    "required": false,
+    "type": "TSStringKeyword",
+  },
+  "c": {
+    "required": true,
+    "type": "TSBooleanKeyword",
+  },
+  "d": {
+    "required": true,
+    "type": "TSArrayType",
+  },
+  "e": {
+    "required": true,
+    "type": "TSTypeLiteral",
+  },
+}
+`;
+
+exports[`index > simple-interface-ref 1`] = `
+{
+  "a": {
+    "required": true,
+    "type": "TSNumberKeyword",
+  },
+  "b": {
+    "required": false,
+    "type": "TSStringKeyword",
+  },
+  "c": {
+    "required": true,
+    "type": "TSBooleanKeyword",
+  },
+  "d": {
+    "required": true,
+    "type": "TSArrayType",
+  },
+  "e": {
+    "required": true,
+    "type": "TSTypeLiteral",
+  },
+}
+`;
+
+exports[`index > simple-type-ref 1`] = `
+{
+  "a": {
+    "required": true,
+    "type": "TSNumberKeyword",
+  },
+  "b": {
+    "required": false,
+    "type": "TSStringKeyword",
+  },
+  "c": {
+    "required": true,
+    "type": "TSBooleanKeyword",
+  },
+  "d": {
+    "required": true,
+    "type": "TSArrayType",
+  },
+  "e": {
+    "required": true,
+    "type": "TSTypeLiteral",
+  },
+}
+`;
+
+exports[`index > simple-type-ref-interseaction-case-0 1`] = `
+{
+  "a": {
+    "required": true,
+    "type": "TSNumberKeyword",
+  },
+  "b": {
+    "required": false,
+    "type": "TSStringKeyword",
+  },
+  "c": {
+    "required": true,
+    "type": "TSBooleanKeyword",
+  },
+  "d": {
+    "required": true,
+    "type": "TSArrayType",
+  },
+  "e": {
+    "required": true,
+    "type": "TSTypeLiteral",
+  },
+  "h": {
+    "required": true,
+    "type": "TSNumberKeyword",
+  },
+  "i": {
+    "required": false,
+    "type": "TSStringKeyword",
+  },
+  "j": {
+    "required": true,
+    "type": "TSBooleanKeyword",
+  },
+  "k": {
+    "required": true,
+    "type": "TSArrayType",
+  },
+  "l": {
+    "required": true,
+    "type": "TSTypeLiteral",
+  },
+}
+`;

@@ -1,4 +1,4 @@
-defineProps<{
+type Props = {
   a: number
   b?: string
   c: boolean
@@ -7,5 +7,6 @@ defineProps<{
     f: number
     g: string
   }
-}>()
+}
 
+defineProps<Props>()
