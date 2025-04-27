@@ -1,4 +1,3 @@
-import type { t } from './babel'
 import type { RuntimeProps } from './types'
 import fs from 'fs-extra'
 import MagicString from 'magic-string'
