@@ -1,8 +1,47 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`index > complex 1`] = `{}`;
+exports[`index > complex 1`] = `
+{
+  "d": {
+    "required": true,
+    "type": "TSArrayType",
+  },
+  "e": {
+    "required": true,
+    "type": "TSTypeLiteral",
+  },
+}
+`;
 
-exports[`index > complex-intersection 1`] = `{}`;
+exports[`index > complex-ag 1`] = `
+{
+  "d": {
+    "required": true,
+    "type": "TSArrayType",
+  },
+  "e": {
+    "required": true,
+    "type": "TSTypeLiteral",
+  },
+}
+`;
+
+exports[`index > complex-intersection 1`] = `
+{
+  "a": {
+    "required": true,
+    "type": "TSNumberKeyword",
+  },
+  "b": {
+    "required": false,
+    "type": "TSStringKeyword",
+  },
+  "c": {
+    "required": true,
+    "type": "TSBooleanKeyword",
+  },
+}
+`;
 
 exports[`index > simple-interface 1`] = `
 {

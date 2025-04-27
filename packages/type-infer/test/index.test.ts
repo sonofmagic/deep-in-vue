@@ -1,6 +1,10 @@
-import { extractTypes } from '@/index'
+import { resolveScope } from '@/scope'
 import fs from 'fs-extra'
 import path from 'pathe'
+
+function extractTypes(id: string) {
+  return resolveScope(id, true)
+}
 
 describe('index', () => {
   it('simple-interface', async () => {
@@ -57,6 +61,18 @@ describe('index', () => {
     )
     await fs.outputFile(
       path.resolve(import.meta.dirname, './output/complex.json'),
+      JSON.stringify(props, undefined, 2),
+      'utf8',
+    )
+    expect(props).toMatchSnapshot()
+  })
+
+  it('complex-ag', async () => {
+    const { props } = await extractTypes(
+      path.resolve(import.meta.dirname, './fixtures/complex-ag.ts'),
+    )
+    await fs.outputFile(
+      path.resolve(import.meta.dirname, './output/complex-ag.json'),
       JSON.stringify(props, undefined, 2),
       'utf8',
     )

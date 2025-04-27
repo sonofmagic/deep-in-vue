@@ -1,4 +1,4 @@
-import { Props } from './a'
+import { Props } from './b'
 
 defineProps<Props>()
 

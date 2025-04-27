@@ -4,4 +4,8 @@ export interface Props extends BaseProps {
   a: number
   b?: string
   c: boolean
-} 
+}
+
+export type {
+  BaseProps
+}
