@@ -39,6 +39,10 @@ describe('index', () => {
     expect(await r('simple-type-ref-interseaction-case-0')).toMatchSnapshot()
   })
 
+  it('simple-type-ref-interseaction-case-1', async () => {
+    expect(await r('simple-type-ref-interseaction-case-1')).toMatchSnapshot()
+  })
+
   it('complex', async () => {
     expect(await r('complex')).toMatchSnapshot()
   })

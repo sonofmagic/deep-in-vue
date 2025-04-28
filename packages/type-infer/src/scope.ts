@@ -215,6 +215,7 @@ export function resolveScope(id: string, extractTypes = false): Scope {
         ExportDeclarations.push(p)
       },
     },
+
   }
   if (extractTypes) {
     opts.CallExpression = function (p) {

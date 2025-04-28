@@ -1,6 +1,7 @@
 import { resolveScope } from '@/scope'
-import fs from 'fs-extra'
 import path from 'pathe'
+// import a from './fixtures/a.ts?url'
+// console.log(a)
 
 function r(testCase: string) {
   const scope = resolveScope(
@@ -11,6 +12,7 @@ function r(testCase: string) {
 
 describe('analyze', () => {
   it('analyze', () => {
-
+    const scope = r('a')
+    expect(scope.typeMap.keys()).toMatchSnapshot('typeMap keys')
   })
 })
