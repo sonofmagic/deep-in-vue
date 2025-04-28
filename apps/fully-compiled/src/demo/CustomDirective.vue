@@ -1,5 +1,5 @@
 <template>
-  <div v-repeat="3">
+  <div v-file>
     Hello
   </div>
 </template>

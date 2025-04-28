@@ -1,7 +1,7 @@
 import fs from 'fs-extra'
 import path from 'pathe'
 import { compileScript, compileStyle, compileTemplate, parse } from 'vue/compiler-sfc'
-// walk estree-walker
+import { transformRepeat } from './v-file'
 
 function debug(..._args: any[]) {
 
@@ -27,7 +27,7 @@ async function main() {
         id: target,
 
       })
-      output('script.ts', content)
+      output('CustomDirective/script.ts', content)
     }
     if (template) {
       const { code } = compileTemplate({
@@ -36,11 +36,11 @@ async function main() {
         source: template.content,
         compilerOptions: {
           nodeTransforms: [
-
+            transformRepeat,
           ],
         },
       })
-      output('template.ts', code)
+      output('CustomDirective/template.ts', code)
     }
     if (styles.length) {
       const { code } = compileStyle({
@@ -48,7 +48,7 @@ async function main() {
         filename,
         source: styles[0].content,
       })
-      output('style.css', code)
+      output('CustomDirective/style.css', code)
     }
   }
 }

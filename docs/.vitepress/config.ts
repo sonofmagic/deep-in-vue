@@ -18,17 +18,17 @@ export default defineConfig({
         collapsed: false,
         text: '入门',
         items: [
-          { text: '纯运行时项目', link: '/no-compile' },
           { text: 'vue 编译器介绍', link: '/compiler' },
           { text: '编译时指令 vs 运行时指令', link: '/compile-time-directive' },
           { text: 'render vs setup render 函数', link: '/render-vs-setup' },
+          { text: '纯运行时项目', link: '/no-compile' },
           { text: 'vue+jsx 全编译项目', link: '/fully-compiled' },
         ],
       },
       {
         base: '/essence',
         collapsed: false,
-        text: '本质',
+        text: '进阶',
         items: [
           { text: 'script setup 的本质', link: '/setup' },
           { text: 'v-bind 的本质', link: '/vBind' },
@@ -51,6 +51,7 @@ export default defineConfig({
         collapsed: false,
         text: '深入',
         items: [
+
           { text: '类型推导与提取', link: '/type-infer' },
           // { text: '静态提升与 openBlock', link: '/index' },
         ],

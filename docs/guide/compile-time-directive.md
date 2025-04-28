@@ -95,5 +95,6 @@ export function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 ## 编译时指令以及如何自定义
 
-[v-for](https://github.com/vuejs/core/blob/a23fb59e83c8b65b27eaa21964c8baa217ab0573/packages/compiler-core/src/transforms/vFor.ts)
-[v-if](https://github.com/vuejs/core/blob/a23fb59e83c8b65b27eaa21964c8baa217ab0573/packages/compiler-core/src/transforms/vIf.ts)
+- [v-for](https://github.com/vuejs/core/blob/a23fb59e83c8b65b27eaa21964c8baa217ab0573/packages/compiler-core/src/transforms/vFor.ts)
+- [v-if](https://github.com/vuejs/core/blob/a23fb59e83c8b65b27eaa21964c8baa217ab0573/packages/compiler-core/src/transforms/vIf.ts)
+- 自定义编译时指令 [v-file]()

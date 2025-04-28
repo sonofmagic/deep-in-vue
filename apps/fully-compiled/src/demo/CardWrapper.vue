@@ -65,7 +65,7 @@ function handleClick() {
   </div>
 </template>
 
-<style scoped>
+<style>
 .card {
   border: 1px solid #ddd;
   border-radius: 12px;

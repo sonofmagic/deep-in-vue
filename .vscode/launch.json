@@ -13,7 +13,7 @@
     },
     {
       "command": "npm run repeat",
-      "name": "Compile run-repeat Vue",
+      "name": "Compile v-file Vue",
       "request": "launch",
       "type": "node-terminal",
       "cwd": "${workspaceFolder}/apps/fully-compiled"
