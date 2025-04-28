@@ -162,3 +162,32 @@ exports[`index > simple-type-ref-interseaction-case-0 1`] = `
   },
 }
 `;
+
+exports[`index > simple-type-ref-ref 1`] = `
+{
+  "a": {
+    "required": true,
+    "type": "TSNumberKeyword",
+  },
+  "b": {
+    "required": false,
+    "type": "TSStringKeyword",
+  },
+  "c": {
+    "required": true,
+    "type": "TSBooleanKeyword",
+  },
+  "d": {
+    "required": true,
+    "type": "TSArrayType",
+  },
+  "e": {
+    "required": true,
+    "type": "TSTypeLiteral",
+  },
+  "h": {
+    "required": true,
+    "type": "TSNumberKeyword",
+  },
+}
+`;
