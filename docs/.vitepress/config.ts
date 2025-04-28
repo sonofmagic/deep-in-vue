@@ -38,6 +38,7 @@ export default defineConfig({
           { text: 'v-for 的本质', link: '/vFor' },
           { text: 'slot 的本质', link: '/slot' },
           { text: 'v-slot 的本质', link: '/v-slot' },
+          { text: 'defineXXX 的本质', link: '/define' },
           { text: 'style scoped 的本质', link: '/style-scoped' },
           { text: 'h 函数的本质', link: '/h' },
           { text: 'vue jsx/tsx 的本质', link: '/tsx' },
