@@ -1,7 +1,7 @@
 import fs from 'fs-extra'
 import path from 'pathe'
 import { compileScript, compileStyle, compileTemplate, parse } from 'vue/compiler-sfc'
-import { transformRepeat } from './v-file'
+import { transformVFile } from './v-file'
 
 function debug(..._args: any[]) {
 
@@ -36,7 +36,7 @@ async function main() {
         source: template.content,
         compilerOptions: {
           nodeTransforms: [
-            transformRepeat,
+            transformVFile,
           ],
         },
       })

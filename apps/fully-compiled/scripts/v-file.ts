@@ -1,7 +1,7 @@
 import type { AttributeNode } from '@vue/compiler-core'
 import { createStructuralDirectiveTransform, NodeTypes } from '@vue/compiler-core'
 
-export const transformRepeat = createStructuralDirectiveTransform(
+export const transformVFile = createStructuralDirectiveTransform(
   'file', // 指令名：v-file
   (node, directive, context) => {
     console.log(node, directive, context)
