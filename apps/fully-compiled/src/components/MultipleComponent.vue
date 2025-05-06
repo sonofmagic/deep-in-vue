@@ -20,7 +20,7 @@ Happy.emits = ['click']
 Happy.props = {
   msg: {
     type: String,
-    default: '我是 MutlipleComponent 内定义的组件 Happy',
+    default: '我是 MultipleComponent 内定义的组件 Happy',
   },
 }
 
@@ -29,7 +29,7 @@ export const Sad = defineComponent(
     name: 'Sad',
     props: {
       msg: {
-        default: '我是 MutlipleComponent 内定义的组件 Sad',
+        default: '我是 MultipleComponent 内定义的组件 Sad',
         type: String,
       },
     },
