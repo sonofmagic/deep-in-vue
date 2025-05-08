@@ -2,6 +2,7 @@
   "name": "compile-time-directive",
   "type": "module",
   "version": "0.0.0",
+  "private": true,
   "description": "esbuild build package template",
   "author": "ice breaker <1324318532@qq.com>",
   "license": "ISC",
@@ -40,7 +41,9 @@
     "script:compile": "tsx scripts/index.ts",
     "script:v-file": "tsx scripts/run-custom-directive.ts"
   },
-  "publishConfig": {},
+  "publishConfig": {
+
+  },
   "devDependencies": {
     "@vue/compiler-core": "^3.5.13",
     "vue": "^3.5.13"

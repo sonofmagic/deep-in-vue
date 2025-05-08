@@ -1,8 +1,9 @@
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
+import { transformLazyShow } from 'compile-time-directive'
 import { defineConfig } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
-import { transformLazyShow } from './scripts/v-lazy-show'
+
 // https://vite.dev/config/
 export default defineConfig({
   server: {
@@ -30,6 +31,6 @@ export default defineConfig({
     ),
   ],
   build: {
-    minify: false
-  }
+    minify: false,
+  },
 })

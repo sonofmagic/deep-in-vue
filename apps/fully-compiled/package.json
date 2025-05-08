@@ -17,6 +17,7 @@
     "@vitejs/plugin-vue": "^5.2.1",
     "@vitejs/plugin-vue-jsx": "^4.1.2",
     "@vue/tsconfig": "^0.7.0",
+    "compile-time-directive": "workspace:*",
     "tailwindcss": "^4.1.5",
     "typescript": "~5.8.3",
     "vite": "^6.3.5",

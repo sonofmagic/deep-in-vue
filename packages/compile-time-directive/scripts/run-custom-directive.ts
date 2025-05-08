@@ -1,7 +1,7 @@
 import fs from 'fs-extra'
 import path from 'pathe'
 import { compileScript, compileStyle, compileTemplate, parse } from 'vue/compiler-sfc'
-import { transformVFile } from './v-file'
+import { transformVFile } from '../src'
 
 function debug(..._args: any[]) {
 

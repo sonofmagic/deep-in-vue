@@ -18,11 +18,6 @@ export const routes: Array<RouteRecordRaw> = [
     component: () => import('@/pages/counter.vue'),
   },
   {
-    path: '/card',
-    name: 'card',
-    component: () => import('@/pages/card.vue'),
-  },
-  {
     path: '/hello',
     name: 'hello',
     component: () => import('@/pages/hello.vue'),
