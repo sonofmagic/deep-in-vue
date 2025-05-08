@@ -8,13 +8,13 @@ function debug(..._args: any[]) {
 }
 
 function output(target: string, data: string) {
-  fs.outputFileSync(path.resolve(import.meta.dirname, `../src/demo/output/${target}`), data)
+  fs.outputFileSync(path.resolve(import.meta.dirname, `../test/fixtures/demo/output/${target}`), data)
 }
 
 async function main() {
   const target = 'CardWrapper' // 'error'// 'CardWrapper'
   const filename = `${target}.vue`
-  const codePath = path.resolve(import.meta.dirname, `../src/demo/${target}.vue`) // path.resolve(import.meta.url, '../src/demo/App.vue')
+  const codePath = path.resolve(import.meta.dirname, `../test/fixtures/demo/${target}.vue`) // path.resolve(import.meta.url, '../src/demo/App.vue')
   const code = await fs.readFile(codePath, 'utf-8')
   const { descriptor, errors } = parse(code, {
     filename,

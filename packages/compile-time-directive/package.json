@@ -1,8 +1,7 @@
 {
-  "name": "type-infer",
+  "name": "compile-time-directive",
   "type": "module",
   "version": "0.0.0",
-  "private": true,
   "description": "esbuild build package template",
   "author": "ice breaker <1324318532@qq.com>",
   "license": "ISC",
@@ -37,19 +36,13 @@
     "test:dev": "vitest",
     "release": "pnpm publish",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "script:compile": "tsx scripts/index.ts",
+    "script:v-file": "tsx scripts/run-custom-directive.ts"
   },
   "publishConfig": {},
-  "dependencies": {
-    "@babel/traverse": "^7.27.1",
-    "@babel/types": "^7.27.1",
-    "lru-cache": "^11.1.0",
-    "magic-string": "^0.30.17"
-  },
   "devDependencies": {
-    "@babel/parser": "^7.27.2",
-    "@types/babel__traverse": "^7.20.7",
-    "@types/set-value": "^4.0.3",
-    "set-value": "^4.1.0"
+    "@vue/compiler-core": "^3.5.13",
+    "vue": "^3.5.13"
   }
 }

@@ -10,16 +10,16 @@
   },
   "dependencies": {
     "@faker-js/faker": "^9.7.0",
-    "@vimeo/player": "^2.26.0",
+    "@vimeo/player": "^2.27.1",
     "@vueuse/core": "^13.1.0",
     "axios": "^1.9.0",
     "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
     "dexie": "^4.0.11",
     "element-plus": "^2.9.9",
-    "es-toolkit": "^1.36.0",
+    "es-toolkit": "^1.37.2",
     "ice-ui": "workspace:*",
-    "idb": "^8.0.2",
+    "idb": "^8.0.3",
     "pinia": "^3.0.2",
     "vue": "^3.5.13",
     "vue-router": "^4.5.1"
@@ -29,11 +29,11 @@
     "@types/vimeo__player": "^2.18.3",
     "async-validator": "^4.2.5",
     "defu": "^6.1.4",
-    "msw": "^2.7.5",
+    "msw": "^2.7.6",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.1.5",
     "typescript": "~5.8.3",
-    "vite": "^6.3.4",
+    "vite": "^6.3.5",
     "vite-tsconfig-paths": "^5.1.4"
   },
   "msw": {

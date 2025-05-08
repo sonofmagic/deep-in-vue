@@ -5,18 +5,18 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "command": "npm run compile",
+      "command": "npm run script:compile",
       "name": "Compile Vue",
       "request": "launch",
       "type": "node-terminal",
-      "cwd": "${workspaceFolder}/apps/fully-compiled"
+      "cwd": "${workspaceFolder}/packages/compile-time-directive"
     },
     {
-      "command": "npm run repeat",
+      "command": "npm run script:v-file",
       "name": "Compile v-file Vue",
       "request": "launch",
       "type": "node-terminal",
-      "cwd": "${workspaceFolder}/apps/fully-compiled"
+      "cwd": "${workspaceFolder}/packages/compile-time-directive"
     }
   ]
 }

@@ -14,7 +14,7 @@ function output(target: string, data: string) {
 async function main() {
   const target = 'CustomDirective' // 'error'// 'CardWrapper'
   const filename = `${target}.vue`
-  const codePath = path.resolve(import.meta.dirname, `../src/demo/${target}.vue`) // path.resolve(import.meta.url, '../src/demo/App.vue')
+  const codePath = path.resolve(import.meta.dirname, `../test/fixtures/demo/${target}.vue`) // path.resolve(import.meta.url, '../src/demo/App.vue')
   const code = await fs.readFile(codePath, 'utf-8')
   const { descriptor, errors } = parse(code, {
     filename,
@@ -38,6 +38,9 @@ async function main() {
           nodeTransforms: [
             transformVFile,
           ],
+          directiveTransforms: {
+
+          },
         },
       })
       output('CustomDirective/template.ts', code)
