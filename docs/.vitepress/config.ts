@@ -22,58 +22,68 @@ export default defineConfig({
     search: {
       provider: 'local',
     },
-    sidebar: [
-      { text: '前言', link: '/' },
-      {
-        base: '/guide',
-        collapsed: false,
-        text: '入门',
-        items: [
-          { text: 'vue 编译器介绍', link: '/compiler' },
-          { text: '编译时指令 vs 运行时指令', link: '/compile-time-directive' },
-          { text: 'render vs setup render 函数', link: '/render-vs-setup' },
-        ],
-      },
-      {
-        base: '/essence',
-        collapsed: false,
-        text: '本质',
-        items: [
-          { text: 'script setup 的本质', link: '/setup' },
-          { text: 'v-bind 的本质', link: '/vBind' },
-          { text: 'v-on 的本质', link: '/vOn' },
-          { text: 'v-model 的本质', link: '/vModel' },
-          { text: 'v-if 的本质', link: '/vIf' },
-          { text: 'v-for 的本质', link: '/vFor' },
-          { text: 'slot 的本质', link: '/slot' },
-          { text: 'v-slot 的本质', link: '/v-slot' },
-          { text: 'defineXXX 的本质', link: '/define' },
-          { text: 'style scoped 的本质', link: '/style-scoped' },
-          { text: 'h 函数的本质', link: '/h' },
-          { text: 'vue jsx/tsx 的本质', link: '/tsx' },
-          { text: '.vue 文件的本质', link: '/vue' },
-        ],
-      },
-      {
-        base: '/advanced',
-        text: '进阶',
-        items: [
-          { text: '纯运行时项目', link: '/no-compile' },
-          { text: 'vue+jsx 全编译项目', link: '/fully-compiled' },
-          { text: 'vite dev 和 build 下的 vue 产物', link: '/vite-dev-build' },
-        ],
-      },
-      {
-        base: '/deep',
-        collapsed: false,
-        text: '深入',
-        items: [
-          { text: '类型推导与提取', link: '/type-infer' },
-          { text: '自定义编译时指令', link: '/custom-compile-directive' },
-          // { text: '静态提升与 openBlock', link: '/index' },
-        ],
-      },
-
+    sidebar: {
+      '/': [
+        { text: '前言', link: '/' },
+        {
+          base: '/guide',
+          collapsed: false,
+          text: '入门',
+          items: [
+            { text: 'vue 编译器介绍', link: '/compiler' },
+            { text: '编译时指令 vs 运行时指令', link: '/compile-time-directive' },
+            { text: 'render vs setup render 函数', link: '/render-vs-setup' },
+          ],
+        },
+        {
+          base: '/essence',
+          collapsed: false,
+          text: '本质',
+          items: [
+            { text: 'script setup 的本质', link: '/setup' },
+            { text: 'v-bind 的本质', link: '/vBind' },
+            { text: 'v-on 的本质', link: '/vOn' },
+            { text: 'v-model 的本质', link: '/vModel' },
+            { text: 'v-if 的本质', link: '/vIf' },
+            { text: 'v-for 的本质', link: '/vFor' },
+            { text: 'slot 的本质', link: '/slot' },
+            { text: 'v-slot 的本质', link: '/v-slot' },
+            { text: 'defineXXX 的本质', link: '/define' },
+            { text: 'style scoped 的本质', link: '/style-scoped' },
+            { text: 'h 函数的本质', link: '/h' },
+            { text: 'vue jsx/tsx 的本质', link: '/tsx' },
+            { text: '.vue 文件的本质', link: '/vue' },
+          ],
+        },
+        {
+          base: '/advanced',
+          text: '进阶',
+          items: [
+            { text: '纯运行时项目', link: '/no-compile' },
+            { text: 'vue+jsx 全编译项目', link: '/fully-compiled' },
+            { text: 'vite dev 和 build 下的 vue 产物', link: '/vite-dev-build' },
+          ],
+        },
+        {
+          base: '/deep',
+          collapsed: false,
+          text: '深入',
+          items: [
+            { text: '类型推导与提取', link: '/type-infer' },
+            { text: '自定义编译时指令', link: '/custom-compile-directive' },
+            // { text: '静态提升与 openBlock', link: '/index' },
+          ],
+        },
+      ],
+      '/utils/': [
+        { text: '跳转到本地 IDE', link: '/utils/inspect' },
+      ],
+    },
+    nav: [
+      { text: '指南', link: '/guide/compiler' },
+      { text: '进阶', link: '/advanced/no-compile' },
+      { text: '深入', link: '/deep/type-infer' },
+      { text: '工具', link: '/utils/inspect' },
     ],
   },
   vite: {
