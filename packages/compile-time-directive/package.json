@@ -41,11 +41,9 @@
     "script:compile": "tsx scripts/index.ts",
     "script:v-file": "tsx scripts/run-custom-directive.ts"
   },
-  "publishConfig": {
-
-  },
+  "publishConfig": {},
   "devDependencies": {
-    "@vue/compiler-core": "^3.5.13",
-    "vue": "^3.5.13"
+    "@vue/compiler-core": "^3.5.14",
+    "vue": "^3.5.14"
   }
 }

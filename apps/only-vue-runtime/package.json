@@ -9,9 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@faker-js/faker": "^9.7.0",
+    "@faker-js/faker": "^9.8.0",
     "@vimeo/player": "^2.27.1",
-    "@vueuse/core": "^13.1.0",
+    "@vueuse/core": "^13.2.0",
     "axios": "^1.9.0",
     "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
@@ -21,7 +21,7 @@
     "ice-ui": "workspace:*",
     "idb": "^8.0.3",
     "pinia": "^3.0.2",
-    "vue": "^3.5.13",
+    "vue": "^3.5.14",
     "vue-router": "^4.5.1"
   },
   "devDependencies": {

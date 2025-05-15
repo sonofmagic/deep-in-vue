@@ -2,8 +2,8 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import { transformLazyShow } from 'compile-time-directive'
 import { defineConfig } from 'vite'
+import vueDevTools from 'vite-plugin-vue-devtools'
 import tsconfigPaths from 'vite-tsconfig-paths'
-
 // https://vite.dev/config/
 export default defineConfig({
   server: {
@@ -29,6 +29,7 @@ export default defineConfig({
         loose: true,
       },
     ),
+    vueDevTools(),
   ],
   build: {
     minify: false,

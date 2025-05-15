@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
+import vueDevTools from 'vite-plugin-vue-devtools'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({
@@ -7,5 +8,6 @@ export default defineConfig({
   },
   plugins: [
     tsconfigPaths(),
+    vueDevTools(),
   ],
 })
