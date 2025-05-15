@@ -1,33 +1,44 @@
 # 点击浏览器的元素时自动跳转到本地 IDE
 
-## 前言
-
-为了加快开发者快速从浏览器中，跳转到本地 `IDE` 中查看元素。在尝试了几种方案之后，最终选用了:
-
-[vite-plugin-vue-inspector](https://www.npmjs.com/package/vite-plugin-vue-inspector) 和 [unplugin-vue-inspector](https://www.npmjs.com/package/unplugin-vue-inspector)
-
-原因主要在于: 
-
-1. 它是由 `vue` 官方团队维护的项目，已经被写在了 [devtools.vuejs.org](https://devtools.vuejs.org/) 文档上，不用担心烂尾，
-2. 它支持 `vue2` / `vue3` / `SSR`，符合我们多 `vue` 版本项目的现状。
-3. 它支持 `vite` 和 `webpack` 集成，符合我们项目多打包器共存的现状。
-4. 它支持多种 `IDE` 集成，跳转到指定代码行的能力，符合我们目前 `vscode` / `webstorm` 混用的现状
-
 ## 选型
 
-接下来所有的项目都使用 [unplugin-vue-inspector](https://www.npmjs.com/package/unplugin-vue-inspector) 这个插件去注册
+为了加快开发者快速从浏览器中，跳转到本地 `IDE` 中查看元素。在尝试了几种方案之后，最终选用了混合方案:
 
-原因在于 [unplugin-vue-inspector](https://www.npmjs.com/package/unplugin-vue-inspector) 实际上是 [vite-plugin-vue-inspector](https://www.npmjs.com/package/vite-plugin-vue-inspector) 的超集，它包含了 `vite-plugin-vue-inspector` 所有的功能和代码，详见 扩展阅读-> 包含关系
+- `vite` 项目使用 [vite-plugin-vue-inspector](https://www.npmjs.com/package/vite-plugin-vue-inspector) 
+- `webpack(vue-cli)` 项目使用 [code-inspector-plugin](https://www.npmjs.com/package/code-inspector-plugin)
 
-## 安装插件
+### 为什么选用 `vite-plugin-vue-inspector`?
+
+#### 优势
+
+1. `vue` 官方团队维护的项目，已经被写在了 [devtools.vuejs.org](https://devtools.vuejs.org/) 文档上，不用担心烂尾，
+2. 和 `vue` 高度集成，注入效果好，支持 `vue2` / `vue3` / `SSR`，符合我们多 `vue` 版本项目的现状。
+3. 它支持多种 `IDE` 集成，跳转到指定代码行的能力，符合我们目前 `vscode` / `webstorm` 混用的现状
+
+#### 劣势
+
+但是它只支持 `vite`, 即使是它的超集 [unplugin-vue-inspector](https://www.npmjs.com/package/unplugin-vue-inspector)，在阅读过源代码之后，发现也只支持  `vite` 和 `nuxt`。
+
+### 为什么选用 `code-inspector-plugin`
+
+#### 优势
+
+1. 支持 `webpack` 以及 `vue2` / `vue3` 项目，符合项目现状
+
+#### 劣势
+
+1. 非官方团队维护，怕烂尾。
+2. 注入效果不如 `vite-plugin-vue-inspector`，需要显式在每个 `dom` 上注入一个属性 `data-insp-path` 属性
+
+## Vite 项目注册插件
+
+### 安装插件
 
 ```sh
 yarn add -D unplugin-vue-inspector
 # or
 pnpm i -D unplugin-vue-inspector
 ```
-
-## 注册插件
 
 ### Vite + Vue3 项目
 
@@ -46,18 +57,73 @@ export default defineConfig({
 
 ```ts
 import { defineConfig, } from 'vite'
-import { createVuePlugin, } from 'vite-plugin-vue2'
+import Vue from '@vitejs/plugin-vue2'
 import Inspector from 'unplugin-vue-inspector/vite'
 
 export default defineConfig({
   plugins: [
-    createVuePlugin(),
+    Vue(),
     Inspector({
       vue: 2
     }),
   ],
 })
 ```
+
+## Webpack (vue cli 项目) 注册插件
+
+### 安装插件
+
+```sh
+yarn add -D code-inspector-plugin
+
+pnpm i -D unplugin-vue-inspector
+```
+
+### 注册插件
+
+在你的 `vue.config.js` 文件中添加如下代码：
+
+```js
+const { defineConfig } = require('@vue/cli-service')
+const { codeInspectorPlugin } = require('code-inspector-plugin');
+
+module.exports = defineConfig({
+  transpileDependencies: true,
+  chainWebpack: (config) => {
+    config.plugin('code-inspector-plugin').use(
+      codeInspectorPlugin({
+        bundler: 'webpack',
+      })
+    );
+  },
+})
+```
+
+然后运行 `serve` 即可看到效果。另外一点值得注意的是，构建的时候，默认是不会进行任何的注入的，所以此插件可以直接注册，不需要环境变量进行控制。
+
+> 这个插件的功能是在每一个 `dom` 上注入一个属性 `data-insp-path` 对于的值为 `src/components/HelloWorld.vue:16:7:li`，然后在通过构造 `URL Scheme` 的方式(比如 `vscode://xxxxxyyyzzz`) 来，跳转到对应的代码行。
+
+### 使用功能
+
+打开浏览器控制台, 此时在你的 `console` 会显示一个信息:
+
+```
+[code-inspector-plugin]同时按住 shift + ⌥option 时启用功能(点击页面元素可定位至编辑器源代码)
+```
+
+然后你使用对于按键，点击页面元素，即可跳转到 `IDE` 对应的代码行。
+
+## 故障排查
+
+### 打开 Vscode 编辑器报错
+
+```txt
+Could not open index.vue in the editor.
+The editor process exited with an error: spawn code ENOENT ('code' command does not exist in 'PATH').
+```
+
+这是因为你没有在系统中注册 `code` 命令，可以通过 ctrl + shift + p 打开 `vscode` 的命令面板，然后输入 `shell command`，选择 `Shell Command: Install 'code' command in PATH`，然后重启 `vscode` 即可。
 
 ## 扩展阅读
 
@@ -72,3 +138,7 @@ export default defineConfig({
 ![](./inspect.png)
 
 
+## 参考资料
+
+- [vite-plugin-vue-inspector](https://www.npmjs.com/package/vite-plugin-vue-inspector)
+- [code-inspector-plugin](https://inspector.fe-dev.cn/)
