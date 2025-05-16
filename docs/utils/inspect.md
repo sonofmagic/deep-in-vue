@@ -14,6 +14,7 @@
 1. `vue` 官方团队维护的项目，已经被写在了 [devtools.vuejs.org](https://devtools.vuejs.org/) 文档上，不用担心烂尾。
 2. 和 `vue` 高度集成，注入效果更好，支持 `vue2` / `vue3` / `SSR`，符合我们多 `vue` 版本项目的现状。
 3. 支持多种 `IDE` 集成，跳转到指定代码行的能力，符合我们目前 `vscode` / `webstorm` 混用的现状
+4. 下载量一个月 `285` 万次，经过了充分的实践测试
 
 #### 劣势
 
@@ -30,6 +31,7 @@
 
 1. 非官方团队维护，怕烂尾。
 2. 注入效果不如官方团队的 `vite-plugin-vue-inspector`，为了跨框架的通用性，需要显式在每个 `dom` 上注入一个属性 `data-insp-path` 属性
+3. 下载量一个月 `12` 万次，只有 `vite-plugin-vue-inspector` 的 `1/20`
 
 ## Vite 项目注册插件
 
