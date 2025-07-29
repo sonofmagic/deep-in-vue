@@ -22,14 +22,17 @@
     "dist"
   ],
   "scripts": {
-    "dev": "unbuild --stub",
-    "build:watch": "tsup --watch --sourcemap",
-    "build": "tsup",
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview",
     "test": "vitest run",
     "test:dev": "vitest",
     "release": "pnpm publish",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "unbuild:dev": "unbuild --stub",
+    "unbuild:watch": "tsup --watch --sourcemap",
+    "tsup": "tsup"
   },
   "publishConfig": {
     "exports": {
@@ -43,7 +46,9 @@
     "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts"
   },
-  "dependencies": {
+  "peerDependencies": {
     "vue": "^3.5.18"
-  }
+  },
+  "dependencies": {},
+  "devDependencies": {}
 }

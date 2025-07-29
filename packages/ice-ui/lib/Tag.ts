@@ -1,4 +1,4 @@
-import { computed, defineComponent, h, inject, ref, unref } from 'vue'
+import { computed, defineComponent, h, inject, ref, renderSlot, unref } from 'vue'
 import { SIZE_INJECTION_KEY } from './ConfigProvider'
 
 export function useGlobalSize() {
@@ -11,9 +11,9 @@ export function useGlobalSize() {
 
 export const IceTag = defineComponent({
   name: 'IceTag',
-  setup() {
+  setup(_props, { slots }) {
     return () => {
-      return h('div')
+      return h('div', renderSlot(slots, 'default'))
     }
   },
 })
