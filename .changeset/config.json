@@ -3,7 +3,7 @@
   "changelog": [
     "@changesets/changelog-github",
     {
-      "repo": "sonofmagic/monorepo-template"
+      "repo": "sonofmagic/deep-in-vue"
     }
   ],
   "commit": false,

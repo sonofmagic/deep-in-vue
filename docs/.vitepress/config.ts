@@ -78,12 +78,33 @@ export default defineConfig({
       '/utils/': [
         { text: '跳转到本地 IDE', link: '/utils/inspect' },
       ],
+      '/ui/': [
+        { text: '前言', link: '/ui/index' },
+        {
+          text: '提炼组件 (vue)',
+          items: [
+            { text: '组件的编写', link: '/ui/component/0.write' },
+            { text: '组件的构建', link: '/ui/component/1.build' },
+            { text: '组件的发布', link: '/ui/component/2.publish' },
+            { text: '组件的使用', link: '/ui/component/3.usage' },
+          ],
+        },
+        {
+          text: '现有组件库分析',
+          items: [
+            { text: 'element-ui (vue2) 构建分析', link: '/ui/element-ui' },
+            { text: 'element-plus (vue3) 构建分析', link: '/ui/element-plus' },
+          ],
+        },
+
+      ],
     },
     nav: [
       { text: '指南', link: '/guide/compiler' },
       { text: '进阶', link: '/advanced/no-compile' },
       { text: '深入', link: '/deep/type-infer' },
       { text: '工具', link: '/utils/inspect' },
+      { text: '构建组件库', link: '/ui/index' },
     ],
   },
   vite: {
