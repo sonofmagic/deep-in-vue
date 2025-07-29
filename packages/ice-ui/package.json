@@ -44,6 +44,6 @@
     "types": "./dist/index.d.ts"
   },
   "dependencies": {
-    "vue": "^3.5.14"
+    "vue": "^3.5.18"
   }
 }
