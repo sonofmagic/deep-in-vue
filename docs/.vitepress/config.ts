@@ -81,12 +81,13 @@ export default defineConfig({
       '/ui/': [
         { text: '前言', link: '/ui/index' },
         {
-          text: '提炼组件 (vue)',
+          text: '提炼组件 (vue 2&3)',
           items: [
             { text: '组件的编写', link: '/ui/component/0.write' },
             { text: '组件的构建', link: '/ui/component/1.build' },
-            { text: '组件的发布', link: '/ui/component/2.publish' },
-            { text: '组件的使用', link: '/ui/component/3.usage' },
+            { text: '组件的测试', link: '/ui/component/2.test' },
+            { text: '组件的发布', link: '/ui/component/3.publish' },
+            { text: '组件的使用', link: '/ui/component/4.usage' },
           ],
         },
         {
@@ -96,7 +97,12 @@ export default defineConfig({
             { text: 'element-plus (vue3) 构建分析', link: '/ui/element-plus' },
           ],
         },
-
+        {
+          text: '下个时代的组件库',
+          items: [
+            { text: 'headless', link: '/next/index' },
+          ],
+        },
       ],
     },
     nav: [
