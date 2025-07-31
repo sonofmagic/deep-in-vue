@@ -49,6 +49,7 @@
   "peerDependencies": {
     "vue": "^3.5.18"
   },
-  "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/jsdom": "^21.1.7"
+  }
 }

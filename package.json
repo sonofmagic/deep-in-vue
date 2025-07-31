@@ -59,6 +59,7 @@
     "fs-extra": "^11.3.0",
     "gray-matter": "^4.0.3",
     "husky": "^9.1.6",
+    "jsdom": "^26.1.0",
     "lint-staged": "^16.1.2",
     "only-allow": "^1.2.1",
     "pathe": "^2.0.3",
