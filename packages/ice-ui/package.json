@@ -29,10 +29,7 @@
     "test:dev": "vitest",
     "release": "pnpm publish",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "unbuild:dev": "unbuild --stub",
-    "unbuild:watch": "tsup --watch --sourcemap",
-    "tsup": "tsup"
+    "lint:fix": "eslint . --fix"
   },
   "publishConfig": {
     "exports": {

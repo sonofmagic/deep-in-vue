@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "@babel/parser": "^7.28.0",
-    "@types/babel__traverse": "^7.20.7",
+    "@types/babel__traverse": "^7.28.0",
     "@types/set-value": "^4.0.3",
     "set-value": "^4.1.0"
   }

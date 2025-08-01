@@ -19,7 +19,7 @@
     "@vue/tsconfig": "^0.7.0",
     "compile-time-directive": "workspace:*",
     "tailwindcss": "^4.1.11",
-    "typescript": "~5.8.3",
+    "typescript": "~5.9.2",
     "vite": "^7.0.6",
     "vite-tsconfig-paths": "^5.1.4",
     "vue-tsc": "^3.0.4"
