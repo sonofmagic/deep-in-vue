@@ -93,8 +93,16 @@ export default defineConfig({
         {
           text: '现有组件库分析',
           items: [
-            { text: 'element-ui (vue2) 构建分析', link: '/ui/element-ui' },
-            { text: 'element-plus (vue3) 构建分析', link: '/ui/element-plus' },
+            // { text: 'element-ui (vue2) 构建分析', link: '/ui/element-ui' },
+            {
+              text: 'element-plus (vue3) 构建分析',
+              items: [
+                {
+                  text: '项目分析',
+                  link: '/ui/npm/element-plus/index',
+                },
+              ],
+            },
           ],
         },
         {
