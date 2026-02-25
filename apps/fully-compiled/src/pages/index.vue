@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import MultipleComponent, { Happy, Sad } from '@/components/MultipleComponent.vue'
 import { ref } from 'vue'
+import MultipleComponent, { Happy, Sad } from '@/components/MultipleComponent.vue'
 
 const msg = ref('Hello World')
 

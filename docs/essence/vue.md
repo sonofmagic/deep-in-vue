@@ -9,6 +9,7 @@
 ```vue
 <script setup>
 import { ref } from 'vue'
+
 const message = ref('Hello Vue 3')
 </script>
 
@@ -29,8 +30,6 @@ div {
 - `<script>` 或 `<script setup>`：包含 JavaScript 逻辑（响应式、数据、方法等）。
 - `<style>`：CSS 样式，可以通过 `scoped` 实现样式作用域隔离。
 
-
-
 ## `.vue` 文件的本质是什么？
 
 > 本质上，`.vue` 文件是一种**自定义的文件格式**，由 Vue 官方定义，并需要借助构建工具（如 Vite 或 Webpack）通过 `vue-loader` 或 `@vitejs/plugin-vue` 插件进行**解析和转换成标准 JavaScript 模块**。
@@ -43,8 +42,6 @@ div {
 4. 脚本部分成为组件的逻辑部分。
 5. 样式部分会被提取并注入到最终页面中（支持 scoped、css modules 等功能）。
 
-
-
 ## `.vue` 文件是浏览器能直接识别的吗？
 
 不是。`.vue` 文件并不是浏览器原生支持的格式。它**需要被构建工具预处理（编译）**成纯 JavaScript、CSS 和 HTML 才能运行在浏览器中。
@@ -52,7 +49,6 @@ div {
 > 这里你不妨在运行 `vue` 项目的时候，直接打开控制台，查看 `sources` 这个 `tab`，看看浏览器中 `.vue` 文件到底是什么
 >
 > 你会发现 `vite dev` 是实时编译 `vue` 的，样式引入本质上也被转化成了 `js` 然后内联了字符串。
-
 
 ## 总结
 
@@ -63,5 +59,3 @@ div {
 | 作用       | 用于定义 Vue 组件            |
 | 依赖工具   | `@vitejs/plugin-vue`（Vite） |
 | 浏览器支持 | 需要编译后才能运行           |
-
-

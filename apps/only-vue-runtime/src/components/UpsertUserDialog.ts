@@ -1,6 +1,6 @@
-import type { User } from '@/types'
 import type { ValidateFieldsError } from 'async-validator'
 import type { FormInstance } from 'element-plus'
+import type { User } from '@/types'
 import { ElButton, ElDialog, ElForm, ElFormItem, ElInput, ElSelect } from 'element-plus'
 import { cloneDeep } from 'es-toolkit'
 import { defineComponent, h, ref, useTemplateRef } from 'vue'

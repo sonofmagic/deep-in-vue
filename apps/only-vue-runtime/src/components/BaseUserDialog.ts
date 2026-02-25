@@ -1,5 +1,5 @@
-import type { User } from '@/types'
 import type { FunctionalComponent } from 'vue'
+import type { User } from '@/types'
 import { ElDialog, ElMessage } from 'element-plus'
 import { cloneDeep } from 'es-toolkit'
 import { cloneVNode, h } from 'vue'

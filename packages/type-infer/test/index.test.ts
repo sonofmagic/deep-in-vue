@@ -1,6 +1,6 @@
-import { resolveScope } from '@/scope'
 import fs from 'fs-extra'
 import path from 'pathe'
+import { resolveScope } from '@/scope'
 
 function extractTypes(id: string) {
   return resolveScope(id, true)

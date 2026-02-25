@@ -1,5 +1,5 @@
-import { extractTypes } from '@/0.single-file-infer'
 import path from 'pathe'
+import { extractTypes } from '@/0.single-file-infer'
 
 describe('0.single-file-infer', () => {
   it('should extract types from a.ts', async () => {

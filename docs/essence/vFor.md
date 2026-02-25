@@ -9,6 +9,7 @@
 `v-for` 用于循环遍历数组、对象或其他可迭代的集合，并渲染每个元素。例如：
 
 ### 数组渲染
+
 ```html
 <ul>
   <li v-for="item in items" :key="item.id">{{ item.name }}</li>
@@ -16,6 +17,7 @@
 ```
 
 ### 对象渲染
+
 ```html
 <ul>
   <li v-for="(value, key) in items" :key="key">{{ key }}: {{ value }}</li>
@@ -42,11 +44,12 @@
 Vue 会把这个模板编译成类似这样的渲染函数：
 
 ```javascript
-import { renderList as _renderList, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock, toDisplayString as _toDisplayString } from "vue"
+import { createElementBlock as _createElementBlock, Fragment as _Fragment, openBlock as _openBlock, renderList as _renderList, toDisplayString as _toDisplayString } from 'vue'
+
 function render(_ctx, _cache) {
-  return (_openBlock(), _createElementBlock("ul", null, [
+  return (_openBlock(), _createElementBlock('ul', null, [
     (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_ctx.items, (item) => {
-      return (_openBlock(), _createElementBlock("li", {
+      return (_openBlock(), _createElementBlock('li', {
         key: item.id
       }, _toDisplayString(item.name), 1 /* TEXT */))
     }), 128 /* KEYED_FRAGMENT */))
@@ -83,7 +86,7 @@ https://github.com/vuejs/core/blob/a23fb59e83c8b65b27eaa21964c8baa217ab0573/pack
 Vue 在内部通过代理（Proxy）来实现对数组的响应式监控。当你对数组执行操作时（如 `.push()`、`.pop()`、`.splice()` 等），Vue 会触发重新渲染，更新相关的 DOM 元素。
 
 ```javascript
-this.items.push({ id: 3, name: 'Item 3' });
+this.items.push({ id: 3, name: 'Item 3' })
 ```
 
 当执行 `push()` 方法时，Vue 会检测到 `items` 数组发生变化，然后重新渲染所有依赖 `items` 的 DOM 元素。

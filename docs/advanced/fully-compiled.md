@@ -7,4 +7,3 @@
 源代码详见 [apps/fully-compiled](https://github.com/sonofmagic/deep-in-vue/tree/main/apps/only-vue-runtime)
 
 线上地址: https://fully-compiled.netlify.app/
-

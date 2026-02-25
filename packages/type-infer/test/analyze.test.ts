@@ -1,5 +1,5 @@
-import { resolveScope } from '@/scope'
 import path from 'pathe'
+import { resolveScope } from '@/scope'
 // import a from './fixtures/a.ts?url'
 // console.log(a)
 

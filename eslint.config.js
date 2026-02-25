@@ -8,12 +8,19 @@ export default icebreaker(
       'apps/only-vue-runtime/public',
       'docs/**/*.md',
     ],
+    formatters: {
+      css: true,
+      graphql: true,
+      html: true,
+      markdown: true,
+      prettierOptions: {
+        endOfLine: 'lf',
+      },
+    },
   },
   {
-   
     rules: {
       'vue/one-component-per-file': 'off',
-
     },
   },
 )

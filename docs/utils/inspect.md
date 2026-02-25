@@ -4,7 +4,7 @@
 
 为了加快开发者快速从浏览器中，跳转到本地 `IDE` 中查看元素。在尝试了几种方案之后，最终选用了这个方案:
 
-- `vite` 项目使用 [vite-plugin-vue-inspector](https://www.npmjs.com/package/vite-plugin-vue-inspector) 
+- `vite` 项目使用 [vite-plugin-vue-inspector](https://www.npmjs.com/package/vite-plugin-vue-inspector)
 - `webpack(vue-cli)` 项目使用 [code-inspector-plugin](https://www.npmjs.com/package/code-inspector-plugin)
 
 ### 为什么选用 `vite-plugin-vue-inspector`?
@@ -18,7 +18,7 @@
 
 #### 劣势
 
-但是它只支持 `vite`, 即使是它的超集 [unplugin-vue-inspector](https://www.npmjs.com/package/unplugin-vue-inspector)，在阅读过源代码之后，发现也只支持  `vite` 和 `nuxt`。
+但是它只支持 `vite`, 即使是它的超集 [unplugin-vue-inspector](https://www.npmjs.com/package/unplugin-vue-inspector)，在阅读过源代码之后，发现也只支持 `vite` 和 `nuxt`。
 
 ### 为什么选用 `code-inspector-plugin`
 
@@ -46,8 +46,8 @@ pnpm i -D vite-plugin-vue-inspector
 ### Vite + Vue3 项目
 
 ```ts
-import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vite'
 
 import Inspector from 'vite-plugin-vue-inspector'
 
@@ -59,8 +59,8 @@ export default defineConfig({
 ### Vite + Vue2 项目
 
 ```ts
-import { defineConfig, } from 'vite'
 import Vue from '@vitejs/plugin-vue2'
+import { defineConfig, } from 'vite'
 import Inspector from 'vite-plugin-vue-inspector'
 
 export default defineConfig({
@@ -95,7 +95,7 @@ pnpm i -D code-inspector-plugin
 
 ```js
 const { defineConfig } = require('@vue/cli-service')
-const { codeInspectorPlugin } = require('code-inspector-plugin');
+const { codeInspectorPlugin } = require('code-inspector-plugin')
 
 module.exports = defineConfig({
   transpileDependencies: true,
@@ -104,7 +104,7 @@ module.exports = defineConfig({
       codeInspectorPlugin({
         bundler: 'webpack',
       })
-    );
+    )
   },
 })
 ```

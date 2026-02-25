@@ -1,5 +1,5 @@
-import type { User } from '@/types'
 import type { EntityTable } from 'dexie'
+import type { User } from '@/types'
 // db.js
 import Dexie from 'dexie'
 import { omit } from 'es-toolkit'

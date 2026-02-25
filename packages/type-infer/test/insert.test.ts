@@ -1,6 +1,6 @@
-import { insert } from '@/insert'
 import fs from 'fs-extra'
 import path from 'pathe'
+import { insert } from '@/insert'
 
 function handle(jsonFilename: string) {
   const code = insert(

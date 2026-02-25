@@ -1,6 +1,6 @@
-import type { DirectiveTransform, NodeTransform } from '@vue/compiler-core'
+import type { DirectiveTransform } from '@vue/compiler-core'
 
-export const transformX: DirectiveTransform = (dir, node, context) => {
+export const transformX: DirectiveTransform = (dir, _node, _context) => {
   return {
     props: [
       {

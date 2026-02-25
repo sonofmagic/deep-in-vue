@@ -1,1 +1,4 @@
-# pnpm lint-staged
+#!/usr/bin/env sh
+set -e
+
+pnpm exec lint-staged

@@ -1,4 +1,3 @@
-
 # v-on 的本质
 
 在 Vue 中，`v-on` 指令用于监听 DOM 事件并执行相应的回调。它的本质是将事件监听器绑定到元素或组件，并在触发事件时调用指定的方法。`v-on` 的工作原理与 Vue 的响应式系统、虚拟 DOM 渲染机制和事件处理机制密切相关。要深入理解 `v-on` 的本质，我们需要从以下几个方面进行解析：
@@ -20,11 +19,12 @@ Vue 会将模板中的 `v-on:click="handleClick"` 转换成渲染函数中对应
 编译后的渲染函数如下所示：
 
 ```javascript
-import { openBlock as _openBlock, createElementBlock as _createElementBlock } from "vue"
+import { createElementBlock as _createElementBlock, openBlock as _openBlock } from 'vue'
+
 function render(_ctx, _cache) {
-  return (_openBlock(), _createElementBlock("button", {
+  return (_openBlock(), _createElementBlock('button', {
     onClick: _cache[0] || (_cache[0] = (...args) => (_ctx.handleClick && _ctx.handleClick(...args)))
-  }, "Click me"))
+  }, 'Click me'))
 }
 ```
 
@@ -44,23 +44,23 @@ Vue 允许在 `v-on` 上使用修饰符来改变事件的行为，例如 `.stop`
 这些修饰符的实现本质上是通过在事件触发时在事件处理函数中插入相应的 `event` 方法调用来完成的。
 
 ```js
-const __sfc__ = {  };
-import { withModifiers as _withModifiers, createElementVNode as _createElementVNode, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock } from "vue"
+import { createElementBlock as _createElementBlock, createElementVNode as _createElementVNode, Fragment as _Fragment, openBlock as _openBlock, withModifiers as _withModifiers } from 'vue'
+
+const __sfc__ = { }
 function render(_ctx, _cache) {
   return (_openBlock(), _createElementBlock(_Fragment, null, [
-    _createElementVNode("button", {
-      onClick: _cache[0] || (_cache[0] = _withModifiers((...args) => (_ctx.handleClick && _ctx.handleClick(...args)), ["stop"]))
-    }, "Click me"),
-    _createElementVNode("form", {
-      onSubmit: _cache[1] || (_cache[1] = _withModifiers((...args) => (_ctx.handleSubmit && _ctx.handleSubmit(...args)), ["prevent"]))
-    }, "Submit", 32 /* NEED_HYDRATION */),
-    _createElementVNode("custom-button", {
+    _createElementVNode('button', {
+      onClick: _cache[0] || (_cache[0] = _withModifiers((...args) => (_ctx.handleClick && _ctx.handleClick(...args)), ['stop']))
+    }, 'Click me'),
+    _createElementVNode('form', {
+      onSubmit: _cache[1] || (_cache[1] = _withModifiers((...args) => (_ctx.handleSubmit && _ctx.handleSubmit(...args)), ['prevent']))
+    }, 'Submit', 32 /* NEED_HYDRATION */),
+    _createElementVNode('custom-button', {
       onClick: _cache[2] || (_cache[2] = (...args) => (_ctx.handleClick && _ctx.handleClick(...args)))
-    }, "Click me")
+    }, 'Click me')
   ], 64 /* STABLE_FRAGMENT */))
 }
 __sfc__.render = render
-__sfc__.__file = "src/App.vue"
+__sfc__.__file = 'src/App.vue'
 export default __sfc__
 ```
-

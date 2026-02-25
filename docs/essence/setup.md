@@ -4,7 +4,7 @@
 
 换句话说：**你写的不是标准 JS，而是 Vue 编译器“预处理”前的代码。**
 
-> 比如我们经常有个常识 `typescript` 定义的类型在 `js` 产物中会被丢弃，但是你也见过 `defineProps<Props>()` 中定义的 `Props`，的确会在产物中变成实实在在的 `js` 代码 
+> 比如我们经常有个常识 `typescript` 定义的类型在 `js` 产物中会被丢弃，但是你也见过 `defineProps<Props>()` 中定义的 `Props`，的确会在产物中变成实实在在的 `js` 代码
 
 ## 举个例子
 
@@ -12,22 +12,19 @@
 
 ```html
 <script setup>
-import { ref } from 'vue'
+  import { ref } from 'vue'
 
-const count = ref(0)
+  const count = ref(0)
 
-function increment() {
-  count.value++
-}
+  function increment() {
+    count.value++
+  }
 </script>
 
 <template>
-  <button @click="increment">
-    Count: {{ count }}
-  </button>
+  <button @click="increment">Count: {{ count }}</button>
 </template>
 ```
-
 
 ## 编译后会变成什么？
 
@@ -100,8 +97,6 @@ export default {
 | 模板访问变量   | 必须 `return`    | 自动暴露顶层变量   |
 | 类型推导（TS） | 较麻烦           | 完美推导           |
 | 开发体验       | 需要结构重复     | 极简、推荐方式     |
-
-
 
 ## 总结
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import LangTsx from '@/components/LangTsx.vue'
 import { ref } from 'vue'
+import LangTsx from '@/components/LangTsx.vue'
 
 const msg = ref('Hello World')
 </script>
@@ -14,7 +14,3 @@ const msg = ref('Hello World')
     </LangTsx>
   </div>
 </template>
-
-<style scoped>
-
-</style>

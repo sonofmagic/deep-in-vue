@@ -41,7 +41,6 @@ export default {
 
 编译后，Vue 会生成多个 `$slots['xxx']` 函数。
 
-
 ### 作用域插槽（Scoped slots）
 
 允许子组件把数据传给插槽内容：
@@ -66,8 +65,6 @@ export default {
 // 父组件传入
 slots.default({ msg: 'hello from child' })
 ```
-
-
 
 ## 插槽类型
 
@@ -103,12 +100,11 @@ export default {
 - `this.$slots.default` 是父组件传入的插槽内容（是个函数）
 - 我们调用它来生成 VNode 并渲染进 `<div class="box">` 中
 
-
 ## 父组件示例
 
 ```html
 <script setup>
-import Box from './Box'
+  import Box from './Box'
 </script>
 
 <template>
@@ -119,7 +115,6 @@ import Box from './Box'
 ```
 
 在运行时，Vue 会把 `<p>你好，我是插槽里的内容！</p>` 包装成函数传进 `Box` 的 `this.$slots.default`，然后在 `Box` 中执行这个函数，插进去。
-
 
 ## **作用域插槽**
 
@@ -160,4 +155,3 @@ export default {
 ## 总结
 
 > Vue 插槽的本质就是：**父组件给子组件传入一个返回 VNode 的函数**，子组件在适当的时候调用这个函数插入内容。
-

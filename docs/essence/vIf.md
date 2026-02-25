@@ -3,6 +3,7 @@
 在 Vue 中，`v-if` 是一种条件渲染指令，用于根据给定的表达式条件，决定某个 DOM 元素或组件是否渲染到页面上。它的本质实际上是通过 **虚拟 DOM** 和 **响应式系统** 来动态地控制 DOM 的生成与销毁。为了更深入地理解 `v-if` 的本质，我们需要从 Vue 的渲染机制、虚拟 DOM、组件生命周期等方面来分析。
 
 ## **`v-if` 的功能**
+
 `v-if` 的功能是在模板中根据条件动态地决定某个元素或组件是否渲染。例如：
 
 ```html
@@ -29,7 +30,7 @@ Vue 会把它转换为渲染函数中的类似代码：
 
 ```javascript
 function render() {
-  return this.isVisible ? h('div', null, 'Hello World') : null;
+  return this.isVisible ? h('div', null, 'Hello World') : null
 }
 ```
 
@@ -73,7 +74,7 @@ Vue 的 **响应式系统** 是 `v-if` 能够工作的重要基础。当 `v-if` 
 
 - **`created`** 和 **`mounted`** 只会在组件第一次渲染时被调用。
 - 当条件变为 `false` 时，组件会被销毁，触发 **`beforeDestroy`** 和 **`destroyed`** 钩子。
-  
+
 这意味着，`v-if` 控制的不仅是 DOM 元素的插入和销毁，还会影响组件的生命周期。
 
 ## **总结：`v-if` 的本质**

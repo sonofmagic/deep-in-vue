@@ -1,6 +1,6 @@
-import { adminRoutes } from '@/router'
 import { ElCheckbox, ElMenu, ElMenuItem, ElRadioButton, ElRadioGroup } from 'element-plus'
 import { computed, defineComponent, h, reactive, vShow, withDirectives } from 'vue'
+import { adminRoutes } from '@/router'
 
 // 最简易的外置状态
 export const sharedState = reactive({

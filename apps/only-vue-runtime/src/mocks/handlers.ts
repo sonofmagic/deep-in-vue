@@ -1,7 +1,7 @@
 import type { PaginationRequest, PaginationResponse, User } from '@/types'
-import { sleepRandom } from '@/utils'
 import { defu } from 'defu'
 import { http, HttpResponse } from 'msw'
+import { sleepRandom } from '@/utils'
 import { db } from './database'
 
 type UserPaginationRequest = PaginationRequest<{ nameSearch?: string, roleSearch?: string }>

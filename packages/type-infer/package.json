@@ -41,13 +41,13 @@
   },
   "publishConfig": {},
   "dependencies": {
-    "@babel/traverse": "^7.28.0",
-    "@babel/types": "^7.28.2",
-    "lru-cache": "^11.1.0",
-    "magic-string": "^0.30.17"
+    "@babel/traverse": "^7.29.0",
+    "@babel/types": "^7.29.0",
+    "lru-cache": "^11.2.6",
+    "magic-string": "^0.30.21"
   },
   "devDependencies": {
-    "@babel/parser": "^7.28.0",
+    "@babel/parser": "^7.29.0",
     "@types/babel__traverse": "^7.28.0",
     "@types/set-value": "^4.0.3",
     "set-value": "^4.1.0"

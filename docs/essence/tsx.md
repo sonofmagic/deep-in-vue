@@ -20,6 +20,7 @@ JSX 本质上不是浏览器或 JavaScript 原生支持的语法，它是一种*
 
 ```js
 import { jsx as _jsx } from 'react/jsx-runtime'
+
 /* #__PURE__ */_jsx('div', {
   className: 'greeting',
   children: 'Hello, JSX'

@@ -1,1 +1,4 @@
-pnpm dlx commitlint --edit $1
+#!/usr/bin/env sh
+set -e
+
+pnpm exec commitlint --edit "$1"
