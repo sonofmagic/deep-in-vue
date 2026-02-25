@@ -117,7 +117,7 @@ export default {
 </script>
 ```
 
-之前需要 `withDefaults` 来设置默认值，现在直接用 JS 原生的解构默认值语法就行了，更加直观：
+在很多场景下，之前需要 `withDefaults` 来设置默认值；从 Vue 3.5 开始，直接用 JS 解构默认值会更直观：
 
 ```html
 <script setup lang="ts">
@@ -130,6 +130,8 @@ export default {
   const { count = 0 } = defineProps<{ count?: number }>()
 </script>
 ```
+
+> 补充：`withDefaults` 并没有被废弃，复杂默认值或你希望集中管理默认策略时，它依然有价值。
 
 ## Vue 3.5+ 新特性：`useTemplateRef`
 
@@ -169,8 +171,33 @@ Vue 3.5 引入了 `useTemplateRef()` 来获取模板引用，比之前的同名 
 </template>
 ```
 
+## Vue 3.5+ 新特性：`onWatcherCleanup`
+
+`onWatcherCleanup()` 用于在 `watch` / `watchEffect` 的副作用即将失效时注册清理逻辑。典型场景是请求取消、定时器清理、事件解绑。
+
+```html
+<script setup lang="ts">
+  import { ref, watch, onWatcherCleanup } from 'vue'
+
+  const id = ref(1)
+  const user = ref<any>(null)
+
+  watch(id, async (newId) => {
+    const controller = new AbortController()
+    onWatcherCleanup(() => controller.abort())
+
+    const resp = await fetch(`/api/user/${newId}`, {
+      signal: controller.signal,
+    })
+    user.value = await resp.json()
+  })
+</script>
+```
+
+相比把清理逻辑散落在外部，`onWatcherCleanup` 能把“本次副作用对应的清理”写在同一块逻辑里，可读性更好，也更不容易漏掉。
+
 ## 总结
 
 > `<script setup>` 是 Vue 3 的编译时语法糖，**最终都被编译为标准的 `setup()` 函数和对应的 `render()`**，它让 Composition API 写法更自然、简洁、类型友好，是 Vue 3 推荐的组件书写方式。
 >
-> Vue 3.5 进一步增强了 `<script setup>` 的开发体验：响应式 Props 解构让 props 处理更简洁，`useTemplateRef` 让模板引用更清晰，`useId` 简化了无障碍开发。
+> Vue 3.5 进一步增强了 `<script setup>` 的开发体验：响应式 Props 解构让 props 处理更简洁，`useTemplateRef` 让模板引用更清晰，`useId` 简化了无障碍开发，`onWatcherCleanup` 让副作用清理更可控。

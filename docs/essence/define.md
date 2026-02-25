@@ -81,6 +81,21 @@ export default defineComponent({
 
 `defineModel` 返回的是一个 `ref`，可以直接读写，编译器会自动帮你处理 prop 声明和 emit 触发。
 
+在当前 Vue 3.5.x 的编译结果中，它会展开为 `props + emits + useModel` 的组合，而不是魔法运行时：
+
+```js
+import { useModel as _useModel } from 'vue'
+
+export default {
+  props: { modelValue: {}, modelModifiers: {} },
+  emits: ['update:modelValue'],
+  setup(__props) {
+    const modelValue = _useModel(__props, 'modelValue')
+    return { modelValue }
+  },
+}
+```
+
 支持多个 model 和类型声明：
 
 ```html

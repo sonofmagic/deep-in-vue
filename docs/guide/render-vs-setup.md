@@ -46,7 +46,7 @@ const MyComponent = {
 
 ### 生命周期
 
-- `render` 函数：在组件的 `beforeMount` 阶段被调用，是模板解析后的渲染逻辑
+- `render` 函数：会在组件挂载和后续更新的渲染流程中执行
 - `setup` 返回的 render：`setup` 在组件初始化阶段执行，比 `render` 更早。`setup` 的返回值直接决定组件的渲染方式
 
 ### 使用方式
@@ -78,4 +78,4 @@ const MyComponent = {
 
 - 日常开发推荐使用 `<script setup>` + `<template>` 模板语法，开发体验最好
 - 需要高度动态渲染时，使用 `setup` 返回渲染函数（配合 JSX 更佳）
-- Options API 的 `render` 函数更适合 Vue 2 风格的项目或渐进式迁移场景
+- Options API 的 `render` 函数更适合历史风格项目或渐进式迁移场景

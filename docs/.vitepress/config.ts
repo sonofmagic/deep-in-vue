@@ -62,6 +62,7 @@ export default defineConfig({
             { text: '纯运行时项目', link: '/no-compile' },
             { text: 'vue+jsx 全编译项目', link: '/fully-compiled' },
             { text: 'vite dev 和 build 下的 vue 产物', link: '/vite-dev-build' },
+            { text: 'Vue 3.5 SSR 与 Hydration', link: '/ssr-hydration-3.5' },
           ],
         },
         {
@@ -81,7 +82,7 @@ export default defineConfig({
       '/ui/': [
         { text: '前言', link: '/ui/index' },
         {
-          text: '提炼组件 (vue 2&3)',
+          text: '提炼组件 (Vue 3 主线，含 Vue 2 历史兼容)',
           items: [
             { text: '组件的编写', link: '/ui/component/0.write' },
             { text: '组件的构建', link: '/ui/component/1.build' },

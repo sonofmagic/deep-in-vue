@@ -59,7 +59,8 @@ function render(_ctx, _cache) {
 
 在这个渲染函数中，`v-for` 指令被编译成了一个 `renderList` 调用，该 `renderList` 调用会根据 `items` 数组生成一个新的数组，其中每个 `item` 对应一个新的虚拟 DOM 节点。`h()` 是 Vue 的虚拟 DOM 创建函数，它会生成一个虚拟节点。
 
-> 其实 `renderList` 内部就是循环调用的 `renderItem`，你可以把它理解成一个`更加强大` 的 `带缓存`的 `Array.prototype.map` 函数
+> `renderList` 内部本质是按不同数据类型（数组、对象、数字、可迭代对象）统一做遍历并调用 `renderItem`。  
+> 它不是简单意义上的“带缓存 map”，缓存与复用主要仍依赖 vnode diff、`key`、以及 block/patch 标记等机制。
 
 https://github.com/vuejs/core/blob/a23fb59e83c8b65b27eaa21964c8baa217ab0573/packages/runtime-core/src/helpers/renderList.ts#L59
 

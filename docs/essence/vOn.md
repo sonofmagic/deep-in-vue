@@ -4,7 +4,7 @@
 
 ## 1. **编译过程与渲染函数**
 
-在 Vue 中，模板会被编译成渲染函数，这些渲染函数返回的是虚拟 DOM（VNode）。`v-on` 指令的本质是将事件绑定的逻辑编译为 `addEventListener` 事件监听器，并将事件处理函数与 Vue 实例的上下文关联。
+在 Vue 中，模板会被编译成渲染函数，这些渲染函数返回的是虚拟 DOM（VNode）。`v-on` 的本质是把事件语法编译成 VNode 的 `onXxx` 属性，再由运行时 patch 到真实 DOM 事件监听上。
 
 假设我们有以下模板：
 
@@ -14,7 +14,7 @@
 
 ## 2. **编译为渲染函数**
 
-Vue 会将模板中的 `v-on:click="handleClick"` 转换成渲染函数中对应的事件绑定代码。它通过 JavaScript 语法动态地绑定事件监听器。在 Vue 3 中，这个编译过程的最终结果是一个 JavaScript 函数，它会通过 `addEventListener` 动态地为 `click` 事件注册事件处理函数。
+Vue 会将模板中的 `v-on:click="handleClick"` 转换成渲染函数中对应的事件绑定代码。在 Vue 3 中，编译结果通常是 `onClick` 这样的 VNode prop，运行时再把它挂到真实元素上。
 
 编译后的渲染函数如下所示：
 
@@ -38,8 +38,11 @@ Vue 允许在 `v-on` 上使用修饰符来改变事件的行为，例如 `.stop`
 ```html
 <button @click.stop="handleClick">Click me</button>
 <form @submit.prevent="handleSubmit">Submit</form>
-<custom-button @click.native="handleClick">Click me</custom-button>
 ```
+
+> 注意：`@click.native` 是 Vue 2 语法，在 Vue 3 已移除。
+>
+> Vue 3 中，子组件要么显式通过 `emits` 对外抛出事件（`@click` 监听组件事件），要么把未声明事件透传到根元素。
 
 这些修饰符的实现本质上是通过在事件触发时在事件处理函数中插入相应的 `event` 方法调用来完成的。
 
