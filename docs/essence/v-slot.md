@@ -1,5 +1,7 @@
 # v-slot 的本质
 
+> 插槽的编译本质在 [slot 的本质](./slot.md) 中已经介绍过：插槽就是函数。本文重点看 `v-slot` 指令在编译过程中是如何被转换的。
+
 [Demo 示例](https://play.vuejs.org/#eNqNks1OwzAQhF9ltVxLeoBTFZAA9QAHQMDRlyjZhBTHtvwTgiK/O7bTpo0EiJs9Mzv6vPKIN0plvSPcYG6pU7ywdM0EQH4nOwX9ueHSXjEcYVhBCZ5hcgHGoID38yV46ZKv4+CxYh+fy+GsrlPf10lZagjCvi5fL1AW0xXVheMT0v8rZqqFjiu0ppSibptsZ6QISxhjmmEZ0i0n/aRsK4VhuIHkRK/gXH4+JM1qR6uDXr5T+fGDvjND1Bg+azKke2I4e7bQDdnJ3r4+0hDOs9nJyvGQ/sN8ISO5i4xT7NaJKmCf5BLtfaektq1o3sx2sCTM4VERNCZ9yjMMPyEu6renH3Evsss0x4RH/w3CULit)
 
 [withCtx](https://github.com/vuejs/core/blob/a23fb59e83c8b65b27eaa21964c8baa217ab0573/packages/runtime-core/src/componentRenderContext.ts#L70) 默认获取当前组件的上下文

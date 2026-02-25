@@ -155,3 +155,18 @@ export default {
 ## 总结
 
 > Vue 插槽的本质就是：**父组件给子组件传入一个返回 VNode 的函数**，子组件在适当的时候调用这个函数插入内容。
+
+## 补充：defineSlots（Vue 3.3+）
+
+Vue 3.3 引入了 `defineSlots` 编译宏，用于在 `<script setup>` 中声明插槽的类型，让 TypeScript 能够正确推导插槽 props：
+
+```html
+<script setup lang="ts">
+  const slots = defineSlots<{
+    default(props: { msg: string }): any
+    header(props: { title: string }): any
+  }>()
+</script>
+```
+
+`defineSlots` 只用于类型声明，不会产生运行时代码。它帮助 IDE 和 TypeScript 理解插槽的结构，提供更好的类型检查和自动补全体验。

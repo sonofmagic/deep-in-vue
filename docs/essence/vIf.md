@@ -72,10 +72,13 @@ Vue 的 **响应式系统** 是 `v-if` 能够工作的重要基础。当 `v-if` 
 
 `v-if` 还与组件的生命周期钩子密切相关。对于 `v-if` 渲染的组件，只有在组件的 DOM 被插入时，它的生命周期钩子才会被触发。即：
 
-- **`created`** 和 **`mounted`** 只会在组件第一次渲染时被调用。
-- 当条件变为 `false` 时，组件会被销毁，触发 **`beforeDestroy`** 和 **`destroyed`** 钩子。
+- 当条件为 `true` 时，组件被创建和挂载，触发 `onMounted` 等钩子。
+- 当条件变为 `false` 时，组件会被卸载，触发 `onBeforeUnmount` 和 `onUnmounted` 钩子。
+- 当条件再次变为 `true` 时，组件会被**重新创建**，再次触发 `onMounted`。
 
-这意味着，`v-if` 控制的不仅是 DOM 元素的插入和销毁，还会影响组件的生命周期。
+> 注意：Vue 3 中已将 `beforeDestroy` / `destroyed` 重命名为 `onBeforeUnmount` / `onUnmounted`（Composition API）或 `beforeUnmount` / `unmounted`（Options API）。
+
+这意味着，`v-if` 控制的不仅是 DOM 元素的插入和销毁，还会影响组件的完整生命周期。
 
 ## **总结：`v-if` 的本质**
 

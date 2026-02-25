@@ -1,176 +1,153 @@
 # v-model 的本质
 
-在 Vue 3 中，`v-model` 指令的本质发生了变化，相比于 Vue 2，Vue 3 中的 `v-model` 更加灵活，支持双向绑定的同时也可以定制化绑定的行为。为了理解 `v-model` 在 Vue 3 中的本质，我们需要从多个方面来探讨。
+在 Vue 3 中，`v-model` 指令的本质是**语法糖**：它将 prop 绑定和事件监听合并为一个简洁的写法，实现父子组件之间的双向数据绑定。
 
-## 1. **`v-model` 的传统作用**
+## 原生元素上的 v-model
 
-在 Vue 中，`v-model` 被广泛用于在父组件和子组件之间实现双向数据绑定。它将子组件的内部状态与父组件的外部状态同步，使得父子组件可以共享同一份数据，通常用于表单控件（如输入框、选择框等）和自定义组件。
+在原生 `<input>` 上使用 `v-model`：
 
-- **双向绑定**：`v-model` 指令让数据能在父组件和子组件之间来回流动。父组件的数据通过 `v-bind` 传递给子组件，子组件通过事件将更新反向传递给父组件。
+```html
+<input v-model="msg" />
+```
 
-## 2. **Vue 3 中的 `v-model`**
-
-Vue 3 的 `v-model` 指令与 Vue 2 的实现有了一些关键的变化，主要体现在以下几点：
-
-- **支持多个 `v-model` 绑定**：Vue 3 支持在同一个组件上使用多个 `v-model` 指令，允许你在不同的属性上进行双向绑定。
-- **自定义模型值的名称**：在 Vue 3 中，`v-model` 的 `modelValue` prop 和 `update:modelValue` 事件变得更加明确和灵活。
-- **支持修改绑定的事件和属性名**：Vue 3 中你可以自定义 `v-model` 使用的属性和事件的名称，而不仅仅局限于 `value` 和 `input`。
-
-## 3. **`v-model` 的工作原理（Vue 3）**
-
-在 Vue 3 中，`v-model` 指令本质上是通过绑定一个 `modelValue` 属性和一个 `update:modelValue` 事件来实现双向绑定的。
-
-### **组件内部实现：**
-
-假设你有一个自定义组件，它会接收一个 `modelValue` 属性，并通过一个事件（通常是 `update:modelValue`）向父组件发送更新。
+编译后等价于：
 
 ```js
-// 子组件 CustomInput.vue
-<template>
-  <input :value="modelValue" @input="onInput">
-</template>
+import { vModelText as _vModelText, withDirectives as _withDirectives } from 'vue'
 
-<script>
-export default {
-  props: {
-    modelValue: { // 双向绑定的数据
-      type: String,
-      default: ''
-    }
-  },
-  methods: {
-    onInput(event) {
-      // 通过触发 update:modelValue 事件来更新父组件的数据
-      this.$emit('update:modelValue', event.target.value);
-    }
-  }
-};
+// v-model 在原生元素上会编译为运行时指令 vModelText
+_withDirectives(
+  _createElementVNode('input', {
+    'onUpdate:modelValue': ($event) => (_ctx.msg = $event),
+  }),
+  [[_vModelText, _ctx.msg]]
+)
+```
+
+注意：原生元素上的 `v-model` 使用的是**运行时指令**（`vModelText`），而不是纯编译时转换。
+
+## 组件上的 v-model
+
+在自定义组件上使用 `v-model`：
+
+```html
+<CustomInput v-model="text" />
+```
+
+编译后等价于：
+
+```html
+<CustomInput :modelValue="text" @update:modelValue="val => text = val" />
+```
+
+也就是说，`v-model` 在组件上是纯粹的**编译时语法糖**，展开为：
+
+- 绑定 `modelValue` prop
+- 监听 `update:modelValue` 事件
+
+## 子组件的实现
+
+### 传统写法（手动 prop + emit）
+
+```html
+<script setup>
+  const props = defineProps(['modelValue'])
+  const emit = defineEmits(['update:modelValue'])
+</script>
+
+<template>
+  <input
+    :value="props.modelValue"
+    @input="emit('update:modelValue', $event.target.value)"
+  />
+</template>
+```
+
+### Vue 3.4+ 写法：defineModel
+
+Vue 3.4 引入了 `defineModel` 编译宏，极大简化了 `v-model` 的实现：
+
+```html
+<script setup>
+  // 返回一个可读写的 ref，自动处理 prop 和 emit
+  const model = defineModel()
+</script>
+
+<template>
+  <input v-model="model" />
+</template>
+```
+
+`defineModel()` 返回的是一个 `ref`，读取时获取父组件传入的值，写入时自动触发 `update:modelValue` 事件。编译器帮你处理了所有样板代码。
+
+## 多个 v-model 绑定
+
+Vue 3 支持在同一个组件上使用多个 `v-model`：
+
+```html
+<!-- 父组件 -->
+<UserForm v-model:firstName="first" v-model:lastName="last" />
+```
+
+子组件使用 `defineModel` 实现：
+
+```html
+<script setup>
+  const firstName = defineModel('firstName')
+  const lastName = defineModel('lastName')
+</script>
+
+<template>
+  <input v-model="firstName" placeholder="First Name" />
+  <input v-model="lastName" placeholder="Last Name" />
+</template>
+```
+
+编译后，`v-model:firstName="first"` 展开为：
+
+```html
+<UserForm
+  :firstName="first"
+  @update:firstName="val => first = val"
+  :lastName="last"
+  @update:lastName="val => last = val"
+/>
+```
+
+## v-model 修饰符
+
+`v-model` 支持内置修饰符和自定义修饰符：
+
+```html
+<!-- 内置修饰符 -->
+<input v-model.trim="msg" />
+<input v-model.number="age" />
+<input v-model.lazy="msg" />
+
+<!-- 自定义修饰符 -->
+<CustomInput v-model.capitalize="text" />
+```
+
+在子组件中可以通过 `defineModel` 的第二个参数访问修饰符：
+
+```html
+<script setup>
+  const [model, modifiers] = defineModel({
+    set(value) {
+      if (modifiers.capitalize) {
+        return value.charAt(0).toUpperCase() + value.slice(1)
+      }
+      return value
+    },
+  })
 </script>
 ```
 
-在父组件中，你可以这样使用 `v-model` 来进行双向绑定：
+## 总结
 
-```js
-// 父组件 Parent.vue
-<template>
-  <CustomInput v-model="text"/>
-</template>
-
-<script>
-import CustomInput from './CustomInput.vue';
-
-export default {
-  components: { CustomInput },
-  data() {
-    return {
-      text: 'Hello, Vue 3!'
-    };
-  }
-};
-</script>
-```
-
-- **`modelValue`**：这是自定义组件接收的属性，Vue 3 默认将 `v-model` 绑定的属性命名为 `modelValue`。
-- **`update:modelValue`**：这是子组件发出的事件，Vue 会在值改变时触发该事件，从而更新父组件的数据。
-
-### **`v-model` 实际上做了什么**：
-
-- 当你使用 `v-model="text"` 时，Vue 会在内部处理为：
-  - 父组件的 `text` 数据作为 `modelValue` 传递给子组件。
-  - 当子组件通过 `$emit('update:modelValue', newValue)` 触发事件时，父组件的 `text` 数据会被更新。
-
-## 4. **多个 `v-model` 的支持**
-
-Vue 3 允许在同一个组件上使用多个 `v-model`，通过为不同的绑定指定不同的 `prop` 和 `event` 名称。你可以使用 `modelValue` 之外的属性名作为 `v-model` 绑定的目标。
-
-```js
-// 子组件 CustomInput.vue
-<template>
-  <input :value="modelValue" @input="onInput">
-</template>
-
-<script>
-export default {
-  props: {
-    modelValue: String, // 默认的 v-model 属性
-    additionalValue: String // 第二个 v-model 属性
-  },
-  emits: ['update:modelValue', 'update:additionalValue'],
-  methods: {
-    onInput(event) {
-      // 根据传递的属性触发事件
-      this.$emit('update:modelValue', event.target.value);
-    }
-  }
-};
-</script>
-```
-
-在父组件中使用多个 `v-model`：
-
-```js
-<template>
-  <CustomInput v-model="text" v-model:additionalValue="additionalText"/>
-</template>
-
-<script>
-import CustomInput from './CustomInput.vue';
-
-export default {
-  components: { CustomInput },
-  data() {
-    return {
-      text: 'Hello',
-      additionalText: 'World'
-    };
-  }
-};
-</script>
-```
-
-- **`v-model`**：会自动绑定 `modelValue`。
-- **`v-model:additionalValue`**：会绑定 `additionalValue`。
-
-这种方式让你可以更加灵活地处理组件中的多个双向绑定。
-
-## 5. **`v-model` 的自定义事件和属性**
-
-除了默认的 `modelValue` 和 `update:modelValue`，你还可以在组件中自定义用于双向绑定的属性和事件名称。
-
-```js
-// 子组件 CustomInput.vue
-<template>
-  <input :value="inputValue" @input="onInput">
-</template>
-
-<script>
-export default {
-  props: {
-    inputValue: String // 自定义的 prop
-  },
-  emits: ['update:inputValue'], // 自定义的事件
-  methods: {
-    onInput(event) {
-      // 自定义事件触发
-      this.$emit('update:inputValue', event.target.value);
-    }
-  }
-};
-</script>
-```
-
-在父组件中使用：
-
-```js
-<template>
-  <CustomInput v-model:inputValue="text" />
-</template>
-```
-
-## 6. **总结：`v-model` 本质**
-
-- **双向绑定的核心**：Vue 3 的 `v-model` 本质上是通过 `modelValue` 作为绑定的 prop，`update:modelValue` 作为更新事件来实现的双向绑定。
-- **灵活性**：Vue 3 提供了更大的灵活性，允许你在同一个组件上使用多个 `v-model` 绑定，或者自定义事件和属性名称。
-- **适配性**：通过自定义事件和属性，你可以更精确地控制组件的双向绑定，避免了 `v-model` 在 Vue 2 中的限制。
-
-Vue 3 中的 `v-model` 提供了比 Vue 2 更加强大和灵活的双向绑定能力，能够支持更多的场景，包括多个绑定、绑定属性和事件的自定义等功能。
+| 场景         | v-model 的本质                                                |
+| ------------ | ------------------------------------------------------------- |
+| 原生元素     | 编译为运行时指令（`vModelText` 等）+ `onUpdate:modelValue`    |
+| 自定义组件   | 编译时语法糖，展开为 `:modelValue` + `@update:modelValue`     |
+| 多个 v-model | 通过 `v-model:propName` 指定不同的 prop 和对应的 update 事件  |
+| defineModel  | Vue 3.4+ 编译宏，返回可读写 ref，自动处理 prop 和 emit       |

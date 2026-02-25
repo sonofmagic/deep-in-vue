@@ -131,6 +131,67 @@ https://vuejs.org/api/sfc-css-features.html#deep-selectors
 
 - **全局样式**：如果你需要在组件中引入全局样式（例如，CSS reset），则需要在 `scoped` 样式之外进行处理，或者使用 `global` 样式。
 
+## 6. **SFC CSS 特性（Vue 3）**
+
+Vue 3 的 `<style scoped>` 还提供了几个实用的伪选择器：
+
+### `:deep()` — 深度选择器
+
+影响子组件内部的样式：
+
+```css
+.parent :deep(.child-class) {
+  color: red;
+}
+```
+
+编译后：
+
+```css
+.parent[data-v-xxxx] .child-class {
+  color: red;
+}
+```
+
+### `:slotted()` — 插槽选择器
+
+选择通过插槽传入的内容：
+
+```css
+:slotted(.slot-content) {
+  font-weight: bold;
+}
+```
+
+### `:global()` — 全局选择器
+
+在 scoped 样式中声明全局样式：
+
+```css
+:global(.global-class) {
+  color: green;
+}
+```
+
+### `v-bind()` — CSS 中使用响应式数据
+
+Vue 3 支持在 `<style>` 中直接使用 `v-bind()` 绑定响应式数据：
+
+```html
+<script setup>
+  import { ref } from 'vue'
+  const color = ref('red')
+</script>
+
+<style scoped>
+  .text {
+    color: v-bind(color);
+  }
+</style>
+```
+
+`v-bind()` 的本质是通过 CSS 自定义属性（CSS Variables）实现的。编译后，Vue 会在组件根元素上设置 `--xxxx-color: red` 这样的 CSS 变量，然后在样式中引用它。当 `color` 的值变化时，CSS 变量会自动更新，从而实现响应式的样式绑定。
+
 ## 6. **总结：`scoped` 样式的本质**
 
 `<style scoped>` 的本质是通过编译时处理，为组件的根元素和所有相关的样式选择器生成一个唯一的类名（如 `data-v-xxxx`），并将该类名添加到样式规则中，从而限定样式的作用范围，仅在当前组件的元素中生效，避免样式的全局污染。Vue 通过这种机制确保了组件样式的封装性，使得每个组件的样式都能独立而不干扰其他组件。

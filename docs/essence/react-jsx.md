@@ -82,8 +82,3 @@ export default function App() {
 | 变更引入版本            | React 17 引入（非强制） | React 18 推荐默认                |
 | 是否需要 `import React` | 必须                    | 可选（取决于 Babel 设置）        |
 | 优势                    | 无                      | 体积更小、性能更优               |
-
----
-
-要不要我顺便给你写一个小 demo，让你直观对比一下 `React.createElement` 和 `jsx` 的区别？要的话告诉我～
-💬（顺便还能教你怎么在项目里切换使用新旧 JSX Transform！）
