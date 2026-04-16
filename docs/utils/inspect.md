@@ -1,41 +1,61 @@
-# 点击浏览器的元素时自动跳转到本地 IDE
+# 点击浏览器元素时自动跳转到本地 IDE
 
-## 选型
+这一页讨论的是一个非常实用、但又很工程化的小能力：
 
-为了加快开发者快速从浏览器中，跳转到本地 `IDE` 中查看元素。在尝试了几种方案之后，最终选用了这个方案:
+> 当你在浏览器里点到某个 Vue 元素时，能不能直接跳回本地 IDE 对应源代码？
 
-- `vite` 项目使用 [vite-plugin-vue-inspector](https://www.npmjs.com/package/vite-plugin-vue-inspector)
-- `webpack(vue-cli)` 项目使用 [code-inspector-plugin](https://www.npmjs.com/package/code-inspector-plugin)
+如果你经常在大型项目里排查组件来源、样式污染或模板结构，这个能力非常省时间。
 
-### 为什么选用 `vite-plugin-vue-inspector`?
+## 先说本质
 
-#### 优势
+这类能力通常不是 Vue 运行时原生提供的，而是借助构建插件，在开发态为页面注入“源代码定位信息”。
 
-1. `vue` 官方团队维护的项目，已经被写在了 [devtools.vuejs.org](https://devtools.vuejs.org/) 文档上，不用担心烂尾。
-2. 和 `vue` 高度集成，注入效果更好，支持 `vue2` / `vue3` / `SSR`，符合我们多 `vue` 版本项目的现状。
-3. 支持多种 `IDE` 集成，跳转到指定代码行的能力，符合我们目前 `vscode` / `webstorm` 混用的现状
-4. 社区使用范围较广，经过了大量项目实践测试
+所以它本质上是一类：
 
-#### 劣势
+- 开发态增强能力
+- 构建工具插件能力
+- IDE 集成能力
 
-但是它只支持 `vite`, 即使是它的超集 [unplugin-vue-inspector](https://www.npmjs.com/package/unplugin-vue-inspector)，在阅读过源代码之后，发现也只支持 `vite` 和 `nuxt`。
+而不是业务代码层的功能。
 
-### 为什么选用 `code-inspector-plugin`
+## 选型思路
 
-#### 优势
+为了让开发者快速从浏览器跳回本地 IDE，这里最终选择了两条路线：
 
-1. 能够支持 `webpack` 以及 `vue2` / `vue3` 项目，符合项目现状
-2. 也能支持多种 `IDE` 集成，跳转到指定代码行的能力
+- `vite` 项目：[`vite-plugin-vue-inspector`](https://www.npmjs.com/package/vite-plugin-vue-inspector)
+- `webpack` / `vue-cli` 项目：[`code-inspector-plugin`](https://www.npmjs.com/package/code-inspector-plugin)
 
-#### 劣势
+## 为什么优先选 `vite-plugin-vue-inspector`
 
-1. 非官方团队维护，怕烂尾。
-2. 注入效果不如官方团队的 `vite-plugin-vue-inspector`，为了跨框架的通用性，需要显式在每个 `dom` 上注入一个属性 `data-insp-path` 属性
-3. 社区体量相对较小，生态活跃度不如 `vite-plugin-vue-inspector`
+### 优势
+
+1. Vue 团队相关生态长期维护，稳定性预期更好
+2. 与 Vue 集成度更高，开发体验更自然
+3. 支持多种 IDE 跳转
+4. 对 `vue2` / `vue3` / SSR 等场景更友好
+
+### 局限
+
+它本质上更偏 Vite 体系。  
+即使是它的超集 [`unplugin-vue-inspector`](https://www.npmjs.com/package/unplugin-vue-inspector)，核心支持面也主要还是 `vite` 和 `nuxt`。
+
+## 为什么要保留 `code-inspector-plugin`
+
+### 优势
+
+1. 能覆盖 `webpack` 项目
+2. 对 Vue 2 存量项目也更现实
+3. 也支持常见 IDE 跳转能力
+
+### 局限
+
+1. 不是 Vue 官方生态主线方案
+2. 注入方式更偏通用插件思路，颗粒度不如 Vue 专用方案
+3. 社区体量和活跃度通常不如 `vite-plugin-vue-inspector`
 
 ## Vite 项目注册插件
 
-### 安装插件
+### 安装
 
 ```sh
 yarn add -D vite-plugin-vue-inspector
@@ -43,12 +63,11 @@ yarn add -D vite-plugin-vue-inspector
 pnpm i -D vite-plugin-vue-inspector
 ```
 
-### Vite + Vue3 项目
+### Vite + Vue 3
 
 ```ts
 import Vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
-
 import Inspector from 'vite-plugin-vue-inspector'
 
 export default defineConfig({
@@ -56,44 +75,47 @@ export default defineConfig({
 })
 ```
 
-### Vite + Vue2 项目
+### Vite + Vue 2
 
 > Vue 2 已进入 EOL，本节仅用于维护存量项目。
 
 ```ts
 import Vue from '@vitejs/plugin-vue2'
-import { defineConfig, } from 'vite'
+import { defineConfig } from 'vite'
 import Inspector from 'vite-plugin-vue-inspector'
 
 export default defineConfig({
   plugins: [
     Vue(),
     Inspector({
-      vue: 2
+      vue: 2,
     }),
   ],
 })
 ```
 
-### 使用功能
+### 使用方式
 
-在打开页面的时候，页面中间会出现一个 `vue` 的小按钮，点击选择元素即可跳转至 `IDE`
+页面中会出现一个可交互入口，或者可以使用快捷键选中元素后跳转到 IDE。
 
-或者使用快捷键 `control` + `shift` 然后选择元素
+这类能力最适合用在：
 
-## Webpack (vue cli 项目) 注册插件
+- 排查页面元素来源
+- 快速定位某个模板或组件
+- 排查复杂组件树中的样式命中问题
 
-### 安装插件
+## Webpack / Vue CLI 项目注册插件
+
+### 安装
 
 ```sh
 yarn add -D code-inspector-plugin
-
 pnpm i -D code-inspector-plugin
 ```
 
-### 注册插件
+### 注册
 
-在你的 `vue.config.js` 文件中添加如下代码：
+在 `vue.config.js` 中：
 
 ```js
 const { defineConfig } = require('@vue/cli-service')
@@ -105,50 +127,57 @@ module.exports = defineConfig({
     config.plugin('code-inspector-plugin').use(
       codeInspectorPlugin({
         bundler: 'webpack',
-      })
+      }),
     )
   },
 })
 ```
 
-然后运行 `serve` 即可看到效果。另外一点值得注意的是，构建的时候，默认是不会进行任何的注入的，所以此插件可以直接注册，不需要环境变量进行控制。
+然后运行开发服务即可。
 
-### 使用功能
+### 使用方式
 
-打开浏览器控制台, 此时在你的 `console` 会显示一个信息:
+插件会在控制台给出提示，例如按住特定快捷键后，点击页面元素即可跳转到 IDE。
 
-```
-[code-inspector-plugin]同时按住 `shift` + `alt` 时启用功能(点击页面元素可定位至编辑器源代码)
-```
+## IDE 跳转本质上依赖什么
 
-然后你使用对于按键，点击页面元素，即可跳转到 `IDE` 对应的代码行。
+真正起作用的通常是两部分：
 
-## 不同 IDE 跳转到源代码
+1. 页面里注入了元素到源码位置的映射信息
+2. 本地 IDE 命令能被正确调用
 
-这个可以通过插件的配置项 `launchEditor` 设置，详见 [vite-plugin-vue-inspector文档](https://github.com/webfansplz/vite-plugin-vue-inspector) 和 [code-inspector-plugin文档](https://inspector.fe-dev.cn/guide/ide.html)
+所以如果浏览器里点到了元素却打不开 IDE，很多时候不是插件失效，而是本地编辑器命令行没有正确注册。
 
-比较好的方式是，利用环境变量，动态的控制，比如有些人用 `vscode` 那么就不需要任何设置，因为插件默认就是 `vscode`，假如你使用 `webstorm`
+## 常见故障排查
 
-那么，你可以通过配置你的本地环境变量，来把插件跳转指向 `webstorm`, 具体的方式见文档或者来找我。
+### VS Code 打不开
 
-## 故障排查
-
-### 打开 Vscode 编辑器报错
+如果出现类似：
 
 ```txt
 Could not open index.vue in the editor.
 The editor process exited with an error: spawn code ENOENT ('code' command does not exist in 'PATH').
 ```
 
-这是因为你没有在系统中注册 `code` 命令，可以通过 `ctrl` + `shift` + `p` 打开 `vscode` 的命令面板，然后输入 `shell command`，选择 `Shell Command: Install 'code' command in PATH`，然后重启 `vscode` 即可。
+通常说明系统里没有注册 `code` 命令。
+
+处理方式：
+
+1. 在 VS Code 中打开命令面板
+2. 搜索 `Shell Command`
+3. 执行 `Shell Command: Install 'code' command in PATH`
+4. 重启 VS Code
 
 ## 扩展阅读
 
-### vite-plugin-vue-devtools
+### `vite-plugin-vue-devtools`
 
-这个包是 `vite`/`vue` 团队官方维护的开发者工具包，它内部也包含了 [vite-plugin-vue-inspector](https://www.npmjs.com/package/vite-plugin-vue-inspector) 的所有功能，同时也把整个浏览器 `vue devtools` 插件，也集成到这个 `vite` 插件中了。
+它是 Vue / Vite 生态中的官方开发工具方案之一，内部也包含了 `vite-plugin-vue-inspector` 这类能力，并把 Vue Devtools 集成到了开发流程中。
 
-但是这个包，只支持 `vue3` + `vite` 项目，原因在于它里面 `vue devtools` 相关的代码只支持 `vue3`，所以假如你要使用它，请在 `vue3` + `vite` 项目中使用, 同时你就可以把 [vite-plugin-vue-inspector](https://www.npmjs.com/package/vite-plugin-vue-inspector) 或 [unplugin-vue-inspector](https://www.npmjs.com/package/unplugin-vue-inspector) 干掉了。
+但要注意：
+
+- 它更偏 `vue3` + `vite`
+- 如果你已经接了它，某些 inspector 类插件能力可能就不必重复接入
 
 ### 包含关系
 
@@ -158,3 +187,15 @@ The editor process exited with an error: spawn code ENOENT ('code' command does 
 
 - [vite-plugin-vue-inspector](https://www.npmjs.com/package/vite-plugin-vue-inspector)
 - [code-inspector-plugin](https://inspector.fe-dev.cn/)
+
+## 一句话理解
+
+浏览器元素跳回本地 IDE，本质上是开发态构建插件为页面注入源码定位信息，再借助本地编辑器命令完成跳转。
+
+## 建议继续阅读
+
+如果你想把这个能力放回 Vue 工程体系里理解，可以继续看：
+
+1. [Vue 编译器介绍](/guide/compiler)
+2. [vite dev 和 build 下的 vue 产物](/advanced/vite-dev-build)
+3. [构建组件库](/ui/)

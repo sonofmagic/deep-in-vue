@@ -1,84 +1,92 @@
-# 📖 之前：`React.createElement`
+# React createElement 与 jsx 函数
 
-在 **React 17 及以前版本**，JSX 语法最终编译（比如通过 Babel 编译）出来的是类似这样的代码：
+这一页不是为了展开讲 React，而是为了帮助你在读 Vue 的 JSX / TSX、`h()` 和编译产物时，多一个非常重要的对照坐标。
+
+最核心的一句话是：
+
+> JSX 从来都不是浏览器原生语法，它总要先被编译成某种函数调用。
+
+在 React 里，这个函数调用从早期的 `React.createElement`，逐步演进到了新的 `jsx` runtime。
+
+## 旧模式：`React.createElement`
+
+在 React 17 之前很长一段时间里，JSX 通常会被编译成：
 
 ```jsx
 const element = <h1>Hello, world!</h1>
 ```
 
-编译后实际上是：
+编译后更接近：
 
-```javascript
+```js
 const element = React.createElement('h1', null, 'Hello, world!')
 ```
 
-所以 JSX 其实是一个 **语法糖**，背后调用的是 `React.createElement` 方法来创建虚拟 DOM。
+这说明 JSX 本质上只是语法糖，真正落地的是函数调用。
 
----
+## 新模式：`jsx` 函数
 
-# 🚀 变化：引入了 `jsx` 函数
+从 React 17 开始引入新的 JSX Transform，后续逐步成为主流推荐方式。
 
-从 **React 17** 开始，React 引入了一个新的编译方式 —— 叫做 **新的 JSX 转换（New JSX Transform）**，但 **真正默认启用是在 React 18 时代** 配合新版的 Babel。
-
-新的 JSX 编译，会直接编译成调用一个新的 `jsx` 函数，而不是 `React.createElement`。比如：
+同样的代码：
 
 ```jsx
 const element = <h1>Hello, world!</h1>
 ```
 
-经过新版 Babel（@babel/preset-react 7.9.0+）编译后，会变成：
+会被编译成类似：
 
-```javascript
+```js
 import { jsx } from 'react/jsx-runtime'
 
 const element = jsx('h1', { children: 'Hello, world!' })
 ```
 
-也就是说：
+所以对比可以简单记成：
 
-| React 版本          | JSX 编译后                                 |
-| :------------------ | :----------------------------------------- |
-| React 16 及以前     | `React.createElement(...)`                 |
-| React 17 引入新方案 | 可以使用新的 `jsx(...)` 函数（兼容老方案） |
-| React 18            | 完全推荐使用 `jsx(...)`                    |
+| 时代 | JSX 编译目标 |
+| :-- | :-- |
+| 旧模式 | `React.createElement(...)` |
+| 新模式 | `jsx(...)` / `jsxs(...)` |
 
----
+## 为什么 React 要切到新 runtime
 
-# 🧠 为什么要这么做？
+核心原因主要有三类：
 
-1. **减少打包体积**：使用 `jsx` 以后，不再需要在每个文件都 `import React from 'react'`，因为 `jsx` 函数是直接引入的，不依赖 React 全局变量。
+1. 减少样板代码  
+   不再要求每个 JSX 文件都手动 `import React from 'react'`
+2. 优化运行时组织方式  
+   `jsx-runtime` 可以更明确地区分开发态与生产态调用
+3. 为后续渲染模型演进留接口  
+   新的 runtime 结构更适合进一步扩展
 
-2. **优化性能**：`jsx` 函数生成的虚拟节点更轻量，可以有更高效的构建和运行时表现。
-
-3. **更灵活**：比如未来支持 Server Components、新的渲染模型，都可以通过 `jsx-runtime` 模块灵活地切换。
-
----
-
-# 🏗️ 相关的两个运行时模块
+## 相关运行时模块
 
 - `react/jsx-runtime`
-  → 提供 `jsx` 和 `jsxs`（多个 children）函数。
+  提供 `jsx` 和 `jsxs`
 - `react/jsx-dev-runtime`
-  → 开发环境下用的，提供带额外 debug 信息的 `jsxDEV` 函数。
+  提供开发态用的 `jsxDEV`
 
-这也是为什么新版 React 工程中，很多情况下**不需要手动 import React**了，比如：
+这也是为什么现在很多 React 项目里，即使写了 JSX，也不一定再看到显式的 `import React`。
 
-```jsx
-// React 18 中，默认可以这样写
-export default function App() {
-  return <div>Hello</div>
-}
-```
+## 为什么这对读 Vue 文档有帮助
 
-背后是引入了 `jsx` 运行时，而不是 `React.createElement`。
+因为它能帮你建立一个稳定的对照关系：
 
----
+- React JSX 最终会变成 React 运行时理解的函数调用
+- Vue JSX 最终会变成 Vue 运行时理解的 VNode 创建调用
 
-# 📝 总结
+这说明真正关键的不是“长得像不像 JSX”，而是：
 
-| 项目                    | 旧模式                  | 新模式                           |
-| :---------------------- | :---------------------- | :------------------------------- |
-| JSX 编译方式            | `React.createElement`   | `jsx` 函数 (`react/jsx-runtime`) |
-| 变更引入版本            | React 17 引入（非强制） | React 18 推荐默认                |
-| 是否需要 `import React` | 必须                    | 可选（取决于 Babel 设置）        |
-| 优势                    | 无                      | 体积更小、性能更优               |
+> JSX 最终会被编译到哪个框架的运行时协议上。
+
+## 一句话理解
+
+React 的 `createElement` 和 `jsx` runtime 这段演进，最适合作为理解 Vue JSX 的对照背景：同样都是 JSX，最终服务的却是不同框架的运行时模型。
+
+## 建议继续阅读
+
+如果你是为了理解 Vue 里的 JSX / TSX，建议继续看：
+
+1. [vue jsx/tsx 的本质](./tsx.md)
+2. [h 函数的本质](./h.md)

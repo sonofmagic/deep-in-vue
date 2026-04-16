@@ -30,6 +30,7 @@ export default defineConfig({
           collapsed: false,
           text: '入门',
           items: [
+            { text: '本章导读', link: '/' },
             { text: 'vue 编译器介绍', link: '/compiler' },
             { text: '编译时指令 vs 运行时指令', link: '/compile-time-directive' },
             { text: 'render vs setup render 函数', link: '/render-vs-setup' },
@@ -40,6 +41,7 @@ export default defineConfig({
           collapsed: false,
           text: '本质',
           items: [
+            { text: '本章导读', link: '/' },
             { text: 'script setup 的本质', link: '/setup' },
             { text: 'v-bind 的本质', link: '/vBind' },
             { text: 'v-on 的本质', link: '/vOn' },
@@ -59,6 +61,7 @@ export default defineConfig({
           base: '/advanced',
           text: '进阶',
           items: [
+            { text: '本章导读', link: '/' },
             { text: '纯运行时项目', link: '/no-compile' },
             { text: 'vue+jsx 全编译项目', link: '/fully-compiled' },
             { text: 'vite dev 和 build 下的 vue 产物', link: '/vite-dev-build' },
@@ -70,14 +73,19 @@ export default defineConfig({
           collapsed: false,
           text: '深入',
           items: [
+            { text: '本章导读', link: '/' },
+            { text: 'Vue 3 响应式系统的实现原理', link: '/vue-runtime' },
             { text: '类型推导与提取', link: '/type-infer' },
             { text: '自定义编译时指令', link: '/custom-compile-directive' },
-            // { text: '静态提升与 openBlock', link: '/index' },
+            { text: '为什么 React 市占率比 Vue 高', link: '/why-react' },
           ],
         },
       ],
       '/utils/': [
         { text: '跳转到本地 IDE', link: '/utils/inspect' },
+      ],
+      '/demo/': [
+        { text: '语法演示', link: '/demo/' },
       ],
       '/ui/': [
         { text: '前言', link: '/ui/index' },
@@ -94,7 +102,7 @@ export default defineConfig({
         {
           text: '现有组件库分析',
           items: [
-            // { text: 'element-ui (vue2) 构建分析', link: '/ui/element-ui' },
+            { text: 'element-ui (vue2) 构建分析', link: '/ui/npm/element-ui' },
             {
               text: 'element-plus (vue3) 构建分析',
               items: [
@@ -107,19 +115,24 @@ export default defineConfig({
           ],
         },
         {
-          text: '下个时代的组件库',
+          text: '横向对照与趋势',
           items: [
+            { text: 'React 组件生态速览', link: '/ui/other-component/react' },
+            { text: 'SolidJS 组件生态速览', link: '/ui/other-component/solid-js' },
+            { text: 'Svelte 组件生态速览', link: '/ui/other-component/svelte' },
             { text: 'headless', link: '/next/index' },
           ],
         },
       ],
     },
     nav: [
-      { text: '指南', link: '/guide/compiler' },
-      { text: '进阶', link: '/advanced/no-compile' },
-      { text: '深入', link: '/deep/type-infer' },
+      { text: '指南', link: '/guide/' },
+      { text: '本质', link: '/essence/' },
+      { text: '进阶', link: '/advanced/' },
+      { text: '深入', link: '/deep/' },
+      { text: '演示', link: '/demo/' },
       { text: '工具', link: '/utils/inspect' },
-      { text: '构建组件库', link: '/ui/index' },
+      { text: '构建组件库', link: '/ui/' },
     ],
   },
   vite: {

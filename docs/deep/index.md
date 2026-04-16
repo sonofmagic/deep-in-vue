@@ -1,16 +1,60 @@
 # 深入
 
-本章节深入探讨 Vue 的内部实现机制。
+这一章默认你已经接受了一件事：
 
-## VNode 的创建
+> Vue 不是一组零散 API，而是一套由编译器、运行时、响应式系统和工程工具共同组成的体系。
 
-Vue 的虚拟 DOM 核心是 VNode（Virtual Node），所有的模板最终都会被编译为 VNode 的创建调用。
+前面的章节解决的是“看得懂 Vue 的表层写法”，这里要继续往里走，开始碰更接近实现细节的问题。
 
-VNode 的创建源代码：https://github.com/vuejs/core/blob/a23fb59e83c8b65b27eaa21964c8baa217ab0573/packages/runtime-core/src/vnode.ts#L282
+## 这一章关注什么
 
-VNode 包含了节点的类型、props、children 等信息，Vue 通过对比新旧 VNode 树（diff 算法）来计算最小的 DOM 更新操作。
+- Vue 响应式系统在运行时是怎样精确追踪依赖的
+- Vue 如何在编译时利用 TypeScript 类型信息
+- 自定义编译能力是怎样插入现有流程的
+- 模板、AST、运行时辅助函数之间如何建立映射
+- 为什么有些高级能力只能通过编译器扩展实现
+
+## 先建立一个基本前提
+
+Vue 的虚拟 DOM 核心是 VNode（Virtual Node）。
+
+模板最终会被编译成 VNode 创建调用，运行时再基于这些 VNode 做挂载、更新和最小化 DOM 变更。理解这一点之后，再去看类型提取、编译宏、自定义编译时指令，会更容易把“高级能力”放回正确的位置。
+
+VNode 创建相关源码可参考：
+
+https://github.com/vuejs/core/blob/a23fb59e83c8b65b27eaa21964c8baa217ab0573/packages/runtime-core/src/vnode.ts#L282
 
 ## 本章内容
 
-- [类型推导与提取](./type-infer.md) — Vue 如何在编译时提取 TypeScript 类型信息
-- [自定义编译时指令](./custom-compile-directive.md) — 如何编写自己的编译时指令
+- [Vue 3 响应式系统的实现原理](./vue-runtime.md)
+  关注运行时是如何通过 Proxy、effect 和依赖图完成细粒度更新的。
+- [类型推导与提取](./type-infer.md)
+  关注 Vue 如何在编译阶段读取、提取并利用 TypeScript 类型信息。
+- [自定义编译时指令](./custom-compile-directive.md)
+  关注如何把自定义语法扩展接入编译流程，而不是留到运行时兜底。
+- [为什么 React 市占率比 Vue 高](./why-react.md)
+  从生态、工业化和历史窗口角度，补充理解框架传播与工程采用的现实因素。
+
+## 适合怎样阅读
+
+这一章不太适合“只看结论”。
+
+建议边看边做两件事：
+
+1. 对照 Vue core 仓库对应实现
+2. 在本项目里尝试修改示例，验证编译结果是否符合预期
+
+如果你已经开始关心“能不能把自己的工程规则前置到编译阶段”，这一章会更有价值。
+
+## 建议阅读顺序
+
+1. 先读 [Vue 3 响应式系统的实现原理](./vue-runtime.md)，把运行时更新机制补清楚
+2. 再读 [类型推导与提取](./type-infer.md)，理解编译器怎样读取类型信息
+3. 再读 [自定义编译时指令](./custom-compile-directive.md)，看如何扩展编译器行为
+4. 最后把 [为什么 React 市占率比 Vue 高](./why-react.md) 当作补充阅读，帮助你从生态与工业体系层理解框架传播
+
+## 按问题切入
+
+- 想先理解“Vue 为什么能做到字段级更新”：先看 [Vue 3 响应式系统的实现原理](./vue-runtime.md)
+- 想理解“为什么 `defineProps<T>()` 里的类型能变成运行时代码”：先看 [类型推导与提取](./type-infer.md)
+- 想理解“能不能把自己的语法规则前置到编译阶段”：先看 [自定义编译时指令](./custom-compile-directive.md)

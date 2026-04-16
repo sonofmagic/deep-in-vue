@@ -1,4 +1,4 @@
-# script setup 语法糖
+# script setup 的本质
 
 > `<script setup>` 是 Vue 3 提供的一种 **编译时语法糖**，它让你以更简洁的方式使用 Composition API，本质上会在**构建阶段**被 Vue 编译成普通的 `setup()` 函数。
 
@@ -201,3 +201,11 @@ Vue 3.5 引入了 `useTemplateRef()` 来获取模板引用，比之前的同名 
 > `<script setup>` 是 Vue 3 的编译时语法糖，**最终都被编译为标准的 `setup()` 函数和对应的 `render()`**，它让 Composition API 写法更自然、简洁、类型友好，是 Vue 3 推荐的组件书写方式。
 >
 > Vue 3.5 进一步增强了 `<script setup>` 的开发体验：响应式 Props 解构让 props 处理更简洁，`useTemplateRef` 让模板引用更清晰，`useId` 简化了无障碍开发，`onWatcherCleanup` 让副作用清理更可控。
+
+## 建议继续阅读
+
+如果你想把 `script setup` 放回整条编译链里理解，建议继续读：
+
+1. [defineXXX 的本质](/essence/define)
+2. [`.vue` 文件的本质](/essence/vue)
+3. [Vue 编译器介绍](/guide/compiler)

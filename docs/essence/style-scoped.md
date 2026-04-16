@@ -1,47 +1,47 @@
 # style scoped 的本质
 
-在 Vue 中，`<style scoped>` 是一种特殊的 `<style>` 标签属性，它用于限定样式的作用范围，使得样式只应用于当前组件的元素，而不会影响到全局样式或者其他组件的元素。`scoped` 的本质是通过编译时处理来将样式作用域限定在当前组件内，并通过特殊的 CSS 选择器来实现这一点。为了理解其本质，我们需要深入探讨 Vue 如何处理样式、如何生成独特的 CSS 选择器以及如何确保样式只作用于当前组件。
+`<style scoped>` 是 Vue SFC 里最容易“天天在用，但底层说不清”的能力之一。
 
-## 1. **`scoped` 的功能**
+最短答案先给出来：
 
-在没有 `scoped` 的情况下，Vue 组件中的样式是全局的，即使它们只写在某个组件的 `<style>` 标签内，仍然会影响到整个应用中的所有元素。为了避免样式污染其他部分的页面，Vue 引入了 `scoped` 属性来限制样式的作用范围。
+> `<style scoped>` 的本质，不是浏览器原生的样式作用域，而是 Vue 在编译阶段同时改写模板节点和 CSS 选择器，让样式只命中当前组件渲染出来的节点。
+
+所以它本质上是一种**编译期样式隔离方案**。
+
+## 如果不加 scoped 会发生什么
+
+在普通 `<style>` 中，样式默认是全局生效的：
 
 ```html
-<!-- 未加 scoped 时，样式会影响到所有页面元素 -->
 <style>
-  p {
-    color: red;
-  }
+p {
+  color: red;
+}
 </style>
 ```
 
-上面的样式会将页面中所有 `<p>` 标签的文本变成红色。
+这会影响页面里所有匹配到的 `<p>`。
 
-而使用 `scoped` 后，样式只会应用到当前组件的元素：
+而加上 `scoped` 之后：
 
 ```html
-<!-- 使用 scoped 限制样式作用域 -->
 <style scoped>
-  p {
-    color: red;
-  }
+p {
+  color: red;
+}
 </style>
 ```
 
-在这个例子中，`<p>` 标签的样式只会应用到当前组件中的 `<p>` 元素，不会影响到全局的 `<p>` 元素。
+Vue 就会把它限制到当前组件范围内。
 
-## 2. **编译时的处理**
+## 编译时到底做了什么
 
-当你在一个组件中使用 `<style scoped>` 时，Vue 会进行以下操作：
+可以把 Vue 做的事情概括成两步：
 
-1. **注入作用域标识**：Vue 会为组件生成稳定的作用域标识（如 `data-v-xxxx`），并在渲染元素时注入这个 attribute。
-2. **改写 CSS 选择器**：编译阶段会把选择器改写为带 `data-v-xxxx` 的形式，从而只命中当前组件范围内的元素。
+1. 给当前组件渲染出的节点注入一个 scope attribute
+2. 把 CSS 选择器改写成带同样 attribute 的形式
 
-### 2.1 **作用域标识生成**
-
-`data-v-xxxx` 不是“类名”，而是一个作用域 attribute。`xxxx` 是由 SFC 计算出的稳定哈希值，通常同一个组件文件在同一次构建里是固定的。
-
-例如，对于以下组件：
+例如：
 
 ```html
 <template>
@@ -51,93 +51,87 @@
 </template>
 
 <style scoped>
-  p {
-    color: red;
-  }
+p {
+  color: red;
+}
 </style>
 ```
 
-Vue 编译时会做如下的修改：
-
-- 在渲染节点时注入作用域 attribute（如 `data-v-12345`）。
-- 编译样式时把 `p` 选择器改写为带 scope attribute 的选择器：
+编译后会更接近：
 
 ```js
-import { createElementBlock as _createElementBlock, createElementVNode as _createElementVNode, openBlock as _openBlock } from 'vue'
-
-const __sfc__ = { }
-function render(_ctx, _cache) {
-  return (_openBlock(), _createElementBlock('div', null, _cache[0] || (_cache[0] = [
-    _createElementVNode('p', null, 'Scoped style example', -1 /* HOISTED */)
-  ])))
-}
-__sfc__.render = render
-// 注意这个 __scopeId
 __sfc__.__scopeId = 'data-v-7ba5bd90'
-__sfc__.__file = 'src/App.vue'
-export default __sfc__
 ```
 
+以及：
+
 ```css
-/* 通过编译处理后的样式 */
 p[data-v-7ba5bd90] {
   color: red;
 }
 ```
 
-这样，只有 `<div>` 标签及其内部的 `<p>` 元素会应用该样式，其他组件中的 `p` 标签不会受影响。
+所以 `<style scoped>` 的关键并不是“生成了特殊 CSS 语法”，而是：
 
-### 2.2 **样式的作用域**
+- 模板侧节点被打上 `data-v-xxxx`
+- 样式侧选择器也被改写为命中这些节点
 
-通过这种方式，`scoped` 样式的作用域会被自动限制在当前组件内。无论组件中有多少个 `<p>` 元素，都会被正确应用红色样式，而其他组件的 `<p>` 元素不会受到影响。
+## `data-v-xxxx` 是什么
 
-## 3. **Vue 如何处理 `scoped` 样式的关键点**
+它不是 class，也不是运行时随机值，而是一个 scope attribute。
 
-### 3.1 **唯一标识符**
+它通常来自 SFC 相关信息计算出的稳定标识，用来把：
 
-Vue 会基于组件的模板内容生成一个唯一的标识符，通常是一个基于组件文件内容生成的哈希值。这个哈希值会被添加到每个选择器上，从而确保该样式只应用于当前组件。
+- 当前组件渲染出的节点
+- 当前组件编译后的样式
 
-### 3.2 **样式作用范围**
+绑定在一起。
 
-在实际的编译过程中，所有的 CSS 选择器都会被修改，以包含生成的唯一标识符。例如：
+所以同一个 SFC 的实例，通常会共享同一个 scope id，而不是“每个组件实例一个新 id”。
+
+## 为什么这是一种编译期能力
+
+因为浏览器本身并不理解：
+
+```html
+<style scoped>
+```
+
+这不是原生 CSS 特性。  
+真正让它成立的是 Vue 的 SFC 编译器。
+
+所以 `<style scoped>` 和很多 Vue 语法糖一样：
+
+- 开发时看起来很自然
+- 但底层成立依赖编译器改写
+
+## 它的边界在哪里
+
+`scoped` 很好用，但不是“天然隔离一切”的黑盒。
+
+最重要的边界有两个：
+
+### 1. 默认不会直接深入子组件内部
+
+如果你想影响子组件更深层的内容，通常要用 `:deep()`。
 
 ```css
-/* 编译后的 scoped 样式 */
-p[data-v-7ba5bd90] {
-  color: red;
+:deep(.child-element) {
+  color: blue;
 }
 ```
 
-通过这种方式，`scoped` 样式会确保只作用于带有 `data-v-7ba5bd90` attribute 的元素，避免了全局污染。
+### 2. 它不是 Shadow DOM
 
-## 4. **关于 scopeId 的稳定性**
+`scoped` 是“选择器改写 + attribute 约束”，不是浏览器原生 Shadow DOM 隔离。
 
-同一个 SFC 的 `data-v-xxxx` 一般是稳定且复用的，不会“每个实例一个不同 id”。样式隔离依赖的是“当前组件模板渲染出的元素都带同一个 scope attribute”，而不是“每个实例不同 id”。
+这意味着它的隔离方式更轻量，但语义上也和 Shadow DOM 不完全一样。
 
-## 5. **`scoped` 样式的局限性**
+## Vue 3 提供的几个相关能力
 
-https://vuejs.org/api/sfc-css-features.html#deep-selectors
+### `:deep()`
 
-尽管 `scoped` 样式可以避免大部分的样式污染，但它并不是完美的。`scoped` 的本质是“选择器改写 + scope attribute 限定”，这有以下一些限制：
-
-- **子组件边界**：`scoped` 默认不会直接作用到子组件内部深层节点。如果需要影响子组件内部样式，通常使用 `:deep()`。
-
-  ```css
-  /* 示例：使用 :deep() 选择器影响子组件 */
-  :deep(.child-element) {
-    color: blue;
-  }
-  ```
-
-- **全局样式**：如果你需要在组件中引入全局样式（例如，CSS reset），则需要在 `scoped` 样式之外进行处理，或者使用 `global` 样式。
-
-## 6. **SFC CSS 特性（Vue 3）**
-
-Vue 3 的 `<style scoped>` 还提供了几个实用的伪选择器：
-
-### `:deep()` — 深度选择器
-
-影响子组件内部的样式：
+用于影响子组件内部更深层的节点：
 
 ```css
 .parent :deep(.child-class) {
@@ -145,27 +139,13 @@ Vue 3 的 `<style scoped>` 还提供了几个实用的伪选择器：
 }
 ```
 
-编译后：
+### `:slotted()`
 
-```css
-.parent[data-v-xxxx] .child-class {
-  color: red;
-}
-```
+用于选择通过插槽传入的内容。
 
-### `:slotted()` — 插槽选择器
+### `:global()`
 
-选择通过插槽传入的内容：
-
-```css
-:slotted(.slot-content) {
-  font-weight: bold;
-}
-```
-
-### `:global()` — 全局选择器
-
-在 scoped 样式中声明全局样式：
+用于在 scoped 样式中声明全局样式：
 
 ```css
 :global(.global-class) {
@@ -173,27 +153,33 @@ Vue 3 的 `<style scoped>` 还提供了几个实用的伪选择器：
 }
 ```
 
-### `v-bind()` — CSS 中使用响应式数据
+### `v-bind()` in CSS
 
-Vue 3 支持在 `<style>` 中直接使用 `v-bind()` 绑定响应式数据：
+用于在 `<style>` 中使用响应式数据：
 
 ```html
 <script setup>
-  import { ref } from 'vue'
-  const color = ref('red')
+import { ref } from 'vue'
+const color = ref('red')
 </script>
 
 <style scoped>
-  .text {
-    color: v-bind(color);
-  }
+.text {
+  color: v-bind(color);
+}
 </style>
 ```
 
-`v-bind()` 的本质是通过 CSS 自定义属性（CSS Variables）实现的。编译后，Vue 会在组件根元素上设置 `--xxxx-color: red` 这样的 CSS 变量，然后在样式中引用它。当 `color` 的值变化时，CSS 变量会自动更新，从而实现响应式的样式绑定。
+它底层更接近通过 CSS Variables 实现，而不是把 JS 值直接塞进静态 CSS 文件。
 
-## 7. **总结：`scoped` 样式的本质**
+## 一句话理解
 
-`<style scoped>` 的本质是通过编译时处理，把 CSS 选择器改写为带作用域 attribute（如 `data-v-xxxx`）的形式，并在组件渲染节点时注入同样的 scope attribute。这样样式只在当前组件渲染出的节点上生效，避免全局污染。
+`<style scoped>` 的本质，就是 Vue 编译器同时改写模板节点和 CSS 选择器，用同一个 scope attribute 把它们绑定起来，从而形成组件级样式隔离。
 
-这种编译时的作用范围限制使得 Vue 组件的样式更加模块化和可维护，尤其在大型应用中，每个组件都能拥有自己独立的样式，而不需要担心样式冲突或污染。
+## 建议继续阅读
+
+如果你想把它放回整条 SFC 编译链里看，建议继续读：
+
+1. [`.vue` 文件的本质](./vue.md)
+2. [vite dev 和 build 下的 vue 产物](/advanced/vite-dev-build)
+3. [Vue 编译器介绍](/guide/compiler)
