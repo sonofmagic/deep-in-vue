@@ -63,9 +63,10 @@ Vue 不是一个“只有运行时”的框架。
 
 ### 路线一：先建立整体认知
 
-1. [入门：Vue 编译器介绍](/guide/)
-2. [本质：`.vue` 文件的本质](/essence/vue)
-3. [进阶：vite dev 和 build 下的 vue 产物](/advanced/vite-dev-build)
+1. [入门：如何阅读与实验这本书](/guide/how-to-read)
+2. [入门：Vue 编译器介绍](/guide/)
+3. [本质：`.vue` 文件的本质](/essence/vue)
+4. [进阶：vite dev 和 build 下的 vue 产物](/advanced/vite-dev-build)
 
 这条路线适合先把“写什么”和“跑什么”对应起来。
 

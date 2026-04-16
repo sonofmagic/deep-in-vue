@@ -1,4 +1,4 @@
-# vue jsx/tsx 的本质
+# Vue JSX/TSX 的本质
 
 很多人第一次在 Vue 里用 JSX / TSX，会先问一个问题：
 

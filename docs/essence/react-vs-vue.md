@@ -1,6 +1,16 @@
 # React 函数组件 vs Vue setup 渲染函数
 
-本文对比 React 的函数式组件与 Vue 3 中 `setup` 返回 render 函数的组件，帮助你理解两者在设计理念和运行机制上的核心差异。
+这篇不是为了简单下结论说“谁更先进”，而是为了帮你建立一个非常实用的对照坐标：
+
+> React 函数组件和 Vue 里 `setup` 返回 render，看起来都像“函数式写 UI”，但它们的执行模型和更新心智并不相同。
+
+如果这个差异你能看清，很多关于：
+
+- 为什么 React 里需要 `memo` / `useCallback`
+- 为什么 Vue 里很多函数和对象天然更稳定
+- 为什么两边的优化压力分配不同
+
+这些问题都会顺很多。
 
 ## 定义方式
 
@@ -358,3 +368,13 @@ Vue 里 `increaseCount` 定义好以后，函数地址天然稳定。不需要 `
 > **React 是函数重新跑一遍，Vue 是响应式自动追踪变化，只有需要的部分更新。**
 >
 > React 需要开发者手动优化组件更新（`memo`、`useMemo`、`useCallback`）；Vue 3 自动根据响应式数据依赖追踪，粒度更细，开发者压力更小。
+
+## 一句话理解
+
+React 函数组件和 Vue `setup` 返回 render 看起来都很“函数式”，但前者更偏组件函数反复执行，后者更偏一次初始化后由响应式系统驱动 render 精准重跑。
+
+## 建议继续阅读
+
+1. [render 函数 vs setup 返回 render 函数](/guide/render-vs-setup)
+2. [Vue 3 响应式系统的实现原理](/deep/vue-runtime)
+3. [Vue JSX/TSX 的本质](/essence/tsx)

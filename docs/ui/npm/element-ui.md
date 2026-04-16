@@ -1,4 +1,4 @@
-# element-ui (vue2) 构建分析
+# element-ui（Vue 2）构建分析
 
 > 历史兼容说明：`element-ui` 面向 Vue 2 生态。Vue 2 已进入 EOL，本页仅用于维护存量项目时的参考，不作为新项目选型建议。
 

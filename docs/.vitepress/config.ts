@@ -31,9 +31,10 @@ export default defineConfig({
           text: '入门',
           items: [
             { text: '本章导读', link: '/' },
+            { text: '如何阅读与实验这本书', link: '/how-to-read' },
             { text: 'vue 编译器介绍', link: '/compiler' },
             { text: '编译时指令 vs 运行时指令', link: '/compile-time-directive' },
-            { text: 'render vs setup render 函数', link: '/render-vs-setup' },
+            { text: 'render 函数 vs setup 返回 render 函数', link: '/render-vs-setup' },
           ],
         },
         {
@@ -53,7 +54,7 @@ export default defineConfig({
             { text: 'defineXXX 的本质', link: '/define' },
             { text: 'style scoped 的本质', link: '/style-scoped' },
             { text: 'h 函数的本质', link: '/h' },
-            { text: 'vue jsx/tsx 的本质', link: '/tsx' },
+            { text: 'Vue JSX/TSX 的本质', link: '/tsx' },
             { text: '.vue 文件的本质', link: '/vue' },
           ],
         },
@@ -63,8 +64,8 @@ export default defineConfig({
           items: [
             { text: '本章导读', link: '/' },
             { text: '纯运行时项目', link: '/no-compile' },
-            { text: 'vue+jsx 全编译项目', link: '/fully-compiled' },
-            { text: 'vite dev 和 build 下的 vue 产物', link: '/vite-dev-build' },
+            { text: 'Vue + JSX 全编译项目', link: '/fully-compiled' },
+            { text: 'Vite dev 和 build 下的 Vue 产物', link: '/vite-dev-build' },
             { text: 'Vue 3.5 SSR 与 Hydration', link: '/ssr-hydration-3.5' },
           ],
         },
@@ -102,9 +103,9 @@ export default defineConfig({
         {
           text: '现有组件库分析',
           items: [
-            { text: 'element-ui (vue2) 构建分析', link: '/ui/npm/element-ui' },
+            { text: 'element-ui（Vue 2）构建分析', link: '/ui/npm/element-ui' },
             {
-              text: 'element-plus (vue3) 构建分析',
+              text: 'element-plus（Vue 3）构建分析',
               items: [
                 {
                   text: '项目分析',

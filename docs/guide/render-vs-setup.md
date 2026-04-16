@@ -1,4 +1,4 @@
-# render vs setup render 函数
+# render 函数 vs setup 返回 render 函数
 
 在 Vue 3 中，`render` 函数和 `setup` 中返回的渲染函数有着不同的定位和使用场景。
 

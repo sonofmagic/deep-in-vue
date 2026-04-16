@@ -30,6 +30,8 @@
 
 ## 本章内容
 
+- [如何阅读与实验这本书](/guide/how-to-read)
+  先建立阅读方法、实验路径和源码对照方式，避免只记概念不做验证。
 - [Vue 编译器介绍](/guide/compiler)
   先理解 Vue 编译体系由哪些部分组成，以及 `.vue` 文件怎样被拆解、编译、合并。
 - [编译时指令 vs 运行时指令](/guide/compile-time-directive)
@@ -39,9 +41,10 @@
 
 ## 推荐阅读顺序
 
-1. 先读 [Vue 编译器介绍](/guide/compiler)，建立整体地图
-2. 再读 [编译时指令 vs 运行时指令](/guide/compile-time-directive)，补边界感
-3. 最后读 [render vs setup render 函数](/guide/render-vs-setup)，把认知连接到实际组件代码
+1. 先读 [如何阅读与实验这本书](/guide/how-to-read)，确定阅读和验证方式
+2. 再读 [Vue 编译器介绍](/guide/compiler)，建立整体地图
+3. 再读 [编译时指令 vs 运行时指令](/guide/compile-time-directive)，补边界感
+4. 最后读 [render vs setup render 函数](/guide/render-vs-setup)，把认知连接到实际组件代码
 
 ## 按困惑切入
 

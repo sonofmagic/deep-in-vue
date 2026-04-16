@@ -1,4 +1,4 @@
-# element-plus (vue3) 构建分析
+# element-plus（Vue 3）构建分析
 
 这一篇不是在复述 `element-plus` 的功能列表，而是把它当成一个真实的大型 Vue 3 组件库案例来观察：
 
