@@ -32,6 +32,7 @@ export default defineConfig({
           items: [
             { text: '本章导读', link: '/' },
             { text: '如何阅读与实验这本书', link: '/how-to-read' },
+            { text: '术语表', link: '/glossary' },
             { text: 'vue 编译器介绍', link: '/compiler' },
             { text: '编译时指令 vs 运行时指令', link: '/compile-time-directive' },
             { text: 'render 函数 vs setup 返回 render 函数', link: '/render-vs-setup' },
