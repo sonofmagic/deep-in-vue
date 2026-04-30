@@ -12,6 +12,14 @@
 
 如果这些问题没有串起来，你对 Vue 的理解通常会停留在 API 使用层，难以形成完整闭环。
 
+## 这套文档的核心主张
+
+Vue 的很多能力不能只用“运行时 API”解释，也不能只用“模板语法糖”解释。更准确的心智模型是：
+
+> 开发者写的是高层表达，编译器把它降级成渲染函数、VNode、运行时 helper 和 CSS 产物，运行时再基于响应式依赖完成挂载与更新。
+
+后面的每一章，都会围绕这条链路展开：**源码输入 -> 编译转换 -> 运行时协议 -> 工程产物**。
+
 ## 为什么值得理解 Vue 编译器
 
 Vue 不是一个“只有运行时”的框架。
@@ -32,7 +40,7 @@ Vue 不是一个“只有运行时”的框架。
 
 在开始之前，不妨先试着回答下面这些问题：
 
-1. 一个 `.vue` 文件到底是不是标准 JavaScript 模块？
+1. 一个 `.vue` 文件到底是不是浏览器能直接执行的 JavaScript 模块？
 2. `script setup` 为什么能自动暴露顶层变量给模板？
 3. 一个 Vue 项目能不能完全不写 `.vue` 文件，只靠纯 `js/ts` 跑起来？
 4. `<style scoped>` 的样式隔离是如何实现的？
@@ -65,9 +73,9 @@ Vue 不是一个“只有运行时”的框架。
 
 1. [入门：如何阅读与实验这本书](/guide/how-to-read)
 2. [入门：术语表](/guide/glossary)
-3. [入门：Vue 编译器介绍](/guide/)
+3. [入门：Vue 编译器介绍](/guide/compiler)
 4. [本质：`.vue` 文件的本质](/essence/vue)
-5. [进阶：vite dev 和 build 下的 vue 产物](/advanced/vite-dev-build)
+5. [进阶：Vite dev / build 下的 Vue 产物](/advanced/vite-dev-build)
 
 这条路线适合先把“写什么”和“跑什么”对应起来。
 
@@ -84,7 +92,7 @@ Vue 不是一个“只有运行时”的框架。
 ### 路线三：从工程和框架实现切入
 
 1. [纯运行时项目](/advanced/no-compile)
-2. [vue+jsx 全编译项目](/advanced/fully-compiled)
+2. [Vue + JSX 全编译项目](/advanced/fully-compiled)
 3. [Vue 3.5 SSR 与 Hydration](/advanced/ssr-hydration-3.5)
 4. [深入章节](/deep/)
 
@@ -95,7 +103,7 @@ Vue 不是一个“只有运行时”的框架。
 如果你不是想从头读到尾，而是带着具体问题来，可以直接按下面的入口跳：
 
 - 想弄清 `.vue` 文件到底是什么：
-  先看 [`.vue` 文件的本质](/essence/vue)，再看 [vite dev 和 build 下的 vue 产物](/advanced/vite-dev-build)
+  先看 [`.vue` 文件的本质](/essence/vue)，再看 [Vite dev / build 下的 Vue 产物](/advanced/vite-dev-build)
 - 想理解常见语法糖最终会变成什么：
   从 [本质章节](/essence/) 开始，优先看 `script setup`、`v-bind`、`v-on`、`v-model`
 - 想理解为什么有些能力只能发生在编译阶段：
@@ -152,7 +160,7 @@ Vue 不是一个“只有运行时”的框架。
 
 这样做的目的很直接：希望知识可以被传播、被引用、被继续加工，但不要被重新包装成付费商品。
 
-## Start
+## 开始阅读
 
 如果你准备好了，就先从 [入门章节](/guide/) 开始。
 

@@ -106,7 +106,7 @@
 
 ## 阅读源代码
 
-运行一下 `fully-compiled` 项目，观察 `vue` + `jsx` + `h` 的混合写法，感受 `Vue` 在表达层面的灵活性。
+运行一下 `fully-compiled` 项目，观察 Vue + JSX + `h()` 的混合写法，感受 Vue 在表达层面的灵活性。
 
 源代码详见 [apps/fully-compiled](https://github.com/sonofmagic/deep-in-vue/tree/main/apps/fully-compiled)
 
@@ -117,7 +117,7 @@
 读完这篇后，建议顺着这条链路继续：
 
 1. [纯运行时项目](/advanced/no-compile)
-2. [vite dev 和 build 下的 vue 产物](/advanced/vite-dev-build)
+2. [Vite dev / build 下的 Vue 产物](/advanced/vite-dev-build)
 3. [render vs setup render 函数](/guide/render-vs-setup)
 
 这样能把“模板写法之外的 Vue”理解得更完整。

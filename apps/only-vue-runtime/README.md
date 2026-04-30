@@ -1,12 +1,22 @@
-# h 函数的本质
+# 纯运行时示例
 
-h 函数的本质是对 createVNode 的二次封装
+这个示例用来观察：如果不写 `.vue` 模板，只使用 Vue 运行时 API，Vue 项目还能怎样工作。
 
-createVNode 也是对 createBaseVNode 的二次封装
+## h 函数的本质
 
-编译一个 vue 文件，会生成一个 render 函数，这个函数会调用像是
+`h()` 的本质是对 `createVNode()` 的开发者友好封装。
 
-toDisplayString , createElementVNode , vModelText, withDirectives , Fragment, openBlock, createElementBlock 这些非常底层的函数或者标识符
+`createVNode()` 也是对 `createBaseVNode()` 的进一步封装。它们都服务于同一件事：创建 Vue 运行时可以理解的 VNode。
+
+编译一个 Vue 文件，会生成一个 `render` 函数，这个函数会调用类似下面这些运行时 helper：
+
+- `toDisplayString`
+- `createElementVNode`
+- `vModelText`
+- `withDirectives`
+- `Fragment`
+- `openBlock`
+- `createElementBlock`
 
 ```ts
 const Fragment = Symbol.for('v-fgt')
@@ -15,8 +25,8 @@ const Comment = Symbol.for('v-cmt')
 const Static = Symbol.for('v-stc')
 ```
 
-toDisplayString 是你在 vue 中使用 `{{ obj }}` 还能正常展示的原因，假如一个对象直接 `toString`，会得到 `[object Object]`
+`toDisplayString` 是你在 Vue 中使用 `{{ obj }}` 仍能正常展示的原因。假如一个对象直接调用 `toString()`，通常只会得到 `[object Object]`。
 
-createElementVNode 是 createBaseVNode 的别名, 这个只能默认的 h5 元素和一些 vue 自己扩展的元素(比如 `Fragment`)，不像 h 还可以渲染组件
+`createElementVNode` 是 `createBaseVNode` 的别名，主要面向原生 HTML 元素和部分 Vue 内置节点（例如 `Fragment`）。它不像 `h()` 那样以开发者体验为目标，也不适合作为日常手写渲染函数的首选入口。
 
-[play.vuejs.org](https://play.vuejs.org/#eNqdU01vEzEQ/SvGl4DUXavAKWyjAKoEHAABEhdfNruTrIu/5I80aLX/nbFNwgaVUvUSxfPezHtvJhnpa2vrfQS6pI3vnLCBeAjRrrgWyhoXyEgcbMlEts4oskDqgmuuO6N9IMrvyFXCny7egZSGfDdO9k8Wz44EP5hb/ZsSXAQEGlZ0UAEfAZSVbQB8EdIMl2RfpZ4rTnMrp6txzDLT1LDhstCEtjEgU5keJFIR55QwBBs2G4hPH35KIL4zFnqs1BsypgmdkcYtyUZGeMX1lE0l5ope0IBsvRW7+sYbjWvJDZx2RlkhwX2yQWA0TpdlVMJajH77IddSyItjvRug+3FH/cYfUo3Tzw48uD1wesJC63YQCnz99SMc8PsJxMBRIvse8At4I2PyWGhvou7R9oyX3b7PxxV6981fHwJofwyVjCbmlPmc4sHf3hP9j90X9cvch/vELZYfT6Va+9ceC3A+ZI0izA+tg76YHkKwfslY12tsxyOLvas1BKatYjP2Ol3aB9YL/CilGryqNiU09s5ygwQFOlRWxiz/H5k5/UxH6B4O9TZKWSuha/VPEfZIldm49dk8kf5UFcZ/yJbu7lw/n4dI/pP90+GmX/PiYuM=)
+可以在 [play.vuejs.org](https://play.vuejs.org/) 里输入一个最小模板，切到编译结果面板对照这些 helper。

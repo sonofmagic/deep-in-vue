@@ -181,5 +181,5 @@ const color = ref('red')
 如果你想把它放回整条 SFC 编译链里看，建议继续读：
 
 1. [`.vue` 文件的本质](./vue.md)
-2. [vite dev 和 build 下的 vue 产物](/advanced/vite-dev-build)
+2. [Vite dev / build 下的 Vue 产物](/advanced/vite-dev-build)
 3. [Vue 编译器介绍](/guide/compiler)

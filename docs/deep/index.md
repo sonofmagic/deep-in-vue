@@ -22,7 +22,7 @@ Vue 的虚拟 DOM 核心是 VNode（Virtual Node）。
 
 VNode 创建相关源码可参考：
 
-https://github.com/vuejs/core/blob/a23fb59e83c8b65b27eaa21964c8baa217ab0573/packages/runtime-core/src/vnode.ts#L282
+[Vue core: runtime-core/src/vnode.ts](https://github.com/vuejs/core/blob/a23fb59e83c8b65b27eaa21964c8baa217ab0573/packages/runtime-core/src/vnode.ts#L282)
 
 ## 本章内容
 
@@ -66,6 +66,7 @@ https://github.com/vuejs/core/blob/a23fb59e83c8b65b27eaa21964c8baa217ab0573/pack
 - 运行时怎样追踪依赖
 - 编译器怎样读取类型
 - 模板语法怎样被扩展
+- 工程工具怎样把这些能力接成真实产物
 
 到这里，你已经不只是“会用 Vue”，而是在逐步建立“能解释 Vue 为什么这样设计”的能力。
 

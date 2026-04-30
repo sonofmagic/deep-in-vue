@@ -88,5 +88,5 @@ React 的 `createElement` 和 `jsx` runtime 这段演进，最适合作为理解
 
 如果你是为了理解 Vue 里的 JSX / TSX，建议继续看：
 
-1. [vue jsx/tsx 的本质](./tsx.md)
+1. [Vue JSX / TSX 的本质](./tsx.md)
 2. [h 函数的本质](./h.md)

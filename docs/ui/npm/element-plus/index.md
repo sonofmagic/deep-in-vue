@@ -32,7 +32,7 @@
 
 1. fork `element-plus` 到自己的仓库
 2. clone 到本地
-3. 执行 `pnpm i`
+3. 执行 `pnpm install`
 
 这一步的意义不只是把项目跑起来，更重要的是让你能边看仓库结构边对照实际构建行为。
 
@@ -62,7 +62,7 @@
 
 ```bash
 dist # 构建产物
-docs # vitepress 文档网站
+      docs # VitePress 文档网站
 internal # 内部包与构建相关能力
 packages # 组件与源码主目录
 patches # 补丁目录

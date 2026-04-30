@@ -36,9 +36,9 @@
 ### 延伸：思考下一代组件库方向
 
 - [headless](/ui/next/index)
-- [React 组件库](./other-component/react.md)
-- [Solid.js 组件库](./other-component/solid-js.md)
-- [Svelte 组件库](./other-component/svelte.md)
+- [React 组件库](/ui/other-component/react)
+- [SolidJS 组件库](/ui/other-component/solid-js)
+- [Svelte 组件库](/ui/other-component/svelte)
 
 ## 这一章适合谁
 

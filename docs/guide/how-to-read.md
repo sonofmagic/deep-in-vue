@@ -34,7 +34,7 @@
 1. [Vue 编译器介绍](/guide/compiler)
 2. [编译时指令 vs 运行时指令](/guide/compile-time-directive)
 3. [`.vue` 文件的本质](/essence/vue)
-4. [vite dev 和 build 下的 vue 产物](/advanced/vite-dev-build)
+4. [Vite dev / build 下的 Vue 产物](/advanced/vite-dev-build)
 
 ### 第二遍：围绕高频语法糖细读
 

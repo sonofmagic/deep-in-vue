@@ -40,9 +40,9 @@
 
 建议继续看：
 
-1. [vue jsx/tsx 的本质](/essence/tsx)
+1. [Vue JSX / TSX 的本质](/essence/tsx)
 2. [h 函数的本质](/essence/h)
-3. [vue+jsx 全编译项目](/advanced/fully-compiled)
+3. [Vue + JSX 全编译项目](/advanced/fully-compiled)
 
 ## 怎么使用这一页
 

@@ -1,4 +1,4 @@
-# vite dev 和 build 下的 vue 产物
+# Vite dev / build 下的 Vue 产物
 
 这一篇不只是展示两段代码差异，而是想回答一个更有价值的问题：
 
@@ -11,7 +11,7 @@
 
 所以你看到的差异，不是“Vue 编译不一致”，而是**同一套能力在不同目标下的不同包装方式**。
 
-## source
+## 源码
 
 先看源代码：
 
@@ -43,11 +43,11 @@
 - 原生元素上的 `v-model` 会怎样引出运行时指令
 - `scoped style` 会怎样变成带 `data-v-xxx` 的样式隔离
 
-## dev
+## 开发态产物
 
 开发态下，Vite 会尽量把每个部分拆开，方便浏览器直接按模块加载，也方便 HMR 只更新最小单元。
 
-### js(vue)
+### JavaScript（Vue 模块）
 
 ```js
 import '/src/pages/hello.vue?vue&type=style&index=0&scoped=9e67ff97&lang.css'
@@ -163,11 +163,11 @@ import.meta.hot.prune(() => __vite__removeStyle(__vite__id))
 
 所以你在浏览器里看到“CSS 代码被包成 JS”，不要惊讶，这正是开发体验优先的设计。
 
-## build
+## 生产态产物
 
 生产构建时，目标完全不同：尽量减少运行时开发辅助、压缩资源、拆分共享代码、提取独立 CSS。
 
-### js(vue)
+### JavaScript（Vue 模块）
 
 ```js
 import { _ as _export_sfc } from './_plugin-vue_export-helper-1tPrXgE0.js'

@@ -20,9 +20,9 @@
 
 - [纯运行时项目](/advanced/no-compile)
   理解一个 Vue 项目在没有模板编译参与时是什么样子。
-- [vue+jsx 全编译项目](/advanced/fully-compiled)
+- [Vue + JSX 全编译项目](/advanced/fully-compiled)
   从另一种输入形式观察编译和构建的边界。
-- [vite dev 和 build 下的 vue 产物](/advanced/vite-dev-build)
+- [Vite dev / build 下的 Vue 产物](/advanced/vite-dev-build)
   直接对照开发态与生产态产物差异，理解 HMR、样式注入、代码组织方式的变化。
 - [Vue 3.5 SSR 与 Hydration](/advanced/ssr-hydration-3.5)
   进入服务端渲染场景，理解新的 Hydration 策略和常见问题控制手段。
@@ -31,20 +31,20 @@
 
 ### 如果你偏工程实践
 
-优先看 [vite dev 和 build 下的 vue 产物](/advanced/vite-dev-build)，再看 SSR 一文。
+优先看 [Vite dev / build 下的 Vue 产物](/advanced/vite-dev-build)，再看 SSR 一文。
 
 ### 如果你偏原理验证
 
-先从 [纯运行时项目](/advanced/no-compile) 和 [vue+jsx 全编译项目](/advanced/fully-compiled) 开始，对照不同输入形式。
+先从 [纯运行时项目](/advanced/no-compile) 和 [Vue + JSX 全编译项目](/advanced/fully-compiled) 开始，对照不同输入形式。
 
 ## 按场景切入
 
 - 想看“没有 SFC 模板时 Vue 还剩什么”：
   从 [纯运行时项目](/advanced/no-compile) 开始
 - 想看 JSX / `h()` 和模板写法之间的关系：
-  先看 [vue+jsx 全编译项目](/advanced/fully-compiled)，再回看 [h 函数的本质](/essence/h)
+  先看 [Vue + JSX 全编译项目](/advanced/fully-compiled)，再回看 [h 函数的本质](/essence/h)
 - 想排查开发态和生产态产物差异：
-  直接看 [vite dev 和 build 下的 vue 产物](/advanced/vite-dev-build)
+  直接看 [Vite dev / build 下的 Vue 产物](/advanced/vite-dev-build)
 - 想理解 Vue 3.5 在 SSR 方向到底改进了什么：
   直接看 [Vue 3.5 SSR 与 Hydration](/advanced/ssr-hydration-3.5)
 

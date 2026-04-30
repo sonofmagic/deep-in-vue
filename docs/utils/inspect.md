@@ -197,5 +197,5 @@ The editor process exited with an error: spawn code ENOENT ('code' command does 
 如果你想把这个能力放回 Vue 工程体系里理解，可以继续看：
 
 1. [Vue 编译器介绍](/guide/compiler)
-2. [vite dev 和 build 下的 vue 产物](/advanced/vite-dev-build)
+2. [Vite dev / build 下的 Vue 产物](/advanced/vite-dev-build)
 3. [构建组件库](/ui/)

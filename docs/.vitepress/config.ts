@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 
 export default defineConfig({
   title: 'Vue 编译本质论',
-  description: '理解 vue 编译器',
+  description: '理解 Vue 编译器、运行时和工程产物之间的关系',
   themeConfig: {
     socialLinks: [
       { icon: 'github', link: 'https://github.com/sonofmagic/deep-in-vue' },
@@ -17,7 +17,7 @@ export default defineConfig({
     },
     footer: {
       message: `Released under the CC BY-NC-SA 4.0 License.`,
-      copyright: 'Copyright © 2025-present <a target="_blank" ref="nofollow" href="https://github.com/sonofmagic">sonofmagic</a>',
+      copyright: 'Copyright © 2025-present <a target="_blank" rel="nofollow" href="https://github.com/sonofmagic">sonofmagic</a>',
     },
     search: {
       provider: 'local',
@@ -33,9 +33,9 @@ export default defineConfig({
             { text: '本章导读', link: '/' },
             { text: '如何阅读与实验这本书', link: '/how-to-read' },
             { text: '术语表', link: '/glossary' },
-            { text: 'vue 编译器介绍', link: '/compiler' },
+            { text: 'Vue 编译器介绍', link: '/compiler' },
             { text: '编译时指令 vs 运行时指令', link: '/compile-time-directive' },
-            { text: 'render 函数 vs setup 返回 render 函数', link: '/render-vs-setup' },
+            { text: 'render 函数 vs setup 返回 render', link: '/render-vs-setup' },
           ],
         },
         {
@@ -44,7 +44,7 @@ export default defineConfig({
           text: '本质',
           items: [
             { text: '本章导读', link: '/' },
-            { text: 'script setup 的本质', link: '/setup' },
+            { text: '<script setup> 的本质', link: '/setup' },
             { text: 'v-bind 的本质', link: '/vBind' },
             { text: 'v-on 的本质', link: '/vOn' },
             { text: 'v-model 的本质', link: '/vModel' },
@@ -66,7 +66,7 @@ export default defineConfig({
             { text: '本章导读', link: '/' },
             { text: '纯运行时项目', link: '/no-compile' },
             { text: 'Vue + JSX 全编译项目', link: '/fully-compiled' },
-            { text: 'Vite dev 和 build 下的 Vue 产物', link: '/vite-dev-build' },
+            { text: 'Vite dev / build 下的 Vue 产物', link: '/vite-dev-build' },
             { text: 'Vue 3.5 SSR 与 Hydration', link: '/ssr-hydration-3.5' },
           ],
         },
@@ -122,7 +122,7 @@ export default defineConfig({
             { text: 'React 组件生态速览', link: '/ui/other-component/react' },
             { text: 'SolidJS 组件生态速览', link: '/ui/other-component/solid-js' },
             { text: 'Svelte 组件生态速览', link: '/ui/other-component/svelte' },
-            { text: 'headless', link: '/next/index' },
+            { text: 'Headless 组件库趋势', link: '/ui/next/index' },
           ],
         },
       ],
