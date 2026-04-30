@@ -1,4 +1,4 @@
-# Vue JSX/TSX 的本质
+# Vue JSX / TSX 的本质
 
 很多人第一次在 Vue 里用 JSX / TSX，会先问一个问题：
 
@@ -54,7 +54,7 @@ import { jsx as _jsx } from 'react/jsx-runtime'
 
 [babeljs playground](https://babeljs.io/repl#?browsers=defaults%2C%20not%20ie%2011%2C%20not%20ie_mob%2011&build=&builtIns=false&corejs=3.21&spec=false&loose=false&code_lz=JYWwDg9gTgLgBAbzgVwM4FMDKMCGN1wC-cAZlBCHAORTo4DGMVA3AFCsnIB2jwEXcAMIUwACgCUCVnDj1-qeAG053GABo4GGMNUBdOAF4UGbHnSiADOLbS4tGMigDRtmQB4ARshgx-cfoIANsD0ANYGCBKGAHya6NoQqqIqXPAA1HAAjOKE0a4ycICdDoDfioBhcogpMMSAhNb5bgD0Xj78eTLWrITsnDwwfAI6qehQUVIyclwKcMqJqRpaAzD6RmhYuPiW7bb2js51Tb4CAcFhEVEGsfMzMMlXcBnZufkyJeUIlTVPcG7C4HBgXBAACboCKebwHaL_IHoBr7FrEOQgCILIbEeqtAqw8EtWztQhAA&forceAllTransforms=false&modules=false&shippedProposals=false&evaluate=false&fileSize=false&timeTravel=false&sourceType=module&lineWrap=true&presets=env%2Creact%2Cstage-2&prettier=false&targets=&version=7.27.0&externalPlugins=&assumptions=%7B%7D)
 
-扩展阅读：[React createElement 与 jsx 函数](./react-jsx.md)
+扩展阅读：[React createElement 与 JSX runtime](./react-jsx.md)
 
 ## Vue JSX 为什么不能直接用 React 的编译规则
 

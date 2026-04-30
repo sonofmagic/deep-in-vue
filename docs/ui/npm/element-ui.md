@@ -59,6 +59,6 @@
 
 ## 建议继续阅读
 
-1. [element-plus (vue3) 构建分析](/ui/npm/element-plus/index)
+1. [element-plus（Vue 3）构建分析](/ui/npm/element-plus/index)
 2. [组件的使用](/ui/component/4.usage)
 3. [组件的发布](/ui/component/3.publish)

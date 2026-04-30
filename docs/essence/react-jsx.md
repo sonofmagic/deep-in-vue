@@ -1,4 +1,4 @@
-# React createElement 与 jsx 函数
+# React createElement 与 JSX runtime
 
 这一页不是为了展开讲 React，而是为了帮助你在读 Vue 的 JSX / TSX、`h()` 和编译产物时，多一个非常重要的对照坐标。
 
@@ -6,7 +6,7 @@
 
 > JSX 从来都不是浏览器原生语法，它总要先被编译成某种函数调用。
 
-在 React 里，这个函数调用从早期的 `React.createElement`，逐步演进到了新的 `jsx` runtime。
+在 React 里，这个函数调用从早期的 `React.createElement`，逐步演进到了新的 JSX runtime。
 
 ## 旧模式：`React.createElement`
 
@@ -24,7 +24,7 @@ const element = React.createElement('h1', null, 'Hello, world!')
 
 这说明 JSX 本质上只是语法糖，真正落地的是函数调用。
 
-## 新模式：`jsx` 函数
+## 新模式：JSX runtime
 
 从 React 17 开始引入新的 JSX Transform，后续逐步成为主流推荐方式。
 
@@ -56,7 +56,7 @@ const element = jsx('h1', { children: 'Hello, world!' })
 1. 减少样板代码  
    不再要求每个 JSX 文件都手动 `import React from 'react'`
 2. 优化运行时组织方式  
-   `jsx-runtime` 可以更明确地区分开发态与生产态调用
+   JSX runtime 可以更明确地区分开发态与生产态调用
 3. 为后续渲染模型演进留接口  
    新的 runtime 结构更适合进一步扩展
 
@@ -82,7 +82,7 @@ const element = jsx('h1', { children: 'Hello, world!' })
 
 ## 一句话理解
 
-React 的 `createElement` 和 `jsx` runtime 这段演进，最适合作为理解 Vue JSX 的对照背景：同样都是 JSX，最终服务的却是不同框架的运行时模型。
+React 的 `createElement` 和 JSX runtime 这段演进，最适合作为理解 Vue JSX 的对照背景：同样都是 JSX，最终服务的却是不同框架的运行时模型。
 
 ## 建议继续阅读
 

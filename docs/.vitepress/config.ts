@@ -121,7 +121,7 @@ export default defineConfig({
           items: [
             { text: 'React 组件生态速览', link: '/ui/other-component/react' },
             { text: 'SolidJS 组件生态速览', link: '/ui/other-component/solid-js' },
-            { text: 'Svelte 组件生态速览', link: '/ui/other-component/svelte' },
+            { text: 'Svelte 与 Vue 编译模型对比', link: '/ui/other-component/svelte' },
             { text: 'Headless 组件库趋势', link: '/ui/next/index' },
           ],
         },

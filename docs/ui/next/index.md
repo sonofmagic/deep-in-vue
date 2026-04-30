@@ -66,7 +66,7 @@
 
 1. 先读 [组件的使用](/ui/component/4.usage)
 2. 再回看 [组件的构建](/ui/component/1.build)
-3. 最后把这一节和 [element-plus (vue3) 构建分析](/ui/npm/element-plus/index) 对照着看
+3. 最后把这一节和 [element-plus（Vue 3）构建分析](/ui/npm/element-plus/index) 对照着看
 
 这样你会更容易理解：
 

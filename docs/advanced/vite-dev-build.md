@@ -140,7 +140,7 @@ export default /* @__PURE__ */ _export_sfc(_sfc_main, [['render', _sfc_render], 
 
 这说明原生元素上的 `v-model` 不是纯编译消失，而是“编译展开 + 运行时指令辅助”。
 
-### js(css)
+### JavaScript（CSS 模块）
 
 样式模块在开发态也会被包装成 JavaScript：
 
@@ -195,7 +195,7 @@ export {
 }
 ```
 
-### css
+### CSS
 
 ```css
 .hello-msg[data-v-57a43150] {

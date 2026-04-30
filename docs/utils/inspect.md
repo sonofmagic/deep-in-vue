@@ -32,7 +32,7 @@
 1. Vue 团队相关生态长期维护，稳定性预期更好
 2. 与 Vue 集成度更高，开发体验更自然
 3. 支持多种 IDE 跳转
-4. 对 `vue2` / `vue3` / SSR 等场景更友好
+4. 对 Vue 2 / Vue 3 / SSR 等场景更友好
 
 ### 局限
 
@@ -176,7 +176,7 @@ The editor process exited with an error: spawn code ENOENT ('code' command does 
 
 但要注意：
 
-- 它更偏 `vue3` + `vite`
+- 它更偏 Vue 3 + Vite
 - 如果你已经接了它，某些 inspector 类插件能力可能就不必重复接入
 
 ### 包含关系

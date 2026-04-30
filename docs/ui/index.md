@@ -38,7 +38,7 @@
 - [headless](/ui/next/index)
 - [React 组件库](/ui/other-component/react)
 - [SolidJS 组件库](/ui/other-component/solid-js)
-- [Svelte 组件库](/ui/other-component/svelte)
+- [Svelte 与 Vue 编译模型对比](/ui/other-component/svelte)
 
 ## 这一章适合谁
 
