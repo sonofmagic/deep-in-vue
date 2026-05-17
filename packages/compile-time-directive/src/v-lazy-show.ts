@@ -65,6 +65,10 @@ export const transformLazyShow = createStructuralDirectiveTransform(
           name: 'if',
         })
 
+      if (!ssrTransformIf) {
+        return
+      }
+
       ssrTransformIf(node, context)
       return
     }

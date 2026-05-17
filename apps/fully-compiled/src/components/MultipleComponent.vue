@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { FunctionalComponent } from 'vue'
-import { defineComponent, h, withDefaults } from 'vue'
+import { defineComponent, h } from 'vue'
 
 export interface Props {
   msg?: string
@@ -65,5 +65,3 @@ defineEmits<{
   <Happy />
   <Sad />
 </template>
-
-<style scoped></style>

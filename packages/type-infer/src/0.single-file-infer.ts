@@ -100,6 +100,9 @@ export function extractTypes(id: string) {
           if (pa.length > 0) {
             // 只获取第一个范形
             const taregtPath = pa[0]
+            if (!taregtPath) {
+              return
+            }
             // 最基础的情况
             if (taregtPath.isTSTypeLiteral()) {
               for (const mp of taregtPath.get('members')) {

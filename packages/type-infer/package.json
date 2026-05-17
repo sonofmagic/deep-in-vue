@@ -30,9 +30,9 @@
     "dist"
   ],
   "scripts": {
-    "dev": "unbuild --stub",
-    "build:watch": "unbuild --watch --sourcemap",
-    "build": "unbuild",
+    "dev": "tsdown --watch --sourcemap",
+    "build:watch": "tsdown --watch --sourcemap",
+    "build": "tsdown",
     "test": "vitest run",
     "test:dev": "vitest",
     "release": "pnpm publish",

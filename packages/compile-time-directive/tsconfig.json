@@ -2,6 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
     "paths": {
       "@/*": [
         "src/*"
@@ -11,5 +12,8 @@
   "include": [
     "src",
     "test"
+  ],
+  "exclude": [
+    "test/fixtures/**/output/**/*.ts"
   ]
 }

@@ -13,8 +13,6 @@ export const BaseUserDialog: FunctionalComponent<{
   props,
   {
     slots,
-    // eslint-disable-next-line ts/no-unused-vars
-    emit,
   },
 ) => {
   // 切断引用

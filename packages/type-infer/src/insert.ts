@@ -30,6 +30,9 @@ export function insert(id: string, props: RuntimeProps) {
         })
       ) {
         const options = p.get('arguments')[0]
+        if (!options) {
+          return
+        }
         if (options.isObjectExpression()) {
           const propertiesPath = options.get('properties')
           const propsKey = propertiesPath.find(p => p.get('key').isIdentifier({

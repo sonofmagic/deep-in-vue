@@ -226,6 +226,9 @@ export function resolveScope(id: string, extractTypes = false): Scope {
         if (pa.length > 0) {
           // 只获取第一个范形
           const taregtPath = pa[0]
+          if (!taregtPath) {
+            return
+          }
           // 最基础的情况
           resolveIntersectionTypes(taregtPath)
         }
