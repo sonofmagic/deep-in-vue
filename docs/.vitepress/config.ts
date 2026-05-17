@@ -3,6 +3,9 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: 'Vue 编译本质论',
   description: '理解 Vue 编译器、运行时和工程产物之间的关系',
+  head: [
+    ['link', { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' }],
+  ],
   themeConfig: {
     socialLinks: [
       { icon: 'github', link: 'https://github.com/sonofmagic/deep-in-vue' },
@@ -44,7 +47,7 @@ export default defineConfig({
           text: '本质',
           items: [
             { text: '本章导读', link: '/' },
-            { text: '<script setup> 的本质', link: '/setup' },
+            { text: '&lt;script setup&gt; 的本质', link: '/setup' },
             { text: 'v-bind 的本质', link: '/vBind' },
             { text: 'v-on 的本质', link: '/vOn' },
             { text: 'v-model 的本质', link: '/vModel' },
