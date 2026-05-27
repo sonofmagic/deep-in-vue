@@ -2,21 +2,21 @@
 
 Vue 里的 `defineXXX` 看起来像一组风格统一的 API，但它们其实并不属于同一类机制。
 
-最重要的判断先说在前面：
+重要的判断先说在前面：
 
 > 有些 `defineXXX` 是运行时函数，有些是编译宏。它们长得像一组 API，底层却不在同一层工作。
 
-如果这一点不先分清，后面就很容易把 Vue 的编译期能力和运行时能力混在一起。
+如果这一点不先分清，后面就容易把 Vue 的编译期能力和运行时能力混在一起。
 
-## 先学会最重要的判断方法
+## 先学会判断方法
 
-一个很实用的区分方式是：
+一个实用的区分方式是：
 
 ### 运行时函数
 
 - 可以在普通 `.js/.ts` 文件中使用
 - 需要真实 import
-- 会出现在最终运行时代码里
+- 会出现在最后运行时代码里
 
 ### 编译宏
 
@@ -34,7 +34,7 @@ Vue 里的 `defineXXX` 看起来像一组风格统一的 API，但它们其实�
 - `defineAsyncComponent`
 - `defineCustomElement`
 
-它们都是真正的运行时函数，可以在任意 `.js/.ts` 文件中使用。
+它们都是运行时函数，可以在任意 `.js/.ts` 文件中使用。
 
 例如：
 
@@ -72,7 +72,7 @@ https://github.com/vuejs/core/blob/a23fb59e83c8b65b27eaa21964c8baa217ab0573/pack
 | `defineOptions` | 声明组件选项 | 3.3 |
 | `defineModel` | 声明双向绑定 model | 3.4 |
 
-这些名字虽然像函数，但更准确地说，它们是编译器认识的“特殊标记”。
+这些名字虽然像函数，但换个说法，它们是编译器认识的“特殊标记”。
 
 源码参考：
 
@@ -87,35 +87,35 @@ https://github.com/vuejs/core/blob/a23fb59e83c8b65b27eaa21964c8baa217ab0573/pack
 
 - 你写的是 `defineProps()`
 - 编译器看到的是“这里在声明 props”
-- 最终产物里可能变成 `props` 选项、辅助变量或特定 helper
+- 最后产物里可能变成 `props` 选项、辅助变量或特定 helper
 
 也正因为如此：
 
 - 它们不需要 import
 - 它们不能脱离 `<script setup>` 独立存在
 
-## `defineProps` / `defineEmits` 的本质
+## `defineProps` / `defineEmits` 会变成什么
 
 这两个是最典型的宏。
 
 它们的作用并不是“在运行时动态注册 props / emits”，而是让你用更接近 JavaScript 的方式，在 `<script setup>` 中声明组件契约。
 
-从本质上说：
+从产物看：
 
-- `defineProps` 最终会落到组件的 `props`
-- `defineEmits` 最终会落到组件的 `emits`
+- `defineProps` 最后会落到组件的 `props`
+- `defineEmits` 最后会落到组件的 `emits`
 
 所以它们更像声明语法，不是普通函数调用。
 
-## `defineExpose` 的本质
+## `defineExpose` 接到哪里
 
 `defineExpose` 用来声明组件要对父组件暴露哪些实例能力。
 
-它同样是编译宏，但最终会和组件实例暴露机制接上。
+它同样是编译宏，但最后会和组件实例暴露机制接上。
 
 所以它属于“编译期声明，运行时生效”的典型桥梁。
 
-## `defineOptions` 的本质
+## `defineOptions` 写进哪里
 
 `defineOptions` 用来在 `<script setup>` 中声明传统组件选项，例如：
 
@@ -135,7 +135,7 @@ defineOptions({
 
 所以它不是“新增运行时能力”，只是“让 `<script setup>` 能声明原本就在的选项”。
 
-## `defineSlots` 的本质
+## `defineSlots` 影响什么
 
 `defineSlots` 最容易让人误解成运行时 API，其实它主要服务的是类型层。
 
@@ -192,7 +192,7 @@ const modelValue = defineModel()
 </template>
 ```
 
-它返回的是一个可读写的 `ref`，但不要被这个表象误导。  
+它返回的是一个可读写的 `ref`，但不要被这个表象误导。
 它并不是发明了新的双向绑定机制，而是把既有协议编译展开了。
 
 在当前 Vue 3.5.x 的产物里，它会更接近：
@@ -213,7 +213,7 @@ export default {
 这说明：
 
 - `defineModel` 不是运行时魔法
-- 它最终还是回到 props / emits / helper 的组合
+- 它最后还是回到 props / emits / helper 的组合
 
 支持多个 model：
 
@@ -235,11 +235,11 @@ const lastName = defineModel<string>('lastName', { default: '' })
 - 写法上像函数
 - 工作方式上更像编译器关键字
 
-## 一句话判断本质
+## 判断方法
 
-如果一个 `defineXXX` 只能出现在 `<script setup>`，不需要 import，且编译后会被展开成组件选项或 helper，那么它本质上就是编译宏，不是普通运行时函数。
+如果一个 `defineXXX` 只能出现在 `<script setup>`，不需要 import，且编译后会被展开成组件选项或 helper，那么它就是编译宏，不是普通运行时函数。
 
-## 总结
+## 收束一下
 
 | 类型 | 代表 | 本质 |
 | --- | --- | --- |

@@ -1,8 +1,8 @@
 # 前言
 
-很多前端开发者写了很多年 `Vue`，但对“自己写的模板最后在浏览器里到底变成了什么”并不清楚。
+很多人写了很多年 `Vue`，能熟练使用模板、指令和组件，却不一定说得清：这些代码最后在浏览器里变成了什么。
 
-这个项目想补上的，就是这块认知断层：
+这个项目补的就是这块断层：
 
 - `.vue` 文件是什么
 - 模板为什么能变成渲染函数
@@ -10,15 +10,15 @@
 - 运行时到底在执行什么
 - 为什么有些能力只能在编译阶段实现
 
-如果这些问题没有串起来，你对 Vue 的理解通常会停留在 API 使用层，难以形成完整闭环。
+这些问题串不起来，Vue 容易只剩下一组 API 记忆：会用，但解释不清。
 
-## 这套文档的核心主张
+## 这套文档怎么理解 Vue
 
-Vue 的很多能力不能只用“运行时 API”解释，也不能只用“模板语法糖”解释。更准确的心智模型是：
+Vue 的很多能力不能只靠“运行时 API”解释，也不能简单归成“模板语法糖”。更稳的看法是：
 
 > 开发者写的是高层表达，编译器把它降级成渲染函数、VNode、运行时 helper 和 CSS 产物，运行时再基于响应式依赖完成挂载与更新。
 
-后面的每一章，都会围绕这条链路展开：**源码输入 -> 编译转换 -> 运行时协议 -> 工程产物**。
+后面的章节都会沿着这条链路展开：**源码输入 -> 编译转换 -> 运行时协议 -> 工程产物**。
 
 ## 为什么值得理解 Vue 编译器
 
@@ -26,19 +26,19 @@ Vue 不是一个“只有运行时”的框架。
 
 你平时写的模板、`<script setup>`、`defineProps`、`v-model`、`<style scoped>`，很多都不是浏览器原生能力，而是 Vue 在**编译阶段**帮你转换后的结果。
 
-换句话说：
+也就是说，
 
 - 开发者写的是模板和语法糖
 - 浏览器执行的是 JavaScript 渲染逻辑
 - Vue 编译器负责把前者变成后者
 
-这也是 Vue 性能优化的重要来源。很多优化都发生在编译阶段，例如静态提升、Patch Flag、Block Tree、事件缓存。只看运行时，很容易只看到“结果”，却不知道“为什么会这样”。
+这也是 Vue 性能优化的一部分来源。静态提升、Patch Flag、Block Tree、事件缓存都发生在编译阶段。只看运行时，容易只看到“结果”，看不到 Vue 为什么能生成这样的执行路径。
 
 > 手写 `h()` 可以工作，但在大多数场景里，编译器生成的代码更稳定、可维护性更高，也更容易获得框架级优化。
 
 ## 阅读前先问自己
 
-在开始之前，不妨先试着回答下面这些问题：
+在开始之前，可以先试着回答下面这些问题：
 
 1. 一个 `.vue` 文件到底是不是浏览器能直接执行的 JavaScript 模块？
 2. `script setup` 为什么能自动暴露顶层变量给模板？
@@ -48,7 +48,7 @@ Vue 不是一个“只有运行时”的框架。
 6. 编译时指令和运行时指令的边界到底在哪里？
 7. `defineModel` 为什么能减少样板代码？
 8. Vue 3.5 的 props 解构为什么还能保持响应性？
-9. 为什么 Vue 3.5 推荐在 `watch` 中配合 `onWatcherCleanup` 清理副作用？
+9. 为什么 Vue 3.5 建议在 `watch` 中配合 `onWatcherCleanup` 清理副作用？
 10. SSR Lazy Hydration 到底解决了什么工程问题？
 
 如果这些问题你还没有稳定答案，可以先从这个 [Vue 演练场示例](https://play.vuejs.org/#eNqNU82O0zAQfhXjwwbE0ihdTiVbCdBKwAEQIHHxJUomrRfHtmynBFWRQOIlQOL1QLwFY+enScuuVjlkMvPNzDdfZvb0qdaLXQ10RVObG67dmkleaWUc2RMDJWlJaVRFIgRFTPonjUckfnQ2seBqfch9rirdJy5i/+GbYP5YurKb5Vi7gyQ9JlfSOg8gl57B/egFCKHIR2VEcS96cEQgkHBQaZE5QA8hacF367+/fvz++u3Pz++kwA5p7H0huE3I7lGpzCWjnHBJLhhd7wMf8pBw0rZpvE0OdbyBJpe6dpjIS8zz2LMzEjVNxCg6hcoKLjdoVaoA0SEwEndl+t7BHupMgEskEGJBs5NQkqRBHcSk8WROL737IoDYXGko0LPIyN4XypVQZoXSFU+YbINcHogIek4dwmXJN4trqyT+9ZDBaI4duADzRjuO8jO66mr5WIbqf34VfM7UcD748y3kn/7jv7aN9zH61oAFswNGx5jLzAZcF756/xoatMcgTl4LRN8SfAdWidpz7GDPalkg7QkusH0Z1gz/yQd71TiQdhjKE/XINuAZxY3z4t40+oHuxeJxyENFUcVhow9nc3wAt274/IJOl7drPzQ5WsH5fvRLhnErlFtjZf+a7t1sa3rugchdbx6aEBrPcjncZXJyjHMx7j5m4DOZ4+h05iO0/wBs05LJ) 开始，边看编译结果边带着问题往下读。
@@ -67,7 +67,7 @@ Vue 不是一个“只有运行时”的框架。
 - 只想快速上手基本语法、暂时不关心原理的新手
 - 希望把本文当成 Vue 官方 API 手册来查阅的人
 
-## 推荐阅读路径
+## 建议阅读路径
 
 ### 路线一：先建立整体认知
 
@@ -104,7 +104,7 @@ Vue 不是一个“只有运行时”的框架。
 
 - 想弄清 `.vue` 文件到底是什么：
   先看 [`.vue` 文件的本质](/essence/vue)，再看 [Vite dev / build 下的 Vue 产物](/advanced/vite-dev-build)
-- 想理解常见语法糖最终会变成什么：
+- 想理解常见语法糖最后会变成什么：
   从 [本质章节](/essence/) 开始，优先看 `script setup`、`v-bind`、`v-on`、`v-model`
 - 想理解为什么有些能力只能发生在编译阶段：
   先看 [编译时指令 vs 运行时指令](/guide/compile-time-directive)，再看 [自定义编译时指令](/deep/custom-compile-directive)
@@ -130,9 +130,9 @@ Vue 不是一个“只有运行时”的框架。
 
 ## 如何配合源码阅读
 
-这份文档最好的阅读方式，不是只看文字，而是同时打开项目源码一起对照。
+读这份文档时，最好同时打开项目源码。
 
-建议你：
+可以这样做：
 
 1. `git clone` 项目并跑起来
 2. 对照 `apps/only-vue-runtime` 和 `apps/fully-compiled`
@@ -150,7 +150,7 @@ Vue 不是一个“只有运行时”的框架。
 - [babeljs.io/repl](https://babeljs.io/repl#?browsers=defaults%2C%20not%20ie%2011%2C%20not%20ie_mob%2011&build=&builtIns=false&corejs=3.21&spec=false&loose=false&code_lz=JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wChzMBXAOw2AmrgElqATJADwAoBKAb1Jw4RGJSiMAPAD5BcCa2AA3OGgA2KAM4aAcihBIAvACIARgHMAtEVYWArAAZ7RqQEYJAegWKZQofKUq6lq6-sbmVkg2Dk6uHl4-cu5ScKQAvkA&forceAllTransforms=false&modules=false&shippedProposals=false&evaluate=false&fileSize=false&timeTravel=true&sourceType=module&lineWrap=true&presets=env%2Creact%2Cstage-2&prettier=false&targets=&version=7.27.0&externalPlugins=&assumptions=%7B%7D)：辅助理解编译与语法转换
 - [ast-explorer](https://ast-explorer.dev/)：观察 AST 结构与转换结果
 
-推荐把这些站点收藏下来，后续很多章节都会反复用到。
+这些站点后面会反复用到。
 
 ## 协议
 
@@ -158,7 +158,7 @@ Vue 不是一个“只有运行时”的框架。
 
 这意味着你可以免费阅读、共享、演绎这些文章，但必须署名，且不能用于商业用途。
 
-这样做的目的很直接：希望知识可以被传播、被引用、被继续加工，但不要被重新包装成付费商品。
+这条限制很直接：文章可以传播、引用和再加工，但不要重新包装成付费商品。
 
 ## 开始阅读
 

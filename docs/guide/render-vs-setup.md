@@ -6,7 +6,7 @@
 
 ## 先说结论
 
-如果只想抓住最核心差别，可以记这句：
+可以先抓住这个差别：
 
 > `render` 是组件定义上的渲染入口，`setup` 返回的 render 则是把“状态组织”和“渲染表达”放进了同一个闭包里。
 
@@ -14,7 +14,7 @@
 
 ## render 函数（Options API）
 
-`render` 函数是 Vue 组件的核心渲染入口，用于返回虚拟 DOM（VNode）。它通常在 Options API 中定义：
+`render` 函数是 Vue 组件的渲染入口，用于返回虚拟 DOM（VNode）。它通常在 Options API 中定义：
 
 ```js
 import { h } from 'vue'
@@ -34,7 +34,7 @@ const MyComponent = {
 
 ## setup 返回的 render 函数（Composition API）
 
-`setup` 是 Vue 3 Composition API 的核心。你可以在 `setup` 中组织状态和逻辑，然后直接返回一个渲染函数：
+`setup` 是 Vue 3 Composition API 的关键。你可以在 `setup` 中组织状态和逻辑，然后直接返回一个渲染函数：
 
 ```js
 import { h, ref } from 'vue'
@@ -57,7 +57,7 @@ const MyComponent = {
 - 返回的渲染函数天然形成闭包，直接访问这些状态
 - 更适合把组合逻辑和渲染逻辑放在一起组织
 
-## 两者的真正区别
+## 两者的区别
 
 ### 1. 组织方式不同
 
@@ -76,7 +76,7 @@ const MyComponent = {
 
 ## 生命周期视角
 
-- `setup` 在组件初始化阶段执行，比真正渲染更早
+- `setup` 在组件初始化阶段执行，比渲染更早
 - `render` 会在挂载和后续更新时反复执行
 
 如果是 `setup` 返回 render，那么可以理解为：
@@ -87,7 +87,7 @@ const MyComponent = {
 
 ## 和模板编译的关系
 
-如果你写模板，Vue 最终也会把模板编译成 `render` 函数。
+如果你写模板，Vue 最后也会把模板编译成 `render` 函数。
 
 所以无论你是：
 
@@ -95,25 +95,25 @@ const MyComponent = {
 - 写组件选项里的 `render`
 - 在 `setup` 里返回 render
 
-最终都会落到“渲染函数 + 运行时”这条链路上。
+最后都会落到“渲染函数 + 运行时”这条链路上。
 
 区别只在于：这个 render 是你手写的，还是编译器帮你生成的；状态与渲染又是怎样被组织到一起的。
 
-## 对比总结
+## 对照表
 
 | 特性 | `render` 函数 | `setup` 返回的 render 函数 |
 | --- | --- | --- |
 | 作用 | 返回 VNode 并控制组件渲染 | 在 `setup` 中组织逻辑后返回渲染函数 |
 | 风格 | 更偏 Options API | 更偏 Composition API |
 | 状态访问 | 通过组件上下文或返回值组织 | 直接闭包访问响应式状态 |
-| 模板关系 | 模板最终也会编译到这里 | 不依赖模板，完全手写渲染 |
+| 模板关系 | 模板最后也会编译到这里 | 不依赖模板，完全手写渲染 |
 | 适用场景 | 历史项目、显式组件定义 | 高动态渲染、函数式组织、JSX 场景 |
 
 ## 实战里怎么选
 
-### 优先推荐
+### 优先建议
 
-日常业务开发仍然优先推荐：
+日常业务开发仍然优先建议：
 
 - `<script setup>`
 - `<template>`
@@ -133,7 +133,7 @@ const MyComponent = {
 - 渐进式迁移代码
 - 需要沿用旧组件组织方式
 
-## 一句话理解
+## 可以这样记
 
 `render` 和 `setup` 返回 render 不是两个完全不同的渲染系统，而是两种不同的组件组织方式。
 

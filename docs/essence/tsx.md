@@ -4,17 +4,17 @@
 
 > 为什么 Vue JSX 需要额外安装 `@vitejs/plugin-vue-jsx`？
 
-这个问题背后真正要理解的是：
+这个问题背后要理解的是：
 
 > Vue 里的 JSX / TSX，本质上不是模板系统本身，而是“用另一种语法书写渲染函数”。
 
 所以它既不是浏览器原生能力，也不是 Vue 默认就能直接执行的语法。它必须先经过编译。
 
-## 先记住一句话
+## 先抓住这条线
 
 JSX / TSX 的本质是语法糖。
 
-它最终不会直接进入浏览器，而是会先被编译成函数调用，再由 Vue 运行时去创建 VNode。
+它最后不会直接进入浏览器，而是会先被编译成函数调用，再由 Vue 运行时去创建 VNode。
 
 所以从底层角度看：
 
@@ -22,7 +22,7 @@ JSX / TSX 的本质是语法糖。
 - JSX / TSX：编译成 render + VNode
 - `h()`：手写 render + VNode
 
-它们的最终目标是一致的，只是输入形式不同。
+它们的最后目标是一致的，只是输入形式不同。
 
 ## 什么是 JSX 文件
 
@@ -80,7 +80,7 @@ Vue 官方提供了：
 
 [**@vue/babel-plugin-jsx**](https://github.com/vuejs/babel-plugin-jsx)
 
-它的核心工作，就是把 JSX / TSX 转成 Vue 能消费的渲染函数调用。
+它的主要工作，就是把 JSX / TSX 转成 Vue 能消费的渲染函数调用。
 
 ## 1. 把 JSX 编译为 Vue 的 VNode 创建调用
 
@@ -98,11 +98,11 @@ _createVNode('div', {
 }, [_createTextVNode('bar')])
 ```
 
-也就是说，Vue JSX 最终仍然会回到 VNode 创建逻辑。
+也就是说，Vue JSX 最后仍然会回到 VNode 创建逻辑。
 
 ## 2. 支持 Vue 特有语义
 
-这是 Vue JSX 真正和 React JSX 拉开差距的地方。
+这是 Vue JSX 和 React JSX 拉开差距的地方。
 
 例如：
 
@@ -135,7 +135,7 @@ _createVNode(_Fragment, null, [
 ])
 ```
 
-这里非常清楚地体现出 Vue JSX 的本质：
+这里很清楚地说明出 Vue JSX 的本质：
 
 - JSX 只是输入语法
 - Vue 特有语义依然会被转换成 Vue 自己的机制
@@ -160,11 +160,11 @@ _createVNode(_resolveComponent('MyComponent'), {
 
 ## 4. slots 仍然是函数对象
 
-如果你在 JSX 里写插槽，本质上仍然会被转换成 slots 对象。
+如果你在 JSX 里写插槽，仍然会被转换成 slots 对象。
 
 也就是说，换成 JSX 之后，插槽机制不会变，只是声明语法变了。
 
-这点非常重要，因为它说明：
+这点很重要，因为它说明：
 
 - JSX 没有改写 Vue 的组件模型
 - 它只是换了一种写 render 的方式
@@ -173,7 +173,7 @@ _createVNode(_resolveComponent('MyComponent'), {
 
 因为 Vite 本身并不会自动知道“这个 JSX 应该按 Vue 规则编译”。
 
-`@vitejs/plugin-vue-jsx` 的核心作用可以简单理解成两件事：
+`@vitejs/plugin-vue-jsx` 的主要作用可以简单理解成两件事：
 
 1. 把 `@vue/babel-plugin-jsx` 接入构建流程
 2. 让 JSX 文件正确融入 Vue 项目的 HMR、模块分析和开发体验链路
@@ -194,11 +194,11 @@ _createVNode(_resolveComponent('MyComponent'), {
 - 模板更直观的业务页面
 - 主要依赖模板语法糖和模板可读性的团队
 
-## 一句话理解
+## 可以这样记
 
 Vue JSX / TSX 不是“React 语法搬到 Vue”，而是 Vue 借助 Babel 插件，把 JSX 这种写法翻译成自己的 VNode 创建和组件协议。
 
-## 总结
+## 收束一下
 
 | 特性 | 说明 |
 | --- | --- |

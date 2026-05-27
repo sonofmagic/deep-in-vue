@@ -38,7 +38,7 @@ _withDirectives(
 )
 ```
 
-这里最关键的是：
+这里要看的是：
 
 - 有 `onUpdate:modelValue`
 - 也有运行时指令 `vModelText`
@@ -68,7 +68,7 @@ _withDirectives(
 - 绑定 `modelValue` prop
 - 监听 `update:modelValue` 事件
 
-这时运行时的核心不再是 DOM 指令处理，而是组件通信协议。
+这时运行时的关键不再是 DOM 指令处理，而是组件通信协议。
 
 ## 所以 `v-model` 的本质到底是什么
 
@@ -108,7 +108,7 @@ const emit = defineEmits(['update:modelValue'])
 - 父组件传值
 - 子组件通过事件把新值抛回去
 
-双向绑定并不神秘，本质上就是**单向下发 + 事件上抛**。
+双向绑定并不复杂，就是**单向下发 + 事件上抛**。
 
 ## Vue 3.4+：`defineModel`
 
@@ -155,7 +155,7 @@ const lastName = defineModel('lastName')
 </template>
 ```
 
-编译后，本质上还是变成不同 prop / event 对：
+编译后，还是变成不同 prop / event 对：
 
 ```html
 <UserForm
@@ -195,16 +195,16 @@ const [model, modifiers] = defineModel({
 </script>
 ```
 
-修饰符本质上也是编译器与运行时协作的一部分：  
-它们不是“附加魔法”，而是对数据读写时机或值转换策略的补充。
+修饰符本质上也是编译器与运行时协作的一部分：
+它们不是魔法开关，而是对数据读写时机或值转换策略的补充。
 
-## 一句话理解
+## 可以这样记
 
-`v-model` 并不是“真正的双向魔法绑定”，而是 Vue 把一套很常见的同步协议缩写成了统一语法。
+`v-model` 不是魔法式的双向绑定，而是 Vue 把一套很常见的同步协议缩写成了统一语法。
 
 所以你越理解它编译后展开成什么，就越不会被它表面的简洁写法误导。
 
-## 总结
+## 收束一下
 
 | 场景 | `v-model` 的本质 |
 | --- | --- |

@@ -1,18 +1,18 @@
 # 点击浏览器元素时自动跳转到本地 IDE
 
-这一页讨论的是一个非常实用、但又很工程化的小能力：
+这里讨论的是一个实用、但又很工程化的小能力：
 
 > 当你在浏览器里点到某个 Vue 元素时，能不能直接跳回本地 IDE 对应源代码？
 
-如果你经常在大型项目里排查组件来源、样式污染或模板结构，这个能力非常省时间。
+如果你经常在大型项目里排查组件来源、样式污染或模板结构，这个能力很省时间。
 
-## 先说本质
+## 先看它解决什么问题
 
 这类能力通常不是 Vue 运行时原生提供的，而是借助构建插件，在开发态为页面注入“源代码定位信息”。
 
 所以它本质上是一类：
 
-- 开发态增强能力
+- 开发态加强能力
 - 构建工具插件能力
 - IDE 集成能力
 
@@ -20,7 +20,7 @@
 
 ## 选型思路
 
-为了让开发者快速从浏览器跳回本地 IDE，这里最终选择了两条路线：
+为了让开发者快速从浏览器跳回本地 IDE，这里最后选择了两条路线：
 
 - `vite` 项目：[`vite-plugin-vue-inspector`](https://www.npmjs.com/package/vite-plugin-vue-inspector)
 - `webpack` / `vue-cli` 项目：[`code-inspector-plugin`](https://www.npmjs.com/package/code-inspector-plugin)
@@ -36,8 +36,8 @@
 
 ### 局限
 
-它本质上更偏 Vite 体系。  
-即使是它的超集 [`unplugin-vue-inspector`](https://www.npmjs.com/package/unplugin-vue-inspector)，核心支持面也主要还是 `vite` 和 `nuxt`。
+它更偏 Vite 体系。
+即使是它的超集 [`unplugin-vue-inspector`](https://www.npmjs.com/package/unplugin-vue-inspector)，关键支持面也主要还是 `vite` 和 `nuxt`。
 
 ## 为什么要保留 `code-inspector-plugin`
 
@@ -141,7 +141,7 @@ module.exports = defineConfig({
 
 ## IDE 跳转本质上依赖什么
 
-真正起作用的通常是两部分：
+起作用的通常是两部分：
 
 1. 页面里注入了元素到源码位置的映射信息
 2. 本地 IDE 命令能被正确调用
@@ -188,11 +188,11 @@ The editor process exited with an error: spawn code ENOENT ('code' command does 
 - [vite-plugin-vue-inspector](https://www.npmjs.com/package/vite-plugin-vue-inspector)
 - [code-inspector-plugin](https://inspector.fe-dev.cn/)
 
-## 一句话理解
+## 可以这样记
 
 浏览器元素跳回本地 IDE，本质上是开发态构建插件为页面注入源码定位信息，再借助本地编辑器命令完成跳转。
 
-## 建议继续阅读
+## 继续读
 
 如果你想把这个能力放回 Vue 工程体系里理解，可以继续看：
 

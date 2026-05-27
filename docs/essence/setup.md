@@ -2,7 +2,7 @@
 
 > `<script setup>` 是 Vue 3 提供的一种 **编译时语法糖**，它让你以更简洁的方式使用 Composition API，本质上会在**构建阶段**被 Vue 编译成普通的 `setup()` 相关代码。
 
-换句话说：它不是普通 JavaScript 模块会原样执行的结构，而是 Vue SFC 编译器预处理前的源码形态。
+也就是说，它不会按普通 JavaScript 模块原样执行，而是 Vue SFC 编译器预处理前的源码形态。
 
 比如 TypeScript 类型在普通 JavaScript 产物中会被擦除，但 `defineProps<Props>()` 里的部分类型结构，可能会被 Vue 编译器提取成运行时 `props` 选项。
 
@@ -57,7 +57,7 @@
 2. 自动 `return` 所有顶层绑定（变量、函数）用于模板使用
 3. 没有多余的 `export default` 或 `return {}`，更清爽
 
-## 本质关键点
+## 几个关键点
 
 | 功能            | 实现机制                                                                                                                            |
 | --------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
@@ -87,8 +87,6 @@ export default {
 }
 ```
 
----
-
 ## 它和普通 `<script>` 的区别
 
 | 对比点         | `<script>`       | `<script setup>`   |
@@ -96,7 +94,7 @@ export default {
 | 写法           | 手动写 `setup()` | 自动生成 `setup()` |
 | 模板访问变量   | 必须 `return`    | 自动暴露顶层变量   |
 | 类型推导（TS） | 需要更多手写连接 | 更自然             |
-| 开发体验       | 需要结构重复     | 极简、推荐方式     |
+| 开发体验       | 需要结构重复     | 极简、建议方式     |
 
 ## Vue 3.5+ 新特性：响应式 Props 解构
 
@@ -196,13 +194,13 @@ Vue 3.5 引入了 `useTemplateRef()` 来获取模板引用，比之前的同名 
 
 相比把清理逻辑散落在外部，`onWatcherCleanup` 能把“本次副作用对应的清理”写在同一块逻辑里，可读性更好，也更不容易漏掉。
 
-## 总结
+## 收束一下
 
-> `<script setup>` 是 Vue 3 的编译时语法糖，最终会被编译进组件的 `setup()` 逻辑，并和模板生成的 `render()` 连接起来。它让 Composition API 写法更自然、简洁、类型友好，是 Vue 3 推荐的组件书写方式。
+> `<script setup>` 是 Vue 3 的编译时语法糖，最后会被编译进组件的 `setup()` 逻辑，并和模板生成的 `render()` 连接起来。它让 Composition API 写法更自然、简洁、类型友好，是 Vue 3 建议的组件书写方式。
 >
-> Vue 3.5 进一步增强了 `<script setup>` 的开发体验：响应式 Props 解构让 props 处理更简洁，`useTemplateRef` 让模板引用更清晰，`useId` 简化了无障碍开发，`onWatcherCleanup` 让副作用清理更可控。
+> Vue 3.5 进一步加强了 `<script setup>` 的开发体验：响应式 Props 解构让 props 处理更简洁，`useTemplateRef` 让模板引用更清晰，`useId` 简化了无障碍开发，`onWatcherCleanup` 让副作用清理更可控。
 
-## 建议继续阅读
+## 继续读
 
 如果你想把 `script setup` 放回整条编译链里理解，建议继续读：
 
