@@ -98,7 +98,7 @@ _createVNode('div', {
 }, [_createTextVNode('bar')])
 ```
 
-也就是说，Vue JSX 最后仍然会回到 VNode 创建逻辑。
+Vue JSX 最后仍然会回到 VNode 创建逻辑。
 
 ## 2. 支持 Vue 特有语义
 
@@ -162,7 +162,7 @@ _createVNode(_resolveComponent('MyComponent'), {
 
 如果你在 JSX 里写插槽，仍然会被转换成 slots 对象。
 
-也就是说，换成 JSX 之后，插槽机制不会变，只是声明语法变了。
+换成 JSX 之后，插槽机制不会变，变化的是声明语法。
 
 这点很重要，因为它说明：
 
@@ -178,7 +178,7 @@ _createVNode(_resolveComponent('MyComponent'), {
 1. 把 `@vue/babel-plugin-jsx` 接入构建流程
 2. 让 JSX 文件正确融入 Vue 项目的 HMR、模块分析和开发体验链路
 
-也就是说，它不是在提供新的 Vue 能力，而是在把 Vue JSX 的编译规则接到 Vite 上。
+它没有提供新的 Vue 能力，只是把 Vue JSX 的编译规则接到 Vite 上。
 
 ## JSX / TSX 适合什么场景
 
@@ -194,11 +194,11 @@ _createVNode(_resolveComponent('MyComponent'), {
 - 模板更直观的业务页面
 - 主要依赖模板语法糖和模板可读性的团队
 
-## 可以这样记
+## 记住这点
 
 Vue JSX / TSX 不是“React 语法搬到 Vue”，而是 Vue 借助 Babel 插件，把 JSX 这种写法翻译成自己的 VNode 创建和组件协议。
 
-## 收束一下
+## 速查
 
 | 特性 | 说明 |
 | --- | --- |

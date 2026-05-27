@@ -104,7 +104,7 @@ import.meta.hot.accept((mod) => {
 export default /* @__PURE__ */ _export_sfc(_sfc_main, [['render', _sfc_render], ['__scopeId', 'data-v-9e67ff97'], ['__file', '/path/to/your/only-vue-runtime/apps/fully-compiled/src/pages/hello.vue']])
 ```
 
-### 开发态最值得观察的几点
+### 开发态最该观察的几点
 
 #### 1. SFC 被拆成多个模块
 
@@ -203,7 +203,7 @@ export {
 }
 ```
 
-## 生产态最值得观察的几点
+## 生产态最该观察的几点
 
 ### 1. HMR 相关代码消失了
 
@@ -230,7 +230,7 @@ export {
 - `vModelText`
 - `data-v-xxx`
 
-也就是说，**变化的是工程包装，不是 Vue 编译本质本身**。
+**变化的是工程包装，不是 Vue 编译本质本身**。
 
 ## dev 和 build 的主要差异
 
@@ -246,7 +246,7 @@ export {
 
 不要把开发态看到的产物当成 Vue 最后本质，也不要把生产态压缩后的 chunk 当成“唯一正确形态”。
 
-可以这样理解：
+可以从这几层看：
 
 1. Vue 先把 SFC 编译成运行时可消费的组件逻辑
 2. Vite 再根据开发或生产目标做不同的模块包装

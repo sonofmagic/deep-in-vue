@@ -83,7 +83,7 @@ https://github.com/vuejs/core/blob/a23fb59e83c8b65b27eaa21964c8baa217ab0573/pack
 
 它们不是在浏览器里执行“宏逻辑”，而是在 SFC 编译阶段被 Vue 提前识别，然后展开成真正的组件选项或运行时辅助代码。
 
-所以可以这样理解：
+所以可以从这几层看：
 
 - 你写的是 `defineProps()`
 - 编译器看到的是“这里在声明 props”
@@ -230,7 +230,7 @@ const lastName = defineModel<string>('lastName', { default: '' })
 
 编译器在处理 SFC 时，会直接扫描并识别这些特殊调用，然后把它们替换掉。
 
-所以你可以把它理解成：
+所以可以把它拆成两部分：
 
 - 写法上像函数
 - 工作方式上更像编译器关键字
@@ -239,7 +239,7 @@ const lastName = defineModel<string>('lastName', { default: '' })
 
 如果一个 `defineXXX` 只能出现在 `<script setup>`，不需要 import，且编译后会被展开成组件选项或 helper，那么它就是编译宏，不是普通运行时函数。
 
-## 收束一下
+## 小结
 
 | 类型 | 代表 | 本质 |
 | --- | --- | --- |

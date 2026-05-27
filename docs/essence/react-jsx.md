@@ -1,6 +1,6 @@
 # React createElement 与 JSX runtime
 
-这里不是为了展开讲 React，而是为了让你在读 Vue 的 JSX / TSX、`h()` 和编译产物时，多一个有用的对照坐标。
+这里不展开讲 React。我们只借它做一个对照，方便后面理解 Vue 的 JSX / TSX、`h()` 和编译产物。
 
 先看这句话：
 
@@ -76,17 +76,17 @@ const element = jsx('h1', { children: 'Hello, world!' })
 - React JSX 最后会变成 React 运行时理解的函数调用
 - Vue JSX 最后会变成 Vue 运行时理解的 VNode 创建调用
 
-这说明关键的不是“长得像不像 JSX”，而是：
+真正要看的不是“长得像不像 JSX”，而是：
 
 > JSX 最后会被编译到哪个框架的运行时协议上。
 
-## 可以这样记
+## 小结
 
 React 的 `createElement` 和 JSX runtime 这段演进，最适合作为理解 Vue JSX 的对照背景：同样都是 JSX，最后服务的却是不同框架的运行时模型。
 
-## 继续读
+## 接着读
 
-如果你是为了理解 Vue 里的 JSX / TSX，建议继续看：
+如果你是为了理解 Vue 里的 JSX / TSX，可以继续看：
 
 1. [Vue JSX / TSX 的本质](./tsx.md)
 2. [h 函数的本质](./h.md)

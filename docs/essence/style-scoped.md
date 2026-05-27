@@ -172,13 +172,13 @@ const color = ref('red')
 
 它底层更接近通过 CSS Variables 实现，而不是把 JS 值直接塞进静态 CSS 文件。
 
-## 可以这样记
+## 小结
 
 `<style scoped>` 的本质，就是 Vue 编译器同时改写模板节点和 CSS 选择器，用同一个 scope attribute 把它们绑定起来，从而形成组件级样式隔离。
 
-## 继续读
+## 接着读
 
-如果你想把它放回整条 SFC 编译链里看，建议继续读：
+如果你想把它放回整条 SFC 编译链里看，可以接着读：
 
 1. [`.vue` 文件的本质](./vue.md)
 2. [Vite dev / build 下的 Vue 产物](/advanced/vite-dev-build)

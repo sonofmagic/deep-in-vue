@@ -34,7 +34,7 @@ const vnode = h('div', { class: 'container' }, [
 
 `h()` 返回的不是 DOM，也不是 HTML 字符串，而是 **VNode**。
 
-也就是说：
+这里有几层含义：
 
 - 模板编译产物本质上也是在生成 VNode
 - `h()` 只是让你手写这一步
@@ -66,7 +66,7 @@ h(MyComponent, null, {
 
 ## `h()` 和 `createVNode` 的关系
 
-很多时候可以直接把它们理解成：
+很多时候可以直接这样区分：
 
 - `createVNode` 更底层
 - `h()` 更偏开发者友好的封装
@@ -75,11 +75,11 @@ h(MyComponent, null, {
 
 https://github.com/vuejs/core/blob/main/packages/runtime-core/src/h.ts
 
-所以当你说“我在写 `h()`”，本质上其实是在调用 Vue 的 VNode 创建能力，只是用了更方便的入口。
+当你说“我在写 `h()`”，其实是在调用 Vue 的 VNode 创建能力，只是入口更顺手。
 
 ## 为什么编译器不直接生成 `h()`
 
-这是一个很值得注意的点。
+这个点很容易被忽略。
 
 Vue 编译器通常不会生成 `h()`，而会直接生成更底层的函数，比如：
 
@@ -130,11 +130,11 @@ function Heading(props, { slots }) {
 
 它们的差别主要在输入形式和开发体验，不在最后运行目标。
 
-## 可以这样记
+## 记住这点
 
 `h()` 不是 Vue 的“另一套渲染方式”，而是 Vue 把“手写 VNode”这件事暴露给开发者的便利入口。
 
-## 收束一下
+## 速查
 
 | 特性 | 说明 |
 | --- | --- |

@@ -64,7 +64,7 @@ return _ctx.show
 - 事件绑定
 - 组件协议
 
-也就是说，**语法是指令风格，执行却更像普通 patch 行为**。
+**语法是指令风格，执行却更像普通 patch 行为**。
 
 ## 3. 运行时指令（Runtime directives）
 
@@ -123,7 +123,7 @@ return _withDirectives(_createElementVNode('div'), [[_vShow, _ctx.show]])
 2. 看到 `props` / `onClick` / `onUpdate:modelValue`，优先想“编译展开 + patch”
 3. 看到 `withDirectives`，基本就进入“运行时指令”范畴了
 
-## 收束一下
+## 小结
 
 - 不要把所有指令简单分成“编译时”或“运行时”两类。
 - Vue 里大量指令其实是“编译展开 + 运行时执行”的组合。

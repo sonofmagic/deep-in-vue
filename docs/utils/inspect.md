@@ -188,11 +188,11 @@ The editor process exited with an error: spawn code ENOENT ('code' command does 
 - [vite-plugin-vue-inspector](https://www.npmjs.com/package/vite-plugin-vue-inspector)
 - [code-inspector-plugin](https://inspector.fe-dev.cn/)
 
-## 可以这样记
+## 小结
 
 浏览器元素跳回本地 IDE，本质上是开发态构建插件为页面注入源码定位信息，再借助本地编辑器命令完成跳转。
 
-## 继续读
+## 接着读
 
 如果你想把这个能力放回 Vue 工程体系里理解，可以继续看：
 

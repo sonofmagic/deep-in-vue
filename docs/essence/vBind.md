@@ -100,7 +100,7 @@ function render() {
 }
 ```
 
-也就是说，`v-bind:style`、`v-bind:class` 并没有神秘机制，它们依旧是在生成 VNode props，只是这些 props 在运行时会有专门的 patch 策略。
+`v-bind:style`、`v-bind:class` 仍然是在生成 VNode props。特殊之处只在于运行时 patch 这些 props 时，会走专门的处理逻辑。
 
 ## 单个属性和对象展开
 
@@ -173,11 +173,11 @@ Vue 3.4 起支持：
 
 > 模板语法糖在编译期展开，运行时按普通属性更新机制执行。
 
-## 可以这样记
+## 记住这点
 
 `v-bind` 不是在 DOM 上“挂了一个指令再解释”，而是 Vue 先把模板里的动态属性写法翻译成 VNode props，然后再让运行时去更新真实目标。
 
-## 收束一下
+## 速查
 
 | 特性 | 说明 |
 | --- | --- |

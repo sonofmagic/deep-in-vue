@@ -1,8 +1,8 @@
 # 只使用 Vue 运行时 API 构造的 Vue 项目
 
-实际上，你完全可以不写任何一个 `.vue` 文件，只单独使用 `Vue` 的运行时渲染函数去构建一个项目。
+Vue 项目不一定非要写 `.vue` 文件。只使用运行时渲染函数，也能把界面组织起来。
 
-这篇文章的价值不在于建议你日常都这么写，而在于它能帮你把一个问题看得很清楚：
+这不是日常开发推荐写法，但它能把一个问题暴露得很清楚：
 
 > 如果把模板、SFC、编译宏这些“开发期便利层”全部拿掉，Vue 最后还剩下什么？
 
@@ -20,7 +20,7 @@
 但这些并不是 Vue 唯一的存在方式。
 它们更多是 Vue 在开发体验层提供的高级表达形式。
 
-一旦回到运行时 API，你就能更直接地看到：
+回到运行时 API 之后，很多事情会变得更直白：
 
 - VNode 是怎样被创建的
 - 渲染逻辑怎样手工组织
@@ -32,7 +32,7 @@
 
 https://cn.vuejs.org/api/render-function.html#h
 
-不过这篇文章不是简单做 API 列表，而是建议你先结合 [编译演练场例子](https://play.vuejs.org/#eNqNU82O0zAQfhXjwwbE0ihdTiVbCdBKwAEQIHHxJUomrRfHtmynBFWRQOIlQOL1QLwFY+enScuuVjlkMvPNzDdfZvb0qdaLXQ10RVObG67dmkleaWUc2RMDJWlJaVRFIgRFTPonjUckfnQ2seBqfch9rirdJy5i/+GbYP5YurKb5Vi7gyQ9JlfSOg8gl57B/egFCKHIR2VEcS96cEQgkHBQaZE5QA8hacF367+/fvz++u3Pz++kwA5p7H0huE3I7lGpzCWjnHBJLhhd7wMf8pBw0rZpvE0OdbyBJpe6dpjIS8zz2LMzEjVNxCg6hcoKLjdoVaoA0SEwEndl+t7BHupMgEskEGJBs5NQkqRBHcSk8WROL737IoDYXGko0LPIyN4XypVQZoXSFU+YbINcHogIek4dwmXJN4trqyT+9ZDBaI4duADzRjuO8jO66mr5WIbqf34VfM7UcD748y3kn/7jv7aN9zH61oAFswNGx5jLzAZcF756/xoatMcgTl4LRN8SfAdWidpz7GDPalkg7QkusH0Z1gz/yQd71TiQdhjKE/XINuAZxY3z4t40+oHuxeJxyENFUcVhow9nc3wAt274/IJOl7drPzQ5WsH5fvRLhnErlFtjZf+a7t1sa3rugchdbx6aEBrPcjncZXJyjHMx7j5m4DOZ4+h05iO0/wBs05LJ) 一起看，观察这些底层函数在编译产物里的实际位置。
+这里不做 API 清单。更适合把这页和 [编译演练场例子](https://play.vuejs.org/#eNqNU82O0zAQfhXjwwbE0ihdTiVbCdBKwAEQIHHxJUomrRfHtmynBFWRQOIlQOL1QLwFY+enScuuVjlkMvPNzDdfZvb0qdaLXQ10RVObG67dmkleaWUc2RMDJWlJaVRFIgRFTPonjUckfnQ2seBqfch9rirdJy5i/+GbYP5YurKb5Vi7gyQ9JlfSOg8gl57B/egFCKHIR2VEcS96cEQgkHBQaZE5QA8hacF367+/fvz++u3Pz++kwA5p7H0huE3I7lGpzCWjnHBJLhhd7wMf8pBw0rZpvE0OdbyBJpe6dpjIS8zz2LMzEjVNxCg6hcoKLjdoVaoA0SEwEndl+t7BHupMgEskEGJBs5NQkqRBHcSk8WROL737IoDYXGko0LPIyN4XypVQZoXSFU+YbINcHogIek4dwmXJN4trqyT+9ZDBaI4duADzRjuO8jO66mr5WIbqf34VfM7UcD748y3kn/7jv7aN9zH61oAFswNGx5jLzAZcF756/xoatMcgTl4LRN8SfAdWidpz7GDPalkg7QkusH0Z1gz/yQd71TiQdhjKE/XINuAZxY3z4t40+oHuxeJxyENFUcVhow9nc3wAt274/IJOl7drPzQ5WsH5fvRLhnErlFtjZf+a7t1sa3rugchdbx6aEBrPcjncZXJyjHMx7j5m4DOZ4+h05iO0/wBs05LJ) 对照看：模板里看不到的底层函数，在编译产物里会直接出现。
 
 ## 更多底层函数
 
@@ -102,7 +102,7 @@ Vue 编译器会把它们编译进 `.vue` 文件产物里，我们平时一般�
 
 线上地址：https://only-vue-runtime.netlify.app/
 
-## 建议带着这些问题去看
+## 看源码时留意这些问题
 
 1. 如果不用模板，哪些逻辑会变成显式代码？
 2. `v-if`、`v-for`、`slot` 这些能力手写时分别对应什么结构？
