@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.5.34",
+    "vue": "^3.5.35",
     "vue-router": "^5.0.7"
   },
   "devDependencies": {
@@ -20,8 +20,8 @@
     "compile-time-directive": "workspace:*",
     "tailwindcss": "^4.3.0",
     "typescript": "~6.0.3",
-    "vite": "^8.0.13",
+    "vite": "^8.0.14",
     "vite-tsconfig-paths": "^6.1.1",
-    "vue-tsc": "^3.2.9"
+    "vue-tsc": "^3.3.2"
   }
 }

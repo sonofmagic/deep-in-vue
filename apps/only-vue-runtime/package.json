@@ -13,15 +13,15 @@
     "@vimeo/player": "^2.30.4",
     "@vueuse/core": "^14.3.0",
     "axios": "^1.16.1",
-    "date-fns": "^4.1.0",
-    "dayjs": "^1.11.20",
+    "date-fns": "^4.3.0",
+    "dayjs": "^1.11.21",
     "dexie": "^4.4.2",
     "element-plus": "^2.14.0",
-    "es-toolkit": "^1.46.1",
+    "es-toolkit": "^1.47.0",
     "ice-ui": "workspace:*",
     "idb": "^8.0.3",
     "pinia": "^3.0.4",
-    "vue": "^3.5.34",
+    "vue": "^3.5.35",
     "vue-router": "^5.0.7"
   },
   "devDependencies": {
@@ -30,10 +30,10 @@
     "async-validator": "^4.2.5",
     "defu": "^6.1.7",
     "msw": "^2.14.6",
-    "postcss": "^8.5.14",
+    "postcss": "^8.5.15",
     "tailwindcss": "^4.3.0",
     "typescript": "~6.0.3",
-    "vite": "^8.0.13",
+    "vite": "^8.0.14",
     "vite-tsconfig-paths": "^6.1.1"
   },
   "msw": {
