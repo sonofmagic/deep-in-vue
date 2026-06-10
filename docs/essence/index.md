@@ -55,12 +55,13 @@
 3. [style scoped 的本质](/essence/style-scoped)
 4. [h 函数的本质](/essence/h)
 5. [Vue JSX / TSX 的本质](/essence/tsx)
+6. [React 与 Vue 的真实差异](/essence/react-vs-vue)
 
 ## 阅读这一章时建议关注什么
 
 - 这项能力属于编译期、运行期，还是两者都有参与？
 - 开发时的语法糖，最后对应到哪种 JavaScript 结构？
-- 是否有与 React、JSX、原生 DOM API 更容易对照的实现方式？
+- 这项能力放在 Vue 的编译体系里，和 React 的 JSX 事实标准分别解决了什么问题？
 - 这项能力会不会影响性能、类型推导或工程组织方式？
 
 ## 怎么读

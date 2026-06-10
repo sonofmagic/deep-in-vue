@@ -1,92 +1,93 @@
 # React createElement 与 JSX runtime
 
-这里不展开讲 React。我们只借它做一个对照，方便后面理解 Vue 的 JSX / TSX、`h()` 和编译产物。
+这里借 React 讲 JSX，不展开 React API。先把一件事说清楚：
 
-先看这句话：
+> JSX 已经从 React 的语法糖，变成了现代前端工具链默认理解的 UI 表达格式。
 
-> JSX 从来都不是浏览器原生语法，它总要先被编译成某种函数调用。
+先理解这一点，再看 Vue JSX / TSX，就不会只停在 `createElement` 和 `h()` 的表面对照上。
 
-在 React 里，这个函数调用从早期的 `React.createElement`，逐步演进到了新的 JSX runtime。
+## JSX 不是 React 专属语法
 
-## 旧模式：`React.createElement`
+JSX 从来不是浏览器原生语法，它必须先被编译。
 
-在 React 17 之前很长一段时间里，JSX 通常会被编译成：
+早期 React JSX 通常会变成：
 
 ```jsx
-const element = <h1>Hello, world!</h1>
+const element = <h1>Hello</h1>
 ```
-
-编译后更接近：
 
 ```js
-const element = React.createElement('h1', null, 'Hello, world!')
+const element = React.createElement('h1', null, 'Hello')
 ```
 
-这说明 JSX 本质上只是语法糖，落地的是函数调用。
-
-## 新模式：JSX runtime
-
-从 React 17 开始引入新的 JSX Transform，后续逐步成为主流建议方式。
-
-同样的代码：
-
-```jsx
-const element = <h1>Hello, world!</h1>
-```
-
-会被编译成类似：
+React 17 之后的新 JSX Transform 会更接近：
 
 ```js
 import { jsx } from 'react/jsx-runtime'
 
-const element = jsx('h1', { children: 'Hello, world!' })
+const element = jsx('h1', { children: 'Hello' })
 ```
 
-所以对比可以简单记成：
+所以 JSX 不是“React 能直接运行 XML”。它只是一个输入：
 
-| 时代 | JSX 编译目标 |
-| :-- | :-- |
-| 旧模式 | `React.createElement(...)` |
-| 新模式 | `jsx(...)` / `jsxs(...)` |
+> 一种会被编译到目标运行时的 UI 语法。
 
-## 为什么 React 要切到新 runtime
+目标运行时可以是 React，也可以是 Vue、Preact、Solid、MDX 或其他 JSX runtime。
 
-主要原因主要有三类：
+## React 为什么吃到了最大红利
 
-1. 减少样板代码
-   不再要求每个 JSX 文件都手动 `import React from 'react'`
-2. 优化运行时组织方式
-   JSX runtime 可以更明确地区分开发态与生产态调用
-3. 为后续渲染模型演进留接口
-   新的 runtime 结构更适合进一步扩展
+React 推 JSX 推得早，也推得彻底。
 
-## 相关运行时模块
+后来工具链围着 JSX 补齐了很多东西：
 
-- `react/jsx-runtime`
-  提供 `jsx` 和 `jsxs`
-- `react/jsx-dev-runtime`
-  提供开发态用的 `jsxDEV`
+- TypeScript 支持 JSX/TSX 类型检查
+- Babel、SWC、esbuild 能转换 JSX
+- ESLint、Prettier、编辑器能分析和格式化 JSX
+- 组件库、设计系统、文档站和测试工具默认支持 JSX
+- 大量框架把 React JSX 当作第一适配目标
 
-这也是为什么现在很多 React 项目里，即使写了 JSX，也不一定再看到显式的 `import React`。
+这就是 React 经常成为默认适配目标的原因之一。
 
-## 为什么这对读 Vue 文档有帮助
+新工具不一定要理解 React 的全部运行时细节。很多时候，先处理好 JavaScript + JSX，就能覆盖一大批 UI 项目。
 
-因为它能帮你建立一个稳定的对照关系：
+## 新 JSX runtime 的意义
 
-- React JSX 最后会变成 React 运行时理解的函数调用
-- Vue JSX 最后会变成 Vue 运行时理解的 VNode 创建调用
+新 JSX runtime 不再要求每个 JSX 文件都显式写：
 
-真正要看的不是“长得像不像 JSX”，而是：
+```js
+import React from 'react'
+```
 
-> JSX 最后会被编译到哪个框架的运行时协议上。
+它把 JSX 的编译入口变成更明确的 runtime 模块：
+
+- `react/jsx-runtime`：生产环境常用入口，提供 `jsx` / `jsxs`
+- `react/jsx-dev-runtime`：开发环境入口，提供 `jsxDEV`
+
+这个变化让 JSX 更像一个编译入口：
+
+> JSX 语法负责描述结构，runtime 模块负责决定它最后变成什么对象。
+
+## 这对 Vue 的意义
+
+Vue JSX 不是 React JSX 的复制品。
+
+同样一段 JSX，在 React 里会编译到 React 的 element 协议；在 Vue 里会编译到 Vue 的 VNode、slots、指令和事件约定。
+
+区别在这里：
+
+- JSX 是共同输入格式
+- 编译目标由对应框架的 JSX runtime / Babel 插件决定
+- 运行时协议仍然属于各自框架
+
+所以你在 Vue 里写 JSX，本质上是用 JSX 书写 Vue render 函数，而不是把 React 的组件模型搬进 Vue。
 
 ## 小结
 
-React 的 `createElement` 和 JSX runtime 这段演进，最适合作为理解 Vue JSX 的对照背景：同样都是 JSX，最后服务的却是不同框架的运行时模型。
+React 的 JSX runtime 演进，把 JSX 从“语法糖”推成了工具链入口。类型系统、编辑器、格式化和框架生态都愿意围着它做适配。
+
+这也是 React 框架友好度高的原因之一。
 
 ## 接着读
 
-如果你是为了理解 Vue 里的 JSX / TSX，可以继续看：
-
 1. [Vue JSX / TSX 的本质](./tsx.md)
-2. [h 函数的本质](./h.md)
+2. [React 与 Vue 的真实差异](./react-vs-vue.md)

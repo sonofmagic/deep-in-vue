@@ -10,6 +10,13 @@
 
 所以它既不是浏览器原生能力，也不是 Vue 默认就能直接执行的语法。它必须先经过编译。
 
+这里还有一个现实背景：JSX 已经是现代前端工具链的事实标准之一。新的 bundler、formatter、linter、渲染器和上层框架经常先支持 React，很大程度上是因为 JSX 本来就在 JavaScript/TypeScript 工具链里。
+
+Vue 支持 JSX，但 Vue 的主线仍然是 SFC 模板。理解 Vue JSX 时，需要同时看到这两层：
+
+- JSX 是更通用的生态入口
+- Vue JSX 的编译目标仍然是 Vue 自己的运行时协议
+
 ## 先抓住这条线
 
 JSX / TSX 的本质是语法糖。
@@ -198,6 +205,8 @@ _createVNode(_resolveComponent('MyComponent'), {
 
 Vue JSX / TSX 不是“React 语法搬到 Vue”，而是 Vue 借助 Babel 插件，把 JSX 这种写法翻译成自己的 VNode 创建和组件协议。
 
+如果从生态角度看，JSX 给 React 带来了更强的框架友好度；如果从 Vue 内部看，JSX 只是 Vue render 函数的一种输入形式。不要把这两层混在一起。
+
 ## 速查
 
 | 特性 | 说明 |
@@ -207,3 +216,8 @@ Vue JSX / TSX 不是“React 语法搬到 Vue”，而是 Vue 借助 Babel 插�
 | 编译目标 | Vue 的 VNode 创建与运行时 helper |
 | 特有能力 | 支持 Vue 风格的 `v-model`、指令、slots、事件 |
 | Vite 插件作用 | 把 Vue JSX 编译规则接入构建链 |
+
+## 接着读
+
+1. [React createElement 与 JSX runtime](./react-jsx.md)
+2. [React 与 Vue 的真实差异](./react-vs-vue.md)
