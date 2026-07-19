@@ -75,9 +75,27 @@ Vue 编译器不是一个“可有可无”的附属品，而是把开发者写�
 
 ## 跑一跑
 
-`fork` 这个项目，`git clone` 下来之后执行 `pnpm install`。
+先 `fork` 本项目，再克隆自己的仓库并安装依赖：
 
-然后在 `apps/fully-compiled/scripts/index.ts` 中打上断点，再启动 VS Code 调试功能，观察 Vue 单文件组件的编译过程。
+```bash
+git clone <你的 fork 地址>
+cd deep-in-vue
+pnpm install
+```
+
+在 VS Code 中打开仓库后，进入“运行和调试”面板，选择 `Debug Vue SFC compilation`。建议在
+`packages/compile-time-directive/scripts/compile-sfc.ts` 的 `parseResult`、`scriptResult`、
+`templateResult` 和 `styleResults` 所在行设置断点，然后启动调试。
+
+调试过程使用 `@vue/compiler-sfc` 依次解析 SFC，并编译 `<script>` / `<script setup>`、
+`<template>` 和 `<style>`。生成结果会写入
+`packages/compile-time-directive/.debug/sfc/CardWrapper/`，该目录不会进入 Git。
+
+不使用 VS Code 时，也可以直接运行同一个入口：
+
+```bash
+pnpm --filter compile-time-directive debug:sfc
+```
 
 ## 阅读时看什么
 

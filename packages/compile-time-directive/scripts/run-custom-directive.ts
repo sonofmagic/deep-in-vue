@@ -1,59 +1,50 @@
-import fs from 'fs-extra'
-import path from 'pathe'
-import { compileScript, compileStyle, compileTemplate, parse } from 'vue/compiler-sfc'
+import { mkdir, readFile, writeFile } from 'node:fs/promises'
+import path from 'node:path'
+import process from 'node:process'
+import { compileTemplate, parse } from '@vue/compiler-sfc'
 import { transformVFile } from '../src'
 
-function debug(..._args: any[]) {
+function assertNoErrors(stage: string, errors: Array<Error | string>): void {
+  if (errors.length === 0) {
+    return
+  }
 
+  const details = errors
+    .map(error => error instanceof Error ? error.message : error)
+    .join('\n')
+  throw new Error(`${stage} failed:\n${details}`)
 }
 
-function output(target: string, data: string) {
-  fs.outputFileSync(path.resolve(import.meta.dirname, `../src/demo/output/${target}`), data)
-}
-
-async function main() {
-  const target = 'CustomDirective' // 'error'// 'CardWrapper'
-  const filename = `${target}.vue`
-  const codePath = path.resolve(import.meta.dirname, `../test/fixtures/demo/${target}.vue`) // path.resolve(import.meta.url, '../src/demo/App.vue')
-  const code = await fs.readFile(codePath, 'utf-8')
-  const { descriptor, errors } = parse(code, {
+async function main(): Promise<void> {
+  const target = 'CustomDirective'
+  const packageRoot = path.resolve(import.meta.dirname, '..')
+  const filename = path.resolve(packageRoot, 'test/fixtures/demo', `${target}.vue`)
+  const outputDirectory = path.resolve(packageRoot, '.debug/sfc', target)
+  const source = await readFile(filename, 'utf8')
+  const { descriptor, errors } = parse(source, {
     filename,
   })
-  debug(descriptor, errors)
-  if (errors.length === 0) {
-    const { script, template, styles } = descriptor
-    if (script) {
-      const { content } = compileScript(descriptor, {
-        id: target,
+  assertNoErrors('SFC parse', errors)
 
-      })
-      output('CustomDirective/script.ts', content)
-    }
-    if (template) {
-      const { code } = compileTemplate({
-        id: target,
-        filename,
-        source: template.content,
-        compilerOptions: {
-          nodeTransforms: [
-            transformVFile,
-          ],
-          directiveTransforms: {
-
-          },
-        },
-      })
-      output('CustomDirective/template.ts', code)
-    }
-    if (styles.length) {
-      const { code } = compileStyle({
-        id: target,
-        filename,
-        source: styles[0].content,
-      })
-      output('CustomDirective/style.css', code)
-    }
+  if (!descriptor.template) {
+    throw new Error(`${filename} does not contain a template block`)
   }
+
+  const templateResult = compileTemplate({
+    id: 'data-v-debug-custom-directive',
+    filename,
+    source: descriptor.template.content,
+    compilerOptions: {
+      nodeTransforms: [transformVFile],
+    },
+  })
+  assertNoErrors('Template compile', templateResult.errors)
+
+  await mkdir(outputDirectory, { recursive: true })
+  await writeFile(path.resolve(outputDirectory, 'template.js'), templateResult.code, 'utf8')
+  process.stdout.write(
+    `Compiled ${path.relative(packageRoot, filename)} into ${path.relative(packageRoot, outputDirectory)}\n`,
+  )
 }
 
-main()
+await main()

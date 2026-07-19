@@ -30,20 +30,27 @@
     "dist"
   ],
   "scripts": {
-    "dev": "tsdown --watch --sourcemap",
-    "build:watch": "tsdown --watch --sourcemap",
+    "dev": "tsdown --watch --sourcemap --no-clean",
+    "build:watch": "tsdown --watch --sourcemap --no-clean",
     "build": "tsdown",
     "test": "vitest run",
     "test:dev": "vitest",
     "release": "pnpm publish",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "script:compile": "tsx scripts/index.ts",
+    "typecheck": "tsc --noEmit",
+    "debug:sfc": "node --import tsx scripts/compile-sfc.ts",
+    "script:compile": "pnpm debug:sfc",
     "script:v-file": "tsx scripts/run-custom-directive.ts"
   },
   "publishConfig": {},
+  "peerDependencies": {
+    "@vue/compiler-core": "^3.5.40"
+  },
   "devDependencies": {
     "@vue/compiler-core": "^3.5.40",
+    "@vue/compiler-sfc": "^3.5.40",
+    "tsx": "^4.23.1",
     "vue": "^3.5.40"
   }
 }

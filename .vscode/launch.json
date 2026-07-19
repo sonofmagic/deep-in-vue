@@ -5,11 +5,15 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "command": "npm run script:compile",
-      "name": "Compile Vue",
+      "name": "Debug Vue SFC compilation",
       "request": "launch",
-      "type": "node-terminal",
-      "cwd": "${workspaceFolder}/packages/compile-time-directive"
+      "type": "node",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--import", "tsx"],
+      "program": "${workspaceFolder}/packages/compile-time-directive/scripts/compile-sfc.ts",
+      "cwd": "${workspaceFolder}/packages/compile-time-directive",
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/**"]
     },
     {
       "command": "npm run script:v-file",

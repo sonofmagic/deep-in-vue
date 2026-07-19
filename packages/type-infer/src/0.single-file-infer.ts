@@ -49,8 +49,7 @@ export function extractTypes(id: string) {
         if (typeAnnotationPath.node) {
           set(result, `${key}.type`, typeAnnotationPath.node.typeAnnotation.type)
         }
-        const optional = mp.get('optional')
-        set(result, `${key}.required`, !optional.node)
+        set(result, `${key}.required`, !mp.node.optional)
       }
     }
   }
@@ -96,7 +95,11 @@ export function extractTypes(id: string) {
         if (p.get('callee').isIdentifier({
           name: 'defineProps',
         })) {
-          const pa = p.get('typeParameters').get('params')
+          const typeArguments = p.get('typeArguments')
+          if (!typeArguments.isTSTypeParameterInstantiation()) {
+            return
+          }
+          const pa = typeArguments.get('params')
           if (pa.length > 0) {
             // 只获取第一个范形
             const taregtPath = pa[0]

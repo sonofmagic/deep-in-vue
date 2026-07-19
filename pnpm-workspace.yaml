@@ -3,8 +3,13 @@ packages:
   - packages/*
   - '!**/test/**'
   - templates/*
-onlyBuiltDependencies:
-  - '@tailwindcss/oxide'
-  - esbuild
-  - sharp
-  - workerd
+allowBuilds:
+  '@tailwindcss/oxide': true
+  esbuild: true
+  msgpackr-extract: true
+  msw: true
+  sharp: true
+  workerd: true
+minimumReleaseAgeExclude:
+  - postcss@8.5.20
+  - tsdown@0.22.11

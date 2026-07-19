@@ -1,4 +1,4 @@
-import type { NodePath, TraverseOptions } from '@babel/traverse'
+import type { NodePath, Visitor } from '@babel/traverse'
 import type * as t from '@babel/types'
 import type { RuntimeProps } from './types'
 import path from 'node:path'
@@ -107,17 +107,17 @@ export function resolveScope(id: string, extractTypes = false): Scope {
     return undefined
   }
 
-  function resolveTSExpressionWithTypeArguments(np: NodePath<t.TSExpressionWithTypeArguments>) {
+  function resolveTSInterfaceHeritage(np: NodePath<t.TSInterfaceHeritage>) {
     const typeNameNode = np.node.expression
     if (typeNameNode.type === 'Identifier') {
       const name = typeNameNode.name
       return getType(name)
     }
-    else if (typeNameNode.type === 'TSQualifiedName') {
+    else if (typeNameNode.type === 'MemberExpression') {
       // 处理 A.B.C 的情况，只拿最左边的 A
-      let left = typeNameNode.left
-      while (left.type === 'TSQualifiedName') {
-        left = left.left
+      let left = typeNameNode.object
+      while (left.type === 'MemberExpression') {
+        left = left.object
       }
       if (left.type === 'Identifier') {
         const name = left.name
@@ -137,8 +137,7 @@ export function resolveScope(id: string, extractTypes = false): Scope {
         if (typeAnnotationPath.node) {
           set(result, `${key}.type`, typeAnnotationPath.node.typeAnnotation.type)
         }
-        const optional = mp.get('optional')
-        set(result, `${key}.required`, !optional.node)
+        set(result, `${key}.required`, !mp.node.optional)
       }
     }
   }
@@ -149,8 +148,8 @@ export function resolveScope(id: string, extractTypes = false): Scope {
         resolveTSProperty(mp)
       }
     }
-    else if (typePath.isTSExpressionWithTypeArguments()) {
-      const binding = resolveTSExpressionWithTypeArguments(typePath)
+    else if (typePath.isTSInterfaceHeritage()) {
+      const binding = resolveTSInterfaceHeritage(typePath)
       if (binding) {
         if (binding.isTSInterfaceDeclaration()) {
           binding.get('body').get('body').forEach((mp) => {
@@ -195,7 +194,7 @@ export function resolveScope(id: string, extractTypes = false): Scope {
       }
     }
   }
-  const opts: TraverseOptions = {
+  const opts: Visitor = {
     TSInterfaceDeclaration(path) {
       const name = path.node.id.name
       typeMap.set(name, path)
@@ -222,7 +221,11 @@ export function resolveScope(id: string, extractTypes = false): Scope {
       if (p.get('callee').isIdentifier({
         name: 'defineProps',
       })) {
-        const pa = p.get('typeParameters').get('params')
+        const typeArguments = p.get('typeArguments')
+        if (!typeArguments.isTSTypeParameterInstantiation()) {
+          return
+        }
+        const pa = typeArguments.get('params')
         if (pa.length > 0) {
           // 只获取第一个范形
           const taregtPath = pa[0]

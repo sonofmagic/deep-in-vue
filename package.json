@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.0",
   "private": true,
-  "packageManager": "pnpm@10.30.2",
+  "packageManager": "pnpm@11.15.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sonofmagic/monorepo-template.git"
@@ -12,14 +12,17 @@
     "url": "https://github.com/sonofmagic/monorepo-template/issues"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": "^22.18.0 || >=24.11.0",
+    "pnpm": "11.15.0"
   },
   "scripts": {
     "build": "turbo run build",
+    "predev": "turbo run build --filter=compile-time-directive --filter=ice-ui --filter=type-infer",
     "dev": "pnpm run -r --parallel dev",
     "test": "vitest run",
     "test:dev": "vitest",
     "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
     "release": "changeset",
     "publish-packages": "turbo run build lint test && changeset version && changeset publish",
     "preinstall": "npx only-allow pnpm",
@@ -90,12 +93,5 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "msw",
-      "vue-demi"
-    ]
   }
 }
