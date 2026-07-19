@@ -43,8 +43,8 @@
   "dependencies": {
     "@babel/traverse": "^7.29.7",
     "@babel/types": "^7.29.7",
-    "lru-cache": "^11.5.0",
-    "magic-string": "^0.30.21"
+    "lru-cache": "^11.5.2",
+    "magic-string": "^1.0.0"
   },
   "devDependencies": {
     "@babel/parser": "^7.29.7",

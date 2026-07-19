@@ -9,19 +9,19 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.5.35",
-    "vue-router": "^5.0.7"
+    "vue": "^3.5.40",
+    "vue-router": "^5.2.0"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.3.0",
-    "@vitejs/plugin-vue": "^6.0.7",
-    "@vitejs/plugin-vue-jsx": "^5.1.5",
+    "@tailwindcss/postcss": "^4.3.3",
+    "@vitejs/plugin-vue": "^6.0.8",
+    "@vitejs/plugin-vue-jsx": "^5.1.6",
     "@vue/tsconfig": "^0.9.1",
     "compile-time-directive": "workspace:*",
-    "tailwindcss": "^4.3.0",
+    "tailwindcss": "^4.3.3",
     "typescript": "~6.0.3",
-    "vite": "^8.0.14",
+    "vite": "^8.1.5",
     "vite-tsconfig-paths": "^6.1.1",
-    "vue-tsc": "^3.3.2"
+    "vue-tsc": "^3.3.7"
   }
 }

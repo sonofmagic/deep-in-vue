@@ -43,7 +43,7 @@
   },
   "publishConfig": {},
   "devDependencies": {
-    "@vue/compiler-core": "^3.5.35",
-    "vue": "^3.5.35"
+    "@vue/compiler-core": "^3.5.40",
+    "vue": "^3.5.40"
   }
 }
