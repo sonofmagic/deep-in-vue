@@ -10,10 +10,6 @@ export default defineMonorepoConfig({
       autoConfirm: false,
       includePrivate: true,
     },
-    sync: {
-      concurrency: 4,
-      command: 'cnpm sync {name}',
-    },
     upgrade: {
       skipOverwrite: false,
       mergeTargets: true,

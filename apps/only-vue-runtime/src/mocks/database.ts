@@ -23,7 +23,7 @@ const db = new Dexie('ice') as Dexie & {
 //   isActive: boolean // 用户是否激活
 //   role?: 'admin' | 'user' | 'guest' | null // 用户角色，可能为空
 
-function init() {
+async function init() {
   db.version(1).stores({
     users: '++id, name, email, username, password, createdAt, updatedAt, avatarUrl, phone, address, isActive, role',
   })
@@ -38,7 +38,7 @@ function init() {
     }))
   })
 
-  db.open().catch(console.error)
+  await db.open()
 }
 
 export {

@@ -5,7 +5,7 @@ import MultipleComponent, { Happy, Sad } from '@/components/MultipleComponent.vu
 const msg = ref('Hello World')
 
 function handleClick(event: MouseEvent) {
-  console.log('click', event)
+  event.stopPropagation()
 }
 </script>
 

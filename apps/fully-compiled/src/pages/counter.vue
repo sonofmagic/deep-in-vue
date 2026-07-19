@@ -7,7 +7,3 @@ import SetupLangTsx from '@/components/SetupLangTsx.vue'
     <SetupLangTsx />
   </div>
 </template>
-
-<style scoped>
-
-</style>

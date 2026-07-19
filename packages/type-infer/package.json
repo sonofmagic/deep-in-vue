@@ -48,8 +48,6 @@
     "magic-string": "^1.0.0"
   },
   "devDependencies": {
-    "@babel/parser": "^8.0.4",
-    "@types/set-value": "^4.0.3",
-    "set-value": "^4.1.0"
+    "@babel/parser": "^8.0.4"
   }
 }

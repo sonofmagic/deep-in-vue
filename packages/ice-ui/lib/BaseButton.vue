@@ -62,6 +62,6 @@ function handleClick(e: MouseEvent) {
 <style scoped>
 button:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.6);
+  box-shadow: 0 0 0 3px rgb(66 153 225 / 60%);
 }
 </style>

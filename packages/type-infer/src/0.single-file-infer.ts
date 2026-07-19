@@ -1,13 +1,11 @@
 import type { NodePath } from '@babel/traverse'
 import type * as t from '@babel/types'
-import fs from 'fs-extra'
-import set from 'set-value'
+import type { RuntimeProps } from './types'
+import { readFileSync } from 'node:fs'
 import { parse, traverse } from './babel'
 
-export type RuntimeProps = Record<string, { type: string, required: boolean }>
-
 export function extractTypes(id: string) {
-  const code = fs.readFileSync(id, 'utf8')
+  const code = readFileSync(id, 'utf8')
 
   const ast = parse(code, {
     plugins: ['typescript'],
@@ -46,10 +44,10 @@ export function extractTypes(id: string) {
       if (keyP.isIdentifier()) {
         const key = keyP.node.name
         const typeAnnotationPath = mp.get('typeAnnotation')
-        if (typeAnnotationPath.node) {
-          set(result, `${key}.type`, typeAnnotationPath.node.typeAnnotation.type)
+        result[key] = {
+          type: typeAnnotationPath.node?.typeAnnotation.type ?? 'null',
+          required: !mp.node.optional,
         }
-        set(result, `${key}.required`, !mp.node.optional)
       }
     }
   }

@@ -38,15 +38,6 @@ export async function initDatebase() {
         })
       }
     },
-    blocked() {
-      console.log('database blocked')
-    },
-    blocking(currentVersion, blockedVersion, event) {
-      console.log('database blocking', currentVersion, blockedVersion, event)
-    },
-    terminated() {
-      console.log('database terminated')
-    },
   })
   dbRef.value = db
   return db

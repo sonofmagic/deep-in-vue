@@ -10,6 +10,7 @@
     }
   },
   "include": [
+    "*.config.ts",
     "scripts",
     "src",
     "test"

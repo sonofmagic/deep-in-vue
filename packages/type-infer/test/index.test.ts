@@ -1,4 +1,4 @@
-import fs from 'fs-extra'
+import { mkdir, writeFile } from 'node:fs/promises'
 import path from 'pathe'
 import { resolveScope } from '@/scope'
 
@@ -10,8 +10,10 @@ async function r(testCase: string) {
   const { props } = await extractTypes(
     path.resolve(import.meta.dirname, `./fixtures/${testCase}.ts`),
   )
-  await fs.outputFile(
-    path.resolve(import.meta.dirname, `./output/${testCase}.json`),
+  const outputPath = path.resolve(import.meta.dirname, `./output/${testCase}.json`)
+  await mkdir(path.dirname(outputPath), { recursive: true })
+  await writeFile(
+    outputPath,
     JSON.stringify(props, undefined, 2),
     'utf8',
   )

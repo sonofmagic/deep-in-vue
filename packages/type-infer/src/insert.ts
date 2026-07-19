@@ -1,5 +1,5 @@
 import type { RuntimeProps } from './types'
-import fs from 'fs-extra'
+import { readFileSync } from 'node:fs'
 import MagicString from 'magic-string'
 import { parse, traverse } from './babel'
 
@@ -16,7 +16,7 @@ function mapTsType2VueType(type: string) {
 }
 
 export function insert(id: string, props: RuntimeProps) {
-  const code = fs.readFileSync(id, 'utf8')
+  const code = readFileSync(id, 'utf8')
   const ms = new MagicString(code)
   const ast = parse(code, {
     sourceType: 'module',

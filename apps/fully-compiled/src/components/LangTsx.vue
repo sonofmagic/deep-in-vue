@@ -19,9 +19,7 @@ export default defineComponent({
     })
 
     const aaa = <div>{wrap.value}</div>
-    console.log('setup')
     return () => {
-      console.log('render')
       const bbb = <div>{wrap.value}</div>
 
       return (

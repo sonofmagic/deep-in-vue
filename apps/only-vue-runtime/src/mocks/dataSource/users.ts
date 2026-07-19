@@ -1,6 +1,11 @@
-// import type { User } from '@/types'
+import type { User } from '@/types'
 
-const users: any[] = [
+type UserSeed = Omit<User, 'createdAt' | 'updatedAt'> & {
+  createdAt: string
+  updatedAt: string
+}
+
+const users = [
   {
     id: 570,
     name: 'Wanda Mcfarland',
@@ -1387,6 +1392,6 @@ const users: any[] = [
     isActive: false,
     role: null,
   },
-]
+] satisfies UserSeed[]
 
 export default users

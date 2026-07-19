@@ -1,13 +1,16 @@
-import fs from 'fs-extra'
+import type { RuntimeProps } from '@/types'
+import { readFileSync } from 'node:fs'
 import path from 'pathe'
 import { insert } from '@/insert'
 
 function handle(jsonFilename: string) {
+  const props = JSON.parse(
+    readFileSync(path.resolve(__dirname, `./output/${jsonFilename}.json`), 'utf8'),
+  ) as RuntimeProps
   const code = insert(
     path.resolve(__dirname, `./fixtures/vue/index.js`),
-    fs.readJsonSync(path.resolve(__dirname, `./output/${jsonFilename}.json`)),
+    props,
   )
-  // fs.outputFileSync(path.resolve(__dirname, `./output/${jsonFilename}.js`), code)
   return code
 }
 

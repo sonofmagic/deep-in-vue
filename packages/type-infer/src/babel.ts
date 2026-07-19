@@ -4,10 +4,6 @@ import * as t from '@babel/types'
 
 export { parse, parseExpression } from '@babel/parser'
 
-function _interopDefaultCompat(e: any) {
-  return e && typeof e === 'object' && 'default' in e ? e.default : e
-}
-
 type Traverse = (
   parent: t.Node,
   opts: TraverseOptions & Visitor,
@@ -17,7 +13,7 @@ type Traverse = (
 ) => void
 
 // Babel 8's generic overload picks `never` for catch-all enter/exit visitors.
-export const traverse = _interopDefaultCompat(_babelTraverse) as Traverse
+export const traverse = _babelTraverse as Traverse
 
 export {
   t,

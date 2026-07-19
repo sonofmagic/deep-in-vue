@@ -204,7 +204,7 @@ export default defineComponent({
                 percentage.value += 1
               }, 30)
 
-              const res = await ElMessageBox({
+              await ElMessageBox({
                 message: () => {
                   return h('div', {
                     class: 'flex justify-center items-center w-full',
@@ -224,7 +224,6 @@ export default defineComponent({
                 center: true,
                 showConfirmButton: true,
               })
-              console.log(res)
             },
           }, () => '删除'),
         ],

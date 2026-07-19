@@ -5,5 +5,3 @@ import { IceTag } from '../lib/Tag'
 <template>
   <IceTag>IceTag</IceTag>
 </template>
-
-<style scoped></style>

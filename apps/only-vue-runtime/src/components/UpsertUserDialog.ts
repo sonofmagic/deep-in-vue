@@ -1,4 +1,3 @@
-import type { ValidateFieldsError } from 'async-validator'
 import type { FormInstance } from 'element-plus'
 import type { User } from '@/types'
 import { ElButton, ElDialog, ElForm, ElFormItem, ElInput, ElSelect } from 'element-plus'
@@ -208,18 +207,13 @@ export const UpsertUserDialog = defineComponent({
             h(ElButton, {
               type: 'primary',
               async onClick() {
-                try {
-                  const valid = await formRef.value?.validate()
-                  if (valid) {
-                    // 这里可以调用接口保存数据
-                    // await saveUser(formValue.value)
-                    // doUpsertUser(formValue.value)
-                    emit('save', formValue.value)
-                    emit('update:modelValue', false)
-                  }
-                }
-                catch (error) {
-                  console.error(error as ValidateFieldsError)
+                const valid = await formRef.value?.validate().catch(() => false)
+                if (valid) {
+                  // 这里可以调用接口保存数据
+                  // await saveUser(formValue.value)
+                  // doUpsertUser(formValue.value)
+                  emit('save', formValue.value)
+                  emit('update:modelValue', false)
                 }
               },
             }, () => '确定'),

@@ -67,18 +67,21 @@ function handleClick() {
 
 <style>
 .card {
+  padding: 1rem;
   border: 1px solid #ddd;
   border-radius: 12px;
-  padding: 1rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgb(0 0 0 / 10%);
 }
+
 .card-header {
-  font-weight: bold;
   margin-bottom: 0.5rem;
+  font-weight: bold;
 }
+
 .card-body {
   margin-bottom: 0.5rem;
 }
+
 .card-footer {
   font-size: 0.875rem;
   color: #666;

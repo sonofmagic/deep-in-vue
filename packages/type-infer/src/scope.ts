@@ -1,10 +1,9 @@
 import type { NodePath, Visitor } from '@babel/traverse'
 import type * as t from '@babel/types'
 import type { RuntimeProps } from './types'
+import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
-import fs from 'fs-extra'
 import { LRUCache } from 'lru-cache'
-import set from 'set-value'
 import { parse, traverse } from './babel'
 
 interface Scope {
@@ -23,7 +22,7 @@ export function resolveScope(id: string, extractTypes = false): Scope {
   if (cache.has(id)) {
     return cache.get(id)!
   }
-  const code = fs.readFileSync(id, 'utf8')
+  const code = readFileSync(id, 'utf8')
   const dir = path.dirname(id)
   const ast = parse(code, {
     plugins: ['typescript'],
@@ -60,17 +59,17 @@ export function resolveScope(id: string, extractTypes = false): Scope {
         const sourceValue = targetDeclaration.get('source').node.value
         let importFilePath = path.resolve(dir, sourceValue)
         // 加自动补全 .ts/.tsx/.d.ts 文件
-        if (!fs.existsSync(importFilePath)) {
-          if (fs.existsSync(`${importFilePath}.ts`)) {
+        if (!existsSync(importFilePath)) {
+          if (existsSync(`${importFilePath}.ts`)) {
             importFilePath = `${importFilePath}.ts`
           }
-          else if (fs.existsSync(`${importFilePath}.tsx`)) {
+          else if (existsSync(`${importFilePath}.tsx`)) {
             importFilePath = `${importFilePath}.tsx`
           }
-          else if (fs.existsSync(`${importFilePath}.d.ts`)) {
+          else if (existsSync(`${importFilePath}.d.ts`)) {
             importFilePath = `${importFilePath}.d.ts`
           }
-          else if (fs.existsSync(path.join(importFilePath, 'index.ts'))) {
+          else if (existsSync(path.join(importFilePath, 'index.ts'))) {
             importFilePath = path.join(importFilePath, 'index.ts')
           }
           else {
@@ -78,7 +77,7 @@ export function resolveScope(id: string, extractTypes = false): Scope {
             return undefined
           }
         }
-        if (importedName! && fs.existsSync(importFilePath)) {
+        if (importedName! && existsSync(importFilePath)) {
           const importedScope = resolveScope(importFilePath)
           return importedScope.getType(importedName)
         }
@@ -134,10 +133,10 @@ export function resolveScope(id: string, extractTypes = false): Scope {
       if (keyP.isIdentifier()) {
         const key = keyP.node.name
         const typeAnnotationPath = mp.get('typeAnnotation')
-        if (typeAnnotationPath.node) {
-          set(result, `${key}.type`, typeAnnotationPath.node.typeAnnotation.type)
+        result[key] = {
+          type: typeAnnotationPath.node?.typeAnnotation.type ?? 'null',
+          required: !mp.node.optional,
         }
-        set(result, `${key}.required`, !mp.node.optional)
       }
     }
   }
