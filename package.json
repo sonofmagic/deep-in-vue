@@ -37,6 +37,7 @@
     "script:mirror": "monorepo mirror",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
+    "docs:deploy": "pnpm docs:build && wrangler deploy",
     "docs:preview": "vitepress preview docs",
     "commitlint": "commitlint --edit"
   },
@@ -85,6 +86,7 @@
     "vitepress": "^1.6.4",
     "vitest": "~4.1.10",
     "vue-tsc": "^3.3.7",
+    "wrangler": "^4.123.0",
     "yaml": "^2.9.0"
   },
   "publishConfig": {
