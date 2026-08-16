@@ -2,7 +2,7 @@
 
 本仓库是一个围绕 Vue 编译器、运行时和工程产物展开的学习项目。
 
-[文档阅读网站](https://deep-in-vue.netlify.app/)
+[文档阅读网站](https://deep-in-vue.icebreaker.top/)
 
 ## 介绍
 
@@ -22,10 +22,10 @@
 
 ## 阅读路径
 
-- 先读 [前言](https://deep-in-vue.netlify.app/) 和 [入门章节](https://deep-in-vue.netlify.app/guide/) 建立整体地图。
-- 再读 [本质章节](https://deep-in-vue.netlify.app/essence/) 拆解高频语法糖。
-- 需要看真实产物时，进入 [进阶章节](https://deep-in-vue.netlify.app/advanced/)。
-- 想继续理解响应式、类型提取和编译扩展时，进入 [深入章节](https://deep-in-vue.netlify.app/deep/)。
+- 先读 [前言](https://deep-in-vue.icebreaker.top/) 和 [入门章节](https://deep-in-vue.icebreaker.top/guide/) 建立整体地图。
+- 再读 [本质章节](https://deep-in-vue.icebreaker.top/essence/) 拆解高频语法糖。
+- 需要看真实产物时，进入 [进阶章节](https://deep-in-vue.icebreaker.top/advanced/)。
+- 想继续理解响应式、类型提取和编译扩展时，进入 [深入章节](https://deep-in-vue.icebreaker.top/deep/)。
 
 ## 运行环境
 
